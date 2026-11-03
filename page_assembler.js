@@ -125,13 +125,13 @@ function getDesktopHeader() {
 function getMobileHeader() {
   return `
     <header class="mobile-header">
-      <div style="display: flex; align-items: center; gap: 10px;">
+      <a href="home.html" style="display: flex; align-items: center; gap: 10px; text-decoration: none; color: inherit;">
         ${logoImgMobile}
         <div>
           <div style="font-size: 11px; font-weight: 600; color: var(--mut);">Welcome back</div>
           <div style="font-size: 15px; font-weight: 800;">DE</div>
         </div>
-      </div>
+      </a>
 
       <div style="display: flex; align-items: center; gap: 8px;">
         <button onclick="toggleTheme()" class="theme-toggle-btn" aria-label="Toggle theme" style="width: 38px; height: 38px; border-radius: 50%; background: var(--s2); border: 1px solid var(--line); color: var(--tx); display: flex; align-items: center; justify-content: center; cursor: pointer;">
@@ -142,6 +142,10 @@ function getMobileHeader() {
           <svg class="i" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
           <span style="position: absolute; top: 8px; right: 8px; width: 8px; height: 8px; border-radius: 50%; background: var(--yel); border: 1.5px solid var(--s1);"></span>
         </button>
+
+        <a href="wallet.html" aria-label="Wallet" style="width: 38px; height: 38px; border-radius: 50%; background: var(--vio); color: #fff; display: flex; align-items: center; justify-content: center; text-decoration: none; box-shadow: 0 0 10px rgba(122,18,245,0.35);">
+          <svg class="i" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12V7H5a2 2 0 0 1 0-4h14v4"></path><path d="M3 5v14a2 2 0 0 0 2 2h16v-5"></path><path d="M18 12a2 2 0 0 0 0 4h4v-4Z"></path></svg>
+        </a>
       </div>
     </header>
   `;
@@ -154,6 +158,7 @@ function getBottomNav(activeTab) {
     { title: 'Earn', href: 'earn.html', icon: '<polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>' },
     { title: 'Claim', href: 'claim.html', icon: '<path d="M12 3v13m0 0l-5-5m5 5l5-5M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"></path>' },
     { title: 'Buy', href: 'buy.html', icon: '<circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line>' },
+    { title: 'Referral', href: 'referral.html', icon: '<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path>' },
     { title: 'Agents', href: 'agents.html', icon: '<rect x="4" y="4" width="16" height="16" rx="2"></rect><rect x="9" y="9" width="6" height="6"></rect><line x1="9" y1="1" x2="9" y2="4"></line><line x1="15" y1="1" x2="15" y2="4"></line><line x1="9" y1="20" x2="9" y2="23"></line><line x1="15" y1="20" x2="15" y2="23"></line>' },
   ];
 
@@ -162,8 +167,8 @@ function getBottomNav(activeTab) {
       ${tabs.map(t => {
         const isActive = t.title.toLowerCase() === activeTab.toLowerCase();
         return `
-          <a href="${t.href}" class="bottom-nav-item ${isActive ? 'active' : ''}">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${t.icon}</svg>
+          <a href="${t.href}" class="bottom-nav-item ${isActive ? 'active' : ''}" ${isActive ? 'aria-current="page"' : ''}>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${t.icon}</svg>
             <span>${t.title}</span>
           </a>
         `;
@@ -211,23 +216,65 @@ function getCoreScripts() {
         }
       })();
 
+      // Always restore main-wrapper visibility when navigating back/forward (bfcache)
+      window.addEventListener('pageshow', () => {
+        const main = document.querySelector('.main-wrapper');
+        if (main) {
+          main.style.opacity = '1';
+          main.style.transform = 'none';
+        }
+      });
+
       // Smooth Page Transitions & Interactive Enhancements
       document.addEventListener('DOMContentLoaded', () => {
+        const mainWrapper = document.querySelector('.main-wrapper');
+        if (mainWrapper) {
+          mainWrapper.addEventListener('animationend', () => {
+            mainWrapper.style.animation = 'none';
+          }, { once: true });
+        }
+
         document.querySelectorAll('a[href]').forEach(a => {
           const href = a.getAttribute('href');
           if (!href || href.startsWith('#') || href.startsWith('javascript:') || a.target === '_blank') return;
           if (href.endsWith('.html') || (!href.includes('://') && !href.startsWith('mailto:'))) {
             a.addEventListener('click', (e) => {
-              if (e.metaKey || e.ctrlKey || e.shiftKey) return;
-              const main = document.querySelector('.main-wrapper') || document.body;
-              e.preventDefault();
-              main.style.transition = 'opacity 0.16s cubic-bezier(0.22, 1, 0.36, 1), transform 0.16s cubic-bezier(0.22, 1, 0.36, 1)';
-              main.style.opacity = '0.35';
-              main.style.transform = 'translateY(6px)';
-              setTimeout(() => {
-                window.location.href = href;
-              }, 130);
+              if (e.metaKey || e.ctrlKey || e.shiftKey || e.defaultPrevented) return;
+              const currentFile = (window.location.pathname.split('/').pop() || 'index.html').toLowerCase();
+              const targetFile = href.split('?')[0].split('#')[0].replace(/^\\/+/, '').toLowerCase();
+
+              // Immediately highlight bottom nav item if clicked
+              if (a.classList.contains('bottom-nav-item')) {
+                document.querySelectorAll('.bottom-nav-item').forEach(item => item.classList.remove('active'));
+                a.classList.add('active');
+              }
+
+              if (currentFile === targetFile) {
+                e.preventDefault();
+                if (mainWrapper) mainWrapper.scrollTo({ top: 0, behavior: 'smooth' });
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                return;
+              }
+
+              const main = document.querySelector('.main-wrapper');
+              if (main) {
+                e.preventDefault();
+                main.style.animation = 'none';
+                main.style.transition = 'opacity 0.09s ease-out';
+                main.style.opacity = '0.45';
+                setTimeout(() => {
+                  window.location.href = href;
+                }, 70);
+              }
             });
+          }
+        });
+
+        // Wire all Connect Wallet buttons across desktop & mobile
+        document.querySelectorAll('button').forEach(btn => {
+          const txt = (btn.textContent || '').trim().toLowerCase();
+          if (txt.includes('connect wallet') && !btn.getAttribute('onclick')) {
+            btn.addEventListener('click', () => openWalletModal());
           }
         });
 
@@ -273,7 +320,7 @@ function getCoreScripts() {
             });
           }
 
-          // Wire Task Claim buttons on Tasks page
+          // Wire Task Claim buttons on Tasks / Earn page
           buttons.filter(b => (b.textContent || '').trim() === 'Claim').forEach(btn => {
             btn.addEventListener('click', () => {
               if (btn.getAttribute('data-claimed') === 'true') return;
@@ -428,7 +475,7 @@ function getCoreScripts() {
         const addr = '0x71C...49A1';
         document.querySelectorAll('button').forEach(b => {
           if ((b.innerText || '').toLowerCase().includes('connect wallet')) {
-            b.innerHTML = '<span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:currentColor;margin-right:8px;box-shadow:0 0 8px currentColor;"></span> ' + addr;
+            b.innerHTML = '<svg class="i" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:6px;"><path d="M21 12V7H5a2 2 0 0 1 0-4h14v4"></path><path d="M3 5v14a2 2 0 0 0 2 2h16v-5"></path><path d="M18 12a2 2 0 0 0 0 4h4v-4Z"></path></svg> ' + addr;
             b.style.background = 'var(--ok)';
             b.style.color = '#fff';
           }

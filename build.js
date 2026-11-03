@@ -7,14 +7,24 @@ const srcDir = path.join(rootDir, 'design_boards');
 // Helper to make mobile artboard fluid and clean
 function makeMobileFluid(mobileHtml) {
   return mobileHtml
-    .replace(/width:\s*390px;?\s*height:\s*[0-9]+px;?/gi, 'width: 100%; max-width: 460px; min-height: 100vh; height: auto; margin: 0 auto;')
+    .replace(/\sdata-theme="dark"/gi, '')
+    .replace(/width:\s*390px;?\s*height:\s*[0-9]+px;?/gi, 'width: 100%; max-width: 480px; min-height: auto; height: auto; margin: 0 auto;')
     .replace(/overflow:\s*hidden;?/gi, 'overflow: visible;')
     .replace(/<header data-dc-tpl="5"[\s\S]*?<\/header>/gi, '') // mobile topbar is handled by wrapper
-    .replace(/<nav[^>]*aria-label="Bottom"[\s\S]*?<\/nav>/gi, '') // bottom nav is handled by wrapper
-    .replace(/href="([a-zA-Z0-9_]+)\.dc\.html"/gi, 'href="$1.html"') // clean .dc.html links to standard .html
+    .replace(/<nav[^>]*aria-label="(?:Bottom|Primary)"[\s\S]*?<\/nav>/gi, '') // bottom nav is handled by wrapper
+    .replace(/href="Main\.dc\.html"/gi, 'href="home.html"')
+    .replace(/href="Home\.dc\.html"/gi, 'href="home.html"')
+    .replace(/href="Desktop\.dc\.html"/gi, 'href="portfolio.html"')
+    .replace(/href="Earn\.dc\.html"/gi, 'href="earn.html"')
+    .replace(/href="Claim\.dc\.html"/gi, 'href="claim.html"')
+    .replace(/href="Buy\.dc\.html"/gi, 'href="buy.html"')
+    .replace(/href="Agents\.dc\.html"/gi, 'href="agents.html"')
+    .replace(/href="Referral\.dc\.html"/gi, 'href="referral.html"')
+    .replace(/href="Activity\.dc\.html"/gi, 'href="activity.html"')
+    .replace(/href="([a-zA-Z0-9_]+)\.dc\.html"/gi, (_, name) => `href="${name.toLowerCase()}.html"`)
     .replace(/href="Main\.html"/gi, 'href="home.html"')
     .replace(/href="Desktop\.html"/gi, 'href="portfolio.html"')
-    .replace(/href="Earn\.html"/gi, 'href="tasks.html"');
+    .replace(/href="Earn\.html"/gi, 'href="earn.html"');
 }
 
 // Common Vector Icons
@@ -43,21 +53,36 @@ const ICONS = {
   cart: '<svg class="i" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="21" r="1"></circle><circle cx="19" cy="21" r="1"></circle><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"></path></svg>'
 };
 
+// Helper for Portfolio / Activity / Holdings segmented header
+function getPortfolioHeader(activeSubTab) {
+  const tabs = [
+    { label: 'Overview', href: 'portfolio.html', id: 'overview' },
+    { label: 'Activity', href: 'activity.html', id: 'activity' },
+    { label: 'Holdings', href: 'wallet.html', id: 'holdings' }
+  ];
+  return `
+    <div class="portfolio-header" style="margin-bottom: 20px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px;">
+      <div>
+        <h1 style="font-size: 28px; font-weight: 800; letter-spacing: -0.02em; margin: 0 0 4px; color: var(--tx);">Portfolio</h1>
+        <p style="font-size: 14px; color: var(--mut); margin: 0;">Your $OKN at a glance: activity, holdings, and earnings.</p>
+      </div>
+      <!-- Overview / Activity / Holdings Segmented Tabs -->
+      <div class="portfolio-tabs" role="tablist" aria-label="Portfolio sections" style="display: inline-flex; align-items: center; background: var(--s2); padding: 4px; border-radius: 12px; border: 1px solid var(--line); gap: 2px;">
+        ${tabs.map(t => {
+          const isAct = t.id === activeSubTab;
+          return `<a href="${t.href}" role="tab" aria-selected="${isAct}" style="padding: 6px 16px; border-radius: 8px; font-size: 13px; font-weight: ${isAct ? '700' : '600'}; color: ${isAct ? '#FFF' : 'var(--mut)'}; background: ${isAct ? 'var(--vio)' : 'transparent'}; text-decoration: none; white-space: nowrap; transition: all 0.2s;">${t.label}</a>`;
+        }).join('')}
+      </div>
+    </div>
+  `;
+}
+
 // 1. Live Production Portfolio Layout with Modernized UI/UX
 const desktopPortfolioMain = `
   <div class="portfolio-container" style="max-width: 1400px; margin: 0 auto; padding-bottom: 40px;">
     <!-- Top Header & Tabs -->
-    <div class="portfolio-header" style="margin-bottom: 24px; display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 16px;">
-      <div>
-        <h1 style="font-size: 28px; font-weight: 800; letter-spacing: -0.02em; margin: 0 0 6px; color: var(--tx);">Portfolio</h1>
-        <p style="font-size: 14px; color: var(--mut); margin: 0;">Your $OKN at a glance: activity, holdings, and earnings.</p>
-      </div>
-      <!-- Activity / Holdings Tabs -->
-      <div style="display: inline-flex; align-items: center; background: var(--s2); padding: 4px; border-radius: 12px; border: 1px solid var(--line);">
-        <a href="activity.html" style="padding: 6px 18px; border-radius: 8px; font-size: 13px; font-weight: 700; color: #FFF; background: var(--vio); text-decoration: none; ">Activity</a>
-        <a href="wallet.html" style="padding: 6px 18px; border-radius: 8px; font-size: 13px; font-weight: 600; color: var(--mut); text-decoration: none; transition: color 0.2s;">Holdings</a>
-      </div>
-    </div>
+    ${getPortfolioHeader('overview')}
+
 
     <!-- 4 Stat Cards Grid -->
     <div class="resp-grid-4" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 16px;">
@@ -418,12 +443,6 @@ function getMobileBoard(file) {
 const mobileHomeRaw = getMobileBoard('Home.html');
 // Remove slider announcements from mobile Home
 let mobileHome = mobileHomeRaw.replace(/<section[^>]*aria-label="Announcements"[\s\S]*?<\/section>/gi, '');
-mobileHome = mobileHome.replace(/href="Earn\.dc\.html"/gi, 'href="tasks.html"');
-mobileHome = mobileHome.replace(/href="Claim\.dc\.html"/gi, 'href="claim.html"');
-mobileHome = mobileHome.replace(/href="Buy\.dc\.html"/gi, 'href="buy.html"');
-mobileHome = mobileHome.replace(/href="Referral\.dc\.html"/gi, 'href="referral.html"');
-mobileHome = mobileHome.replace(/href="Agents\.dc\.html"/gi, 'href="agents.html"');
-mobileHome = mobileHome.replace(/href="Activity\.dc\.html"/gi, 'href="activity.html"');
 mobileHome = mobileHome.replace(
   />✓<\/div>/g,
   `><svg class="i" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div>`
@@ -433,31 +452,31 @@ mobileHome = mobileHome.replace(/>100<\/div>/g, '>135</div>');
 mobileHome = mobileHome.replace(/100 pts/g, '135 pts');
 mobileHome = mobileHome.replace(/5-day streak/g, '6-day streak');
 mobileHome = mobileHome.replace(/5 days\. Longest: 5/g, '6 days. Longest: 6');
-// Connect wallet modal handler on mobile Home
+// Connect wallet modal handler on mobile Home (matches data-dc-tpl="33" or "34")
 mobileHome = mobileHome.replace(
-  /<button[^>]*data-dc-tpl="34"[^>]*>[\s\S]*?<\/button>/i,
-  `<button onclick="openWalletModal()" style="display: flex; align-items: center; justify-content: space-between; height: 52px; width: 100%; border-radius: 26px; background: #FFFFFF; color: #0A0A0C; font-weight: 800; font-size: 14px; border: none; cursor: pointer; padding: 0 16px 0 6px; box-shadow: 0 6px 20px rgba(0,0,0,0.2); transition: all 0.2s cubic-bezier(0.16,1,0.3,1); margin-top: 20px;">
+  /<button[^>]*data-dc-tpl="3[34]"[^>]*>[\s\S]*?<\/button>/i,
+  `<button onclick="openWalletModal()" style="display: flex; align-items: center; justify-content: space-between; height: 52px; width: 100%; border-radius: 26px; background: #FFFFFF; color: #0A0A0C; font-weight: 800; font-size: 14px; border: none; cursor: pointer; padding: 0 16px 0 6px; box-shadow: 0 6px 20px rgba(0,0,0,0.2); transition: all 0.2s cubic-bezier(0.16,1,0.3,1); margin-top: 6px;">
     <span style="display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 50%; background: #000; color: #fff;">
-      <svg class="i" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+      ${ICONS.wallet}
     </span>
     <span style="font-weight: 800; font-size: 15px;">Connect wallet</span>
     <svg class="i" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="13 17 18 12 13 7"></polyline><polyline points="6 17 11 12 6 7"></polyline></svg>
   </button>`
 );
 
-
 const mobileEarn = getMobileBoard('Earn.html')
-  .replace(/href="[a-zA-Z0-9_]+\.dc\.html"/gi, m => m.replace('.dc.html', '.html'));
+  .replace('Subscribe on [platform]', 'Subscribe on YouTube')
+  .replace('Follow $OKN on [platform]', 'Follow $OKN on Discord');
+
 const mobileClaim = getMobileBoard('Claim.html')
-  .replace(/href="[a-zA-Z0-9_]+\.dc\.html"/gi, m => m.replace('.dc.html', '.html'))
   .replace(/>100<\/div>/g, '>135</div>')
   .replace(/100 pts/g, '135 pts')
   .replace(/100<\/span>/g, '135</span>')
   .replace(
-    /<button[^>]*>\s*<span[^>]*>[\s\S]*?<\/span>\s*Connect wallet\s*<span[^>]*>[\s\S]*?<\/span>\s*<\/button>/i,
-    `<button onclick="openWalletModal()" style="display: flex; align-items: center; justify-content: space-between; height: 52px; width: 100%; border-radius: 26px; background: #FFFFFF; color: #0A0A0C; font-weight: 800; font-size: 14px; border: none; cursor: pointer; padding: 0 16px 0 6px; box-shadow: 0 6px 20px rgba(0,0,0,0.2); transition: all 0.2s cubic-bezier(0.16,1,0.3,1); margin-top: 20px;">
+    /<button[^>]*data-dc-tpl="34"[^>]*>[\s\S]*?<\/button>/i,
+    `<button onclick="openWalletModal()" style="display: flex; align-items: center; justify-content: space-between; height: 52px; width: 100%; border-radius: 26px; background: #FFFFFF; color: #0A0A0C; font-weight: 800; font-size: 14px; border: none; cursor: pointer; padding: 0 16px 0 6px; box-shadow: 0 6px 20px rgba(0,0,0,0.2); transition: all 0.2s cubic-bezier(0.16,1,0.3,1); margin-top: 6px;">
       <span style="display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 50%; background: #000; color: #fff;">
-        <svg class="i" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+        ${ICONS.wallet}
       </span>
       <span style="font-weight: 800; font-size: 15px;">Connect wallet</span>
       <svg class="i" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="13 17 18 12 13 7"></polyline><polyline points="6 17 11 12 6 7"></polyline></svg>
@@ -465,40 +484,96 @@ const mobileClaim = getMobileBoard('Claim.html')
   );
 
 const mobileBuy = getMobileBoard('Buy.html')
-  .replace(/href="[a-zA-Z0-9_]+\.dc\.html"/gi, m => m.replace('.dc.html', '.html'));
-const mobileAgents = getMobileBoard('Agents.html')
-  .replace(/href="[a-zA-Z0-9_]+\.dc\.html"/gi, m => m.replace('.dc.html', '.html'))
-  .replace(/<span data-dc-tpl="56"[^>]*>.*?<\/span><div data-dc-tpl="60"/s, '<img src="assets/polymarket.png" alt="Polymarket" style="width: 44px; height: 44px; border-radius: 14px; object-fit: contain; box-shadow: 0 4px 14px rgba(9, 180, 255, 0.25); flex: 0 0 auto;"><div data-dc-tpl="60"');
+  .replace(/<button data-dc-tpl="61"/i, '<button data-dc-tpl="61" onclick="openWalletModal()"')
+  .replace(/<a data-dc-tpl="75" href="#"/i, '<a data-dc-tpl="75" href="https://testnet.bnbchain.org/faucet-smart" target="_blank" rel="noopener noreferrer"');
 
-// Referral mobile card
-const mobileReferralRaw = getMobileBoard('Referral.html');
+const mobileAgents = getMobileBoard('Agents.html')
+  .replace(/<span data-dc-tpl="56"[^>]*>.*?<\/span><div data-dc-tpl="60"/s, '<img src="assets/polymarket.png" alt="Polymarket" style="width: 44px; height: 44px; border-radius: 14px; object-fit: contain; box-shadow: 0 4px 14px rgba(9, 180, 255, 0.25); flex: 0 0 auto;"><div data-dc-tpl="60"')
+  .replace(/<a data-dc-tpl="65" href="#"/i, '<a data-dc-tpl="65" href="missions.html"')
+  .replace(/<a data-dc-tpl="76" href="#"/i, '<a data-dc-tpl="76" href="leaderboard.html"')
+  .replace(/<a data-dc-tpl="79" href="#"/i, '<a data-dc-tpl="79" href="missions.html"')
+  .replace(/<a data-dc-tpl="82" href="#"/i, '<a data-dc-tpl="82" href="news.html"');
+
+// Referral mobile card & stats
+const mobileReferralRaw = getMobileBoard('Referral.html')
+  .replace(
+    /<section data-dc-tpl="4" class="hero"[\s\S]*?<\/section>/i,
+    `<section data-dc-tpl="4" class="hero" style="background: var(--vio); color: rgb(255, 255, 255); border-radius: 0px 0px 32px 32px; padding: 20px 20px 24px; display: flex; flex-direction: column;">
+      <div style="font-size: 11px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(240, 230, 255, 0.85);">Partner Program</div>
+      <div data-dc-tpl="25" class="num" style="font-size: 28px; font-weight: 800; line-height: 1.15; letter-spacing: -0.02em; margin-top: 4px;">Partner package</div>
+      <div style="font-size: 13px; font-weight: 500; line-height: 1.45; color: rgba(240, 230, 255, 0.88); margin-top: 6px;">Earn direct sales commissions, OKN token allocations, and VIP partner rewards.</div>
+      <div data-dc-tpl="26" style="display: grid; grid-template-columns: repeat(3, minmax(0px, 1fr)); gap: 8px; margin-top: 16px;">
+        <div data-dc-tpl="27" style="padding: 12px 10px; border-radius: 16px; background: rgba(255, 255, 255, 0.16); min-width: 0; overflow: hidden;">
+          <div data-dc-tpl="28" class="num" style="font-size: clamp(15px, 4.2vw, 18px); font-weight: 800; line-height: 1.2; white-space: nowrap;">10–15%</div>
+          <div data-dc-tpl="29" style="font-size: 11px; font-weight: 600; line-height: 1.3; color: rgba(240, 230, 255, 0.9); margin-top: 4px;">Commission</div>
+        </div>
+        <div data-dc-tpl="30" style="padding: 12px 10px; border-radius: 16px; background: rgba(255, 255, 255, 0.16); min-width: 0; overflow: hidden;">
+          <div data-dc-tpl="31" class="num" style="font-size: clamp(15px, 4.2vw, 18px); font-weight: 800; line-height: 1.2; white-space: nowrap;">$200,000</div>
+          <div data-dc-tpl="32" style="font-size: 11px; font-weight: 600; line-height: 1.3; color: rgba(240, 230, 255, 0.9); margin-top: 4px;">Marketing budget</div>
+        </div>
+        <div data-dc-tpl="33" style="padding: 12px 10px; border-radius: 16px; background: rgba(255, 255, 255, 0.16); min-width: 0; overflow: hidden;">
+          <div data-dc-tpl="34" class="num" style="font-size: clamp(15px, 4.2vw, 18px); font-weight: 800; line-height: 1.2; white-space: nowrap;">12 mo</div>
+          <div data-dc-tpl="35" style="font-size: 11px; font-weight: 600; line-height: 1.3; color: rgba(240, 230, 255, 0.9); margin-top: 4px;">Token vesting</div>
+        </div>
+      </div>
+    </section>`
+  )
+  .replace(
+    /<div data-dc-tpl="37"[^>]*>Here is the package:<\/div>/i,
+    '<div data-dc-tpl="37" style="font-size: 18px; font-weight: 800; letter-spacing: -0.01em; color: var(--tx); padding: 6px 2px 2px;">Here is the package:</div>'
+  );
 const mobileReferralCard = `
-  <div style="background: var(--s1); border: 1px solid var(--line); border-radius: 20px; padding: 18px 16px; margin-bottom: 12px; display: flex; flex-direction: column; gap: 12px;">
-    <div style="display: flex; justify-content: space-between; align-items: center;">
-      <div style="font-size: 15px; font-weight: 800; color: var(--tx);">Your Referral Link</div>
-      <span style="font-size: 11px; font-weight: 700; color: var(--mut); background: var(--s2); padding: 4px 10px; border-radius: 8px;">Code: <strong style="color: var(--tx);">DE-71C49</strong></span>
+  <div style="background: var(--s1); border: 1px solid var(--line); border-radius: 20px; padding: 18px 16px; margin-bottom: 4px; display: flex; flex-direction: column; gap: 12px;">
+    <div style="display: flex; justify-content: space-between; align-items: center; gap: 8px;">
+      <div style="font-size: 16px; font-weight: 800; line-height: 1.25; color: var(--tx);">Your Referral Link</div>
+      <span style="font-size: 11px; font-weight: 700; color: var(--mut); background: var(--s2); padding: 4px 10px; border-radius: 8px; white-space: nowrap;">Code: <strong style="color: var(--tx);">DE-71C49</strong></span>
     </div>
+    <div style="font-size: 12.5px; line-height: 1.45; color: var(--mut); margin-top: -4px;">Share your unique tracking link to earn instant commissions on every purchase.</div>
     <div style="background: var(--s2); border: 1px solid var(--line); border-radius: 14px; padding: 10px 14px; display: flex; align-items: center; justify-content: space-between; gap: 8px;">
-      <input type="text" readonly aria-label="Referral link" value="https://app.okntoken.com/ref/DE-71C49" style="background: transparent; border: none; color: var(--tx); font-size: 13px; font-weight: 700; font-family: Sora, monospace; width: 100%; outline: none;">
+      <input type="text" readonly aria-label="Referral link" value="https://app.okntoken.com/ref/DE-71C49" style="background: transparent; border: none; color: var(--vio-l); font-size: 12.5px; font-weight: 600; font-family: Sora, monospace; width: 100%; outline: none; text-overflow: ellipsis;">
     </div>
     <div style="display: flex; gap: 8px;">
       <button onclick="copyReferralLink()" class="copy-ref-btn" style="flex: 1; height: 44px; border-radius: 14px; background: var(--vio); color: #fff; font-weight: 800; font-size: 14px; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; transition: all 0.2s ease;">
         <svg class="i" width="16" height="16" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
         <span>Copy link</span>
       </button>
-      <a href="https://twitter.com/intent/tweet?text=Join%20the%20$OKN%20ecosystem!&url=https%3A%2F%2Fapp.okntoken.com%2Fref%2FDE-71C49" target="_blank" rel="noopener noreferrer" style="width: 44px; height: 44px; border-radius: 14px; background: var(--s2); border: 1px solid var(--line); color: var(--tx); display: flex; align-items: center; justify-content: center;">
+      <a href="https://twitter.com/intent/tweet?text=Join%20the%20$OKN%20ecosystem!&url=https%3A%2F%2Fapp.okntoken.com%2Fref%2FDE-71C49" target="_blank" rel="noopener noreferrer" aria-label="Share on X" style="width: 44px; height: 44px; border-radius: 14px; background: var(--s2); border: 1px solid var(--line); color: var(--tx); display: flex; align-items: center; justify-content: center;">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
       </a>
-      <a href="https://t.me/share/url?url=https%3A%2F%2Fapp.okntoken.com%2Fref%2FDE-71C49&text=Join%20the%20OKN%20ecosystem!" target="_blank" rel="noopener noreferrer" style="width: 44px; height: 44px; border-radius: 14px; background: var(--s2); border: 1px solid var(--line); color: var(--cyan); display: flex; align-items: center; justify-content: center;">
+      <a href="https://t.me/share/url?url=https%3A%2F%2Fapp.okntoken.com%2Fref%2FDE-71C49&text=Join%20the%20OKN%20ecosystem!" target="_blank" rel="noopener noreferrer" aria-label="Share on Telegram" style="width: 44px; height: 44px; border-radius: 14px; background: var(--s2); border: 1px solid var(--line); color: var(--cyan); display: flex; align-items: center; justify-content: center;">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.52 2.77-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/></svg>
       </a>
     </div>
   </div>
 `;
+const mobileReferralStats = `
+  <section style="padding: 20px 18px; border-radius: 24px; background: var(--s1); border: 1px solid var(--line);">
+    <div style="font-size: 16px; font-weight: 800; margin-bottom: 14px; color: var(--tx);">Your Referral Statistics</div>
+    <div style="display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--line);">
+      <span style="color: var(--mut); font-size: 13px; font-weight: 600;">Total Referrals</span>
+      <span class="num" style="font-weight: 800; font-size: 14px; color: var(--tx);">0 friends</span>
+    </div>
+    <div style="display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--line);">
+      <span style="color: var(--mut); font-size: 13px; font-weight: 600;">Total Commission Earned</span>
+      <span class="num" style="font-weight: 800; font-size: 14px; color: var(--ok);">0.00 BNB</span>
+    </div>
+    <div style="display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--line);">
+      <span style="color: var(--mut); font-size: 13px; font-weight: 600;">Point Multiplier</span>
+      <span class="num" style="font-weight: 800; font-size: 14px; color: var(--yel-t);">1.0x</span>
+    </div>
+    <div style="display: flex; justify-content: space-between; padding: 10px 0;">
+      <span style="color: var(--mut); font-size: 13px; font-weight: 600;">Tier Status</span>
+      <span style="font-size: 11px; font-weight: 800; padding: 3px 10px; border-radius: 8px; background: var(--s2); color: var(--tx);">Bronze Partner</span>
+    </div>
+  </section>
+`;
 const mobileReferral = mobileReferralRaw.includes('<main')
-  ? mobileReferralRaw.replace(/<main[^>]*>/, m => m + mobileReferralCard)
-  : (mobileReferralCard + mobileReferralRaw);
-const mobileActivity = getMobileBoard('Activity.html');
+  ? mobileReferralRaw
+      .replace(/<main[^>]*>/, m => m + mobileReferralCard)
+      .replace(/<\/main>/, mobileReferralStats + '</main>')
+  : (mobileReferralCard + mobileReferralRaw + mobileReferralStats);
+const mobileActivity = getMobileBoard('Activity.html')
+  .replace(/>100<\/div>/g, '>135</div>');
 
 const logoImgDesktop = '<img src="assets/okn-logo.png" alt="OKN logo" style="width: 20px; height: 20px; border-radius: 6px; object-fit: cover; display: inline-block; vertical-align: middle;">';
 
@@ -598,8 +673,8 @@ const desktopClaimMain = `
         </div>
       </div>
       <button onclick="openWalletModal()" style="height: 44px; padding: 0 24px; border-radius: 14px; background: #fff; color: #000; font-weight: 800; font-size: 13px; border: none; cursor: pointer; display: flex; align-items: center; gap: 8px;">
+        ${ICONS.wallet}
         <span>Connect wallet</span>
-        ${ICONS.arrowRight}
       </button>
     </div>
   </section>
@@ -619,7 +694,10 @@ const desktopClaimMain = `
         <span style="color: var(--mut); font-size: 14px;">You receive</span>
         <span class="num" style="font-weight: 800; font-size: 16px; color: var(--vio-l);">0 $OKN</span>
       </div>
-      <button onclick="openWalletModal()" style="width: 100%; margin-top: 24px; height: 48px; border-radius: 14px; background: var(--vio); color: #fff; font-weight: 800; border: none; cursor: pointer;">Connect wallet to claim</button>
+      <button onclick="openWalletModal()" style="width: 100%; margin-top: 24px; height: 48px; border-radius: 14px; background: var(--vio); color: #fff; font-weight: 800; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px;">
+        ${ICONS.wallet}
+        <span>Connect wallet to claim</span>
+      </button>
     </div>
 
     <div style="background: var(--s1); border: 1px solid var(--line); border-radius: 24px; padding: 28px;">
@@ -699,7 +777,10 @@ const desktopBuyMain = `
         </div>
       </div>
 
-      <button onclick="openWalletModal()" style="width: 100%; height: 48px; border-radius: 14px; background: var(--vio); color: #fff; font-weight: 800; border: none; cursor: pointer;">Connect wallet to buy</button>
+      <button onclick="openWalletModal()" style="width: 100%; height: 48px; border-radius: 14px; background: var(--vio); color: #fff; font-weight: 800; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px;">
+        ${ICONS.wallet}
+        <span>Connect wallet to buy</span>
+      </button>
     </div>
 
     <div style="background: var(--s1); border: 1px solid var(--line); border-radius: 24px; padding: 28px;">
@@ -811,27 +892,27 @@ const desktopAgentsMain = `
 // 5. Referral Desktop
 const desktopReferralMain = `
   <section style="background: var(--vio); color: #fff; border-radius: 28px; padding: 32px 36px; margin-bottom: 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.12);">
-    <div style="font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.8; margin-bottom: 6px;">Affiliate & Partner Program</div>
-    <h1 style="font-size: 32px; font-weight: 800; margin: 0 0 16px; letter-spacing: -0.02em;">Partner Package</h1>
+    <div style="font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.8; margin-bottom: 6px;">Partner program · Referral</div>
+    <h1 style="font-size: 32px; font-weight: 800; margin: 0 0 16px; letter-spacing: -0.02em;">Partner package</h1>
     <div style="display: flex; gap: 14px; flex-wrap: wrap;">
       <div style="background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); padding: 12px 20px; border-radius: 16px;">
-        <div style="font-size: 20px; font-weight: 800;">10–15%</div>
-        <div style="font-size: 12px; opacity: 0.85;">Direct Commission</div>
+        <div class="num" style="font-size: 20px; font-weight: 800;">10-15%</div>
+        <div style="font-size: 12px; opacity: 0.85;">Commission</div>
       </div>
       <div style="background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); padding: 12px 20px; border-radius: 16px;">
-        <div style="font-size: 20px; font-weight: 800;">$200,000</div>
-        <div style="font-size: 12px; opacity: 0.85;">Marketing Budget</div>
+        <div class="num" style="font-size: 20px; font-weight: 800;">$200,000</div>
+        <div style="font-size: 12px; opacity: 0.85;">Marketing budget</div>
       </div>
       <div style="background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); padding: 12px 20px; border-radius: 16px;">
-        <div style="font-size: 20px; font-weight: 800;">Tier 1 CEX</div>
-        <div style="font-size: 12px; opacity: 0.85;">Confirmed Listing</div>
+        <div class="num" style="font-size: 20px; font-weight: 800;">12 mo</div>
+        <div style="font-size: 12px; opacity: 0.85;">Token vesting</div>
       </div>
     </div>
   </section>
 
   <!-- Interactive Referral Copy Link Card -->
   <div style="background: var(--s1); border: 1px solid var(--line); border-radius: 24px; padding: 24px 28px; margin-bottom: 24px; display: flex; flex-direction: column; gap: 16px;">
-    <div style="display: flex; justify-content: space-between; align-items: center;">
+    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
       <div>
         <div style="font-size: 18px; font-weight: 800;">Your Unique Referral Link</div>
         <div style="font-size: 13px; color: var(--mut); margin-top: 4px;">Share your personal link to earn instant commissions and ascending tier multipliers.</div>
@@ -839,7 +920,7 @@ const desktopReferralMain = `
       <span style="font-size: 12px; font-weight: 800; color: var(--mut); background: var(--s2); padding: 6px 14px; border-radius: 10px;">Referral Code: <strong style="color: var(--tx);">DE-71C49</strong></span>
     </div>
     <div style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
-      <div style="flex: 1; min-width: 280px; background: var(--s2); border: 1px solid var(--line); border-radius: 14px; padding: 12px 18px; display: flex; align-items: center;">
+      <div style="flex: 1; min-width: 240px; background: var(--s2); border: 1px solid var(--line); border-radius: 14px; padding: 12px 18px; display: flex; align-items: center;">
         <input type="text" readonly aria-label="Referral link" value="https://app.okntoken.com/ref/DE-71C49" style="background: transparent; border: none; color: var(--tx); font-size: 14px; font-weight: 700; font-family: Sora, monospace; width: 100%; outline: none;">
       </div>
       <button onclick="copyReferralLink()" class="copy-ref-btn" style="height: 48px; padding: 0 24px; border-radius: 14px; background: var(--vio); color: #fff; font-weight: 800; font-size: 14px; border: none; cursor: pointer; display: flex; align-items: center; gap: 8px; transition: all 0.2s ease;">
@@ -853,6 +934,116 @@ const desktopReferralMain = `
         ${ICONS.telegram}
       </a>
     </div>
+  </div>
+
+  <!-- Full 4-Section Partner Package Details (Restored from Referral.html) -->
+  <div style="font-size: 16px; font-weight: 800; margin: 0 0 16px; color: var(--tx);">Here is the package:</div>
+  <div class="resp-grid-2" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin-bottom: 24px;">
+    <!-- Section 1 -->
+    <section style="padding: 24px; border-radius: 24px; background: var(--s1); border: 1px solid var(--line);">
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <span class="num" style="width: 36px; height: 36px; border-radius: 50%; background: var(--vio); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 700; flex: 0 0 auto;">1</span>
+        <div>
+          <div style="font-size: 16px; font-weight: 800; line-height: 1.25;">Tiered Performance Commissions</div>
+          <div style="font-size: 12px; font-weight: 600; color: var(--mut); margin-top: 2px;">(The "Mouth-Watering" Part)</div>
+        </div>
+      </div>
+      <div style="font-size: 13px; line-height: 1.55; color: var(--mut); margin-top: 16px;">
+        We are allocating an initial <strong style="color: var(--tx); font-weight: 800;">$200,000 Presale Marketing Budget</strong> strictly for performance payouts.
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 12px; margin-top: 14px;">
+        <div style="display: flex; gap: 10px; align-items: flex-start;">
+          <span style="width: 6px; height: 6px; border-radius: 50%; background: var(--vio-l); margin-top: 8px; flex: 0 0 auto;"></span>
+          <div style="font-size: 13px; line-height: 1.55; color: var(--mut);"><strong style="color: var(--tx); font-weight: 800;">Direct Sales Commission:</strong> You earn a <strong style="color: var(--tx); font-weight: 800;">10% - 15% commission</strong> on every single token purchase (USDT/BNB) made through your unique tracking links or promo codes.</div>
+        </div>
+        <div style="display: flex; gap: 10px; align-items: flex-start;">
+          <span style="width: 6px; height: 6px; border-radius: 50%; background: var(--vio-l); margin-top: 8px; flex: 0 0 auto;"></span>
+          <div style="font-size: 13px; line-height: 1.55; color: var(--mut);"><strong style="color: var(--tx); font-weight: 800;">The Math:</strong> If you drive $500k in sales (which is only 10 million OKN tokens at our $0.05 stage price), you instantly earn <strong style="color: var(--tx); font-weight: 800;">$50,000 - $75,000</strong>. If you drive $1M, you earn $100k+.</div>
+        </div>
+        <div style="display: flex; gap: 10px; align-items: flex-start;">
+          <span style="width: 6px; height: 6px; border-radius: 50%; background: var(--vio-l); margin-top: 8px; flex: 0 0 auto;"></span>
+          <div style="font-size: 13px; line-height: 1.55; color: var(--mut);"><strong style="color: var(--tx); font-weight: 800;">Milestone Bonuses:</strong> We will set aggressive monthly targets (e.g., $100k in volume). Hit the target, and we pay a flat cash bonus on top of your commission.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 2 -->
+    <section style="padding: 24px; border-radius: 24px; background: var(--s1); border: 1px solid var(--line);">
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <span class="num" style="width: 36px; height: 36px; border-radius: 50%; background: var(--vio); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 700; flex: 0 0 auto;">2</span>
+        <div>
+          <div style="font-size: 16px; font-weight: 800; line-height: 1.25;">The OKN Token Allocation</div>
+          <div style="font-size: 12px; font-weight: 600; color: var(--mut); margin-top: 2px;">(The "Skin in the Game")</div>
+        </div>
+      </div>
+      <div style="font-size: 13px; line-height: 1.55; color: var(--mut); margin-top: 16px;">
+        We want you to be wealthy when OKN succeeds, not just paid for a campaign.
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 12px; margin-top: 14px;">
+        <div style="display: flex; gap: 10px; align-items: flex-start;">
+          <span style="width: 6px; height: 6px; border-radius: 50%; background: var(--vio-l); margin-top: 8px; flex: 0 0 auto;"></span>
+          <div style="font-size: 13px; line-height: 1.55; color: var(--mut);">We are offering an allocation of <strong style="color: var(--tx); font-weight: 800;">OKN Tokens</strong> to our top marketing partners, vesting over 12 months.</div>
+        </div>
+        <div style="display: flex; gap: 10px; align-items: flex-start;">
+          <span style="width: 6px; height: 6px; border-radius: 50%; background: var(--vio-l); margin-top: 8px; flex: 0 0 auto;"></span>
+          <div style="font-size: 13px; line-height: 1.55; color: var(--mut);">You get a direct stake in the token you are pumping. When OKN lists on Tier-1 exchanges at a higher price, your allocation becomes your real payday.</div>
+        </div>
+        <div style="display: flex; gap: 10px; align-items: flex-start;">
+          <span style="width: 6px; height: 6px; border-radius: 50%; background: var(--vio-l); margin-top: 8px; flex: 0 0 auto;"></span>
+          <div style="font-size: 13px; line-height: 1.55; color: var(--mut);"><strong style="color: var(--tx); font-weight: 800;">Affiliate Leaderboard:</strong> The marketer who drives the highest presale volume in the first 90 days gets a <strong style="color: var(--tx); font-weight: 800;">2x multiplier</strong> on their token allocation.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 3 -->
+    <section style="padding: 24px; border-radius: 24px; background: var(--s1); border: 1px solid var(--line);">
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <span class="num" style="width: 36px; height: 36px; border-radius: 50%; background: var(--vio); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 700; flex: 0 0 auto;">3</span>
+        <div>
+          <div style="font-size: 16px; font-weight: 800; line-height: 1.25;">VIP Access &amp; Status</div>
+        </div>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 12px; margin-top: 16px;">
+        <div style="display: flex; gap: 10px; align-items: flex-start;">
+          <span style="width: 6px; height: 6px; border-radius: 50%; background: var(--vio-l); margin-top: 8px; flex: 0 0 auto;"></span>
+          <div style="font-size: 13px; line-height: 1.55; color: var(--mut);"><strong style="color: var(--tx); font-weight: 800;">Lifetime Fee Discount:</strong> Your personal trading fees on the OKNexus exchange will be permanently zeroed out or heavily discounted.</div>
+        </div>
+        <div style="display: flex; gap: 10px; align-items: flex-start;">
+          <span style="width: 6px; height: 6px; border-radius: 50%; background: var(--vio-l); margin-top: 8px; flex: 0 0 auto;"></span>
+          <div style="font-size: 13px; line-height: 1.55; color: var(--mut);"><strong style="color: var(--tx); font-weight: 800;">Inner Circle:</strong> You will know about major listings, product launches, and roadmap shifts before the public does.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 4 -->
+    <section style="padding: 24px; border-radius: 24px; background: var(--inv-bg); color: var(--inv-tx);">
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <span class="num" style="width: 36px; height: 36px; border-radius: 50%; background: var(--inv-tx); color: var(--inv-bg); display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 700; flex: 0 0 auto;">4</span>
+        <div>
+          <div style="font-size: 16px; font-weight: 800; line-height: 1.25;">What We Provide You</div>
+          <div style="font-size: 12px; font-weight: 600; color: var(--inv-mut); margin-top: 2px;">(Our Commitment)</div>
+        </div>
+      </div>
+      <div style="font-size: 13px; line-height: 1.55; color: var(--inv-mut); margin-top: 16px;">We aren't making you do this blind. We provide:</div>
+      <div style="display: flex; flex-direction: column; gap: 12px; margin-top: 14px;">
+        <div style="display: flex; gap: 10px; align-items: flex-start;">
+          <span style="width: 6px; height: 6px; border-radius: 50%; background: var(--inv-tx); margin-top: 8px; flex: 0 0 auto;"></span>
+          <div style="font-size: 13px; line-height: 1.55;">A high-converting landing page and presale widget.</div>
+        </div>
+        <div style="display: flex; gap: 10px; align-items: flex-start;">
+          <span style="width: 6px; height: 6px; border-radius: 50%; background: var(--inv-tx); margin-top: 8px; flex: 0 0 auto;"></span>
+          <div style="font-size: 13px; line-height: 1.55;">Ready-made creative assets, banners, and video explainers.</div>
+        </div>
+        <div style="display: flex; gap: 10px; align-items: flex-start;">
+          <span style="width: 6px; height: 6px; border-radius: 50%; background: var(--inv-tx); margin-top: 8px; flex: 0 0 auto;"></span>
+          <div style="font-size: 13px; line-height: 1.55;">A dedicated affiliate dashboard to track your sales and commissions in real-time.</div>
+        </div>
+        <div style="display: flex; gap: 10px; align-items: flex-start;">
+          <span style="width: 6px; height: 6px; border-radius: 50%; background: var(--inv-tx); margin-top: 8px; flex: 0 0 auto;"></span>
+          <div style="font-size: 13px; line-height: 1.55;">Weekly syncs to ensure you have the support you need.</div>
+        </div>
+      </div>
+    </section>
   </div>
 
   <div class="resp-grid-2" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px;">
@@ -905,121 +1096,134 @@ const desktopReferralMain = `
   </div>
 `;
 
-// 6. Activity Desktop
+// 6. Activity Desktop & Mobile
 const desktopActivityMain = `
-  <section style="background: var(--vio); color: #fff; border-radius: 28px; padding: 32px 36px; margin-bottom: 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.12);">
-    <div style="font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.8; margin-bottom: 6px;">Audit Trail</div>
-    <div style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 16px;">
-      <div>
-        <div style="font-size: 14px; opacity: 0.85;">Historical Records</div>
-        <div class="num" style="font-size: 42px; font-weight: 800; line-height: 1.1; margin-top: 4px;">Activity Log</div>
+  <div class="portfolio-container" style="max-width: 1400px; margin: 0 auto; padding-bottom: 40px;">
+    ${getPortfolioHeader('activity')}
+
+    <section class="page-hero" style="background: var(--vio); color: #fff; border-radius: 24px; padding: 24px 28px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.12);">
+      <div style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.85; margin-bottom: 4px;">Audit Trail</div>
+      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+        <div>
+          <div style="font-size: 13px; opacity: 0.85;">Historical Records</div>
+          <div class="num" style="font-size: 32px; font-weight: 800; line-height: 1.15; margin-top: 2px;">Activity Log</div>
+        </div>
+        <div style="background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); padding: 10px 16px; border-radius: 14px;">
+          <div style="font-size: 11px; opacity: 0.85;">Transaction Count</div>
+          <div style="font-size: 15px; font-weight: 800; margin-top: 2px;">5 verified movements</div>
+        </div>
       </div>
-      <div style="background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); padding: 12px 20px; border-radius: 16px;">
-        <div style="font-size: 12px; opacity: 0.85;">Transaction Count</div>
-        <div style="font-size: 16px; font-weight: 800; margin-top: 2px;">5 verified movements</div>
-      </div>
+    </section>
+
+    <div style="display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap;">
+      <button style="height: 38px; padding: 0 18px; border-radius: 19px; background: var(--vio); color: #fff; font-size: 13px; font-weight: 700; border: none; cursor: pointer;">All</button>
+      <button style="height: 38px; padding: 0 18px; border-radius: 19px; background: var(--s2); color: var(--mut); font-size: 13px; font-weight: 700; border: 1px solid var(--line); cursor: pointer;">OK Points</button>
+      <button style="height: 38px; padding: 0 18px; border-radius: 19px; background: var(--s2); color: var(--mut); font-size: 13px; font-weight: 700; border: 1px solid var(--line); cursor: pointer;">$OKN</button>
     </div>
-  </section>
 
-  <div style="display: flex; gap: 8px; margin-bottom: 20px;">
-    <button style="height: 38px; padding: 0 18px; border-radius: 19px; background: var(--vio); color: #fff; font-size: 13px; font-weight: 700; border: none; cursor: pointer;">All</button>
-    <button style="height: 38px; padding: 0 18px; border-radius: 19px; background: var(--s2); color: var(--mut); font-size: 13px; font-weight: 700; border: 1px solid var(--line); cursor: pointer;">OK Points</button>
-    <button style="height: 38px; padding: 0 18px; border-radius: 19px; background: var(--s2); color: var(--mut); font-size: 13px; font-weight: 700; border: 1px solid var(--line); cursor: pointer;">$OKN</button>
-  </div>
-
-  <div style="background: var(--s1); border: 1px solid var(--line); border-radius: 24px; padding: 24px 28px;">
-    <div style="display: flex; flex-direction: column; gap: 12px;">
-      <div style="display: flex; align-items: center; justify-content: space-between; padding: 14px 0; border-bottom: 1px solid var(--line); flex-wrap: wrap; gap: 12px;">
-        <div style="display: flex; align-items: center; gap: 14px;">
-          <div style="width: 38px; height: 38px; border-radius: 50%; background: var(--s2); color: var(--ok); display: flex; align-items: center; justify-content: center;">${ICONS.check}</div>
-          <div>
-            <div style="font-weight: 800; font-size: 14px;">Daily check-in</div>
-            <div style="font-size: 12px; color: var(--mut);">Day 5 of streak · Nov 2, 2026</div>
+    <div style="background: var(--s1); border: 1px solid var(--line); border-radius: 20px; padding: 20px 24px;">
+      <div style="display: flex; flex-direction: column; gap: 4px;">
+        <div style="display: flex; align-items: center; justify-content: space-between; padding: 14px 0; border-bottom: 1px solid var(--line); flex-wrap: wrap; gap: 12px;">
+          <div style="display: flex; align-items: center; gap: 12px; min-width: 0;">
+            <div style="width: 36px; height: 36px; border-radius: 50%; background: rgba(47,189,142,0.12); color: var(--ok); display: flex; align-items: center; justify-content: center; flex: 0 0 auto;">${ICONS.check}</div>
+            <div style="min-width: 0;">
+              <div style="font-weight: 800; font-size: 14px; color: var(--tx);">Daily check-in</div>
+              <div style="font-size: 12px; color: var(--mut);">Day 6 of streak · Nov 2, 2026</div>
+            </div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 12px; flex-shrink: 0;">
+            <span class="num" style="font-weight: 800; font-size: 15px; color: var(--ok); white-space: nowrap;">+20 pts</span>
+            <span style="font-size: 11px; font-weight: 800; padding: 4px 10px; border-radius: 8px; background: rgba(255,170,0,0.14); color: var(--org-t); white-space: nowrap;">Awaiting commit</span>
           </div>
         </div>
-        <div style="display: flex; align-items: center; gap: 16px;">
-          <span class="num" style="font-weight: 800; font-size: 15px; color: var(--ok);">+20 pts</span>
-          <span style="font-size: 11px; font-weight: 800; padding: 3px 10px; border-radius: 20px; background: rgba(255,170,0,0.16); color: var(--org-t);">Awaiting commit</span>
-        </div>
-      </div>
 
-      <div style="display: flex; align-items: center; justify-content: space-between; padding: 14px 0; border-bottom: 1px solid var(--line); flex-wrap: wrap; gap: 12px;">
-        <div style="display: flex; align-items: center; gap: 14px;">
-          <div style="width: 38px; height: 38px; border-radius: 50%; background: var(--s2); color: var(--ok); display: flex; align-items: center; justify-content: center;">${ICONS.check}</div>
-          <div>
-            <div style="font-weight: 800; font-size: 14px;">Daily check-in</div>
-            <div style="font-size: 12px; color: var(--mut);">Day 4 of streak · Nov 1, 2026</div>
+        <div style="display: flex; align-items: center; justify-content: space-between; padding: 14px 0; border-bottom: 1px solid var(--line); flex-wrap: wrap; gap: 12px;">
+          <div style="display: flex; align-items: center; gap: 12px; min-width: 0;">
+            <div style="width: 36px; height: 36px; border-radius: 50%; background: rgba(47,189,142,0.12); color: var(--ok); display: flex; align-items: center; justify-content: center; flex: 0 0 auto;">${ICONS.check}</div>
+            <div style="min-width: 0;">
+              <div style="font-weight: 800; font-size: 14px; color: var(--tx);">Daily check-in</div>
+              <div style="font-size: 12px; color: var(--mut);">Day 5 of streak · Nov 1, 2026</div>
+            </div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 12px; flex-shrink: 0;">
+            <span class="num" style="font-weight: 800; font-size: 15px; color: var(--ok); white-space: nowrap;">+20 pts</span>
+            <span style="font-size: 11px; font-weight: 800; padding: 4px 10px; border-radius: 8px; background: rgba(255,170,0,0.14); color: var(--org-t); white-space: nowrap;">Awaiting commit</span>
           </div>
         </div>
-        <div style="display: flex; align-items: center; gap: 16px;">
-          <span class="num" style="font-weight: 800; font-size: 15px; color: var(--ok);">+20 pts</span>
-          <span style="font-size: 11px; font-weight: 800; padding: 3px 10px; border-radius: 20px; background: rgba(255,170,0,0.16); color: var(--org-t);">Awaiting commit</span>
-        </div>
-      </div>
 
-      <div style="display: flex; align-items: center; justify-content: space-between; padding: 14px 0; border-bottom: 1px solid var(--line); flex-wrap: wrap; gap: 12px;">
-        <div style="display: flex; align-items: center; gap: 14px;">
-          <div style="width: 38px; height: 38px; border-radius: 50%; background: var(--s2); color: var(--ok); display: flex; align-items: center; justify-content: center;">${ICONS.check}</div>
-          <div>
-            <div style="font-weight: 800; font-size: 14px;">Daily check-in</div>
-            <div style="font-size: 12px; color: var(--mut);">Day 3 of streak · Oct 31, 2026</div>
+        <div style="display: flex; align-items: center; justify-content: space-between; padding: 14px 0; flex-wrap: wrap; gap: 12px;">
+          <div style="display: flex; align-items: center; gap: 12px; min-width: 0;">
+            <div style="width: 36px; height: 36px; border-radius: 50%; background: rgba(47,189,142,0.12); color: var(--ok); display: flex; align-items: center; justify-content: center; flex: 0 0 auto;">${ICONS.check}</div>
+            <div style="min-width: 0;">
+              <div style="font-weight: 800; font-size: 14px; color: var(--tx);">Daily check-in</div>
+              <div style="font-size: 12px; color: var(--mut);">Day 4 of streak · Oct 31, 2026</div>
+            </div>
           </div>
-        </div>
-        <div style="display: flex; align-items: center; gap: 16px;">
-          <span class="num" style="font-weight: 800; font-size: 15px; color: var(--ok);">+20 pts</span>
-          <span style="font-size: 11px; font-weight: 800; padding: 3px 10px; border-radius: 20px; background: rgba(255,170,0,0.16); color: var(--org-t);">Awaiting commit</span>
+          <div style="display: flex; align-items: center; gap: 12px; flex-shrink: 0;">
+            <span class="num" style="font-weight: 800; font-size: 15px; color: var(--ok); white-space: nowrap;">+20 pts</span>
+            <span style="font-size: 11px; font-weight: 800; padding: 4px 10px; border-radius: 8px; background: rgba(255,170,0,0.14); color: var(--org-t); white-space: nowrap;">Awaiting commit</span>
+          </div>
         </div>
       </div>
     </div>
   </div>
 `;
 
-// 7. Wallet Desktop & Mobile
+// 7. Wallet / Holdings Desktop & Mobile
 const desktopWalletMain = `
-  <section style="background: var(--vio); color: #fff; border-radius: 28px; padding: 32px 36px; margin-bottom: 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.12);">
-    <div style="font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.8; margin-bottom: 6px;">Web3 Custody</div>
-    <div style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 16px;">
-      <div>
-        <div style="font-size: 14px; opacity: 0.85;">Connected Address</div>
-        <div class="num" style="font-size: 32px; font-weight: 800; line-height: 1.1; margin-top: 4px;">0x71C...49A1</div>
-      </div>
-      <div style="background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); padding: 8px 16px; border-radius: 12px; display: flex; align-items: center; gap: 8px;">
-        <span style="width: 8px; height: 8px; border-radius: 50%; background: var(--ok); "></span>
-        <span style="font-size: 13px; font-weight: 700;">BNB Smart Chain (Testnet)</span>
-      </div>
-    </div>
-  </section>
+  <div class="portfolio-container" style="max-width: 1400px; margin: 0 auto; padding-bottom: 40px;">
+    ${getPortfolioHeader('holdings')}
 
-  <div class="resp-grid-2" style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 24px;">
-    <div style="background: var(--s1); border: 1px solid var(--line); border-radius: 24px; padding: 28px;">
-      <div style="font-size: 16px; font-weight: 800; margin-bottom: 20px;">Asset Balances</div>
-      <div style="display: flex; justify-content: space-between; padding: 14px 0; border-bottom: 1px solid var(--line);">
-        <div style="display: flex; align-items: center; gap: 10px;">
-          ${ICONS.bnb}
-          <span style="color: var(--mut); font-size: 14px; font-weight: 700;">BNB (Native Gas)</span>
+    <section class="page-hero" style="background: var(--vio); color: #fff; border-radius: 24px; padding: 24px 28px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.12);">
+      <div style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.85; margin-bottom: 4px;">Web3 Custody</div>
+      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px;">
+        <div>
+          <div style="font-size: 13px; opacity: 0.85;">Connected Address</div>
+          <div class="num" style="font-size: 28px; font-weight: 800; line-height: 1.15; margin-top: 2px;">0x71C...49A1</div>
         </div>
-        <span class="num" style="font-weight: 800; font-size: 16px;">1.45 BNB</span>
-      </div>
-      <div style="display: flex; justify-content: space-between; padding: 14px 0; border-bottom: 1px solid var(--line);">
-        <div style="display: flex; align-items: center; gap: 10px;">
-          ${logoImgDesktop}
-          <span style="color: var(--mut); font-size: 14px; font-weight: 700;">$OKN Token</span>
+        <div style="background: rgba(255,255,255,0.16); backdrop-filter: blur(10px); padding: 8px 14px; border-radius: 12px; display: inline-flex; align-items: center; gap: 8px;">
+          <span style="width: 8px; height: 8px; border-radius: 50%; background: var(--ok); flex-shrink: 0;"></span>
+          <span style="font-size: 13px; font-weight: 700; white-space: nowrap;">BNB Smart Chain (Testnet)</span>
         </div>
-        <span class="num" style="font-weight: 800; font-size: 16px; color: var(--vio-l);">0 $OKN</span>
       </div>
-      <div style="display: flex; justify-content: space-between; padding: 14px 0;">
-        <span style="color: var(--mut); font-size: 14px;">OK Points Balance</span>
-        <span class="num" style="font-weight: 800; font-size: 16px; color: var(--ok);">135 pts</span>
-      </div>
-      <button onclick="openWalletModal()" style="width: 100%; margin-top: 20px; height: 48px; border-radius: 14px; background: var(--s2); border: 1px solid var(--line); color: var(--tx); font-weight: 800; cursor: pointer;">Switch Wallet</button>
-    </div>
+    </section>
 
-    <div style="background: var(--s1); border: 1px solid var(--line); border-radius: 24px; padding: 28px;">
-      <div style="font-size: 16px; font-weight: 800; margin-bottom: 14px;">Deposit & Withdraw</div>
-      <p style="font-size: 14px; color: var(--mut); line-height: 1.6; margin: 0 0 24px;">Deposit BNB to participate in the presale allocation or withdraw claimable $OKN allocations to your personal non-custodial wallet.</p>
-      <div style="display: flex; gap: 12px;">
-        <a href="buy.html" style="flex: 1; height: 46px; border-radius: 14px; background: var(--vio); color: #fff; font-weight: 800; font-size: 13px; display: flex; align-items: center; justify-content: center; text-decoration: none;">Buy $OKN</a>
-        <a href="claim.html" style="flex: 1; height: 46px; border-radius: 14px; background: var(--s2); border: 1px solid var(--line); color: var(--tx); font-weight: 800; font-size: 13px; display: flex; align-items: center; justify-content: center; text-decoration: none;">Claim $OKN</a>
+    <div class="resp-grid-2" style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 24px;">
+      <div style="background: var(--s1); border: 1px solid var(--line); border-radius: 20px; padding: 24px;">
+        <div style="font-size: 17px; font-weight: 800; margin-bottom: 16px; color: var(--tx);">Asset Balances</div>
+        <div class="kv-row" style="display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 14px 0; border-bottom: 1px solid var(--line);">
+          <div style="display: flex; align-items: center; gap: 10px; min-width: 0;">
+            <span style="flex-shrink: 0; display: flex;">${ICONS.bnb}</span>
+            <span style="color: var(--mut); font-size: 14px; font-weight: 700;">BNB (Native Gas)</span>
+          </div>
+          <span class="num" style="font-weight: 800; font-size: 16px; color: var(--tx); white-space: nowrap; flex-shrink: 0;">1.45 BNB</span>
+        </div>
+        <div class="kv-row" style="display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 14px 0; border-bottom: 1px solid var(--line);">
+          <div style="display: flex; align-items: center; gap: 10px; min-width: 0;">
+            <span style="flex-shrink: 0; display: flex;">${logoImgDesktop}</span>
+            <span style="color: var(--mut); font-size: 14px; font-weight: 700;">$OKN Token</span>
+          </div>
+          <span class="num" style="font-weight: 800; font-size: 16px; color: var(--vio-l); white-space: nowrap; flex-shrink: 0;">0 $OKN</span>
+        </div>
+        <div class="kv-row" style="display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 14px 0;">
+          <div style="display: flex; align-items: center; gap: 10px; min-width: 0;">
+            <span style="width: 20px; height: 20px; border-radius: 6px; background: rgba(47,189,142,0.15); color: var(--ok); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">${ICONS.gift}</span>
+            <span style="color: var(--mut); font-size: 14px; font-weight: 700;">OK Points Balance</span>
+          </div>
+          <span class="num" style="font-weight: 800; font-size: 16px; color: var(--ok); white-space: nowrap; flex-shrink: 0;">135 pts</span>
+        </div>
+        <button onclick="openWalletModal()" style="width: 100%; margin-top: 18px; height: 46px; border-radius: 14px; background: var(--s2); border: 1px solid var(--line); color: var(--tx); font-weight: 800; font-size: 14px; cursor: pointer;">Switch Wallet</button>
+      </div>
+
+      <div style="background: var(--s1); border: 1px solid var(--line); border-radius: 20px; padding: 24px; display: flex; flex-direction: column; justify-content: space-between;">
+        <div>
+          <div style="font-size: 17px; font-weight: 800; margin-bottom: 10px; color: var(--tx);">Deposit & Withdraw</div>
+          <p style="font-size: 14px; color: var(--mut); line-height: 1.6; margin: 0 0 20px;">Deposit BNB to participate in the presale allocation or withdraw claimable $OKN allocations to your personal non-custodial wallet.</p>
+        </div>
+        <div style="display: flex; gap: 12px;">
+          <a href="buy.html" style="flex: 1; height: 46px; border-radius: 14px; background: var(--vio); color: #fff; font-weight: 800; font-size: 14px; display: flex; align-items: center; justify-content: center; text-decoration: none;">Buy $OKN</a>
+          <a href="claim.html" style="flex: 1; height: 46px; border-radius: 14px; background: var(--s2); border: 1px solid var(--line); color: var(--tx); font-weight: 800; font-size: 14px; display: flex; align-items: center; justify-content: center; text-decoration: none;">Claim $OKN</a>
+        </div>
       </div>
     </div>
   </div>
@@ -1171,10 +1375,10 @@ const desktopLearnMain = `
   </div>
 `;
 
-// Helper for mobile versions of secondary pages
+// Helper for mobile versions of all pages
 function makeSubpageMobile(title, mainContent) {
   return `
-    <div style="padding: 16px 16px 90px; width: 100%; max-width: 540px; margin: 0 auto; box-sizing: border-box;">
+    <div class="mobile-page-wrap" style="padding: 16px 16px 96px; width: 100%; max-width: 540px; margin: 0 auto; box-sizing: border-box;">
       ${mainContent}
     </div>
   `;
@@ -1187,7 +1391,7 @@ const pagesToBuild = [
     activeNav: 'Portfolio',
     activeBottomTab: 'Home',
     desktopMain: desktopPortfolioMain,
-    mobile: makeSubpageMobile('Portfolio', desktopPortfolioMain),
+    mobile: mobileHome,
     filenames: ['portfolio.html', 'Desktop.dc.html', 'index.html', 'desktop.html', 'DesktopCollapsed.dc.html', 'Desktop__Portfolio__sidebar_collapsed.html']
   },
   {
@@ -1225,7 +1429,7 @@ const pagesToBuild = [
   {
     title: 'Referral',
     activeNav: 'Referral',
-    activeBottomTab: 'Home',
+    activeBottomTab: 'Referral',
     desktopMain: desktopReferralMain,
     mobile: mobileReferral,
     filenames: ['referral.html', 'Referral.dc.html', 'Referral.html']
@@ -1243,10 +1447,9 @@ const pagesToBuild = [
     activeNav: 'Portfolio',
     activeBottomTab: 'Home',
     desktopMain: desktopPortfolioMain,
-    mobile: makeSubpageMobile('Home', desktopPortfolioMain),
+    mobile: mobileHome,
     filenames: ['home.html', 'Main.dc.html', 'Home.dc.html', 'Main.html', 'mobile.html']
   },
-
   {
     title: 'Wallet',
     activeNav: 'Wallet',
@@ -1289,6 +1492,36 @@ const pagesToBuild = [
   }
 ];
 
+// Ensure public/ output directory is populated for Vercel static deployment
+const publicDir = path.join(rootDir, 'public');
+fs.mkdirSync(publicDir, { recursive: true });
+fs.mkdirSync(path.join(publicDir, 'css'), { recursive: true });
+fs.mkdirSync(path.join(publicDir, 'assets'), { recursive: true });
+
+if (fs.existsSync(path.join(rootDir, 'css', 'responsive.css'))) {
+  fs.copyFileSync(
+    path.join(rootDir, 'css', 'responsive.css'),
+    path.join(publicDir, 'css', 'responsive.css')
+  );
+}
+if (fs.existsSync(path.join(rootDir, 'favicon.ico'))) {
+  fs.copyFileSync(
+    path.join(rootDir, 'favicon.ico'),
+    path.join(publicDir, 'favicon.ico')
+  );
+}
+const assetsSrcDir = path.join(rootDir, 'assets');
+if (fs.existsSync(assetsSrcDir)) {
+  for (const entry of fs.readdirSync(assetsSrcDir, { withFileTypes: true })) {
+    if (entry.isFile()) {
+      fs.copyFileSync(
+        path.join(assetsSrcDir, entry.name),
+        path.join(publicDir, 'assets', entry.name)
+      );
+    }
+  }
+}
+
 pagesToBuild.forEach(p => {
   const fullHtml = assemblePage({
     title: p.title,
@@ -1300,8 +1533,9 @@ pagesToBuild.forEach(p => {
 
   p.filenames.forEach(fn => {
     fs.writeFileSync(path.join(rootDir, fn), fullHtml, 'utf8');
+    fs.writeFileSync(path.join(publicDir, fn), fullHtml, 'utf8');
     console.log(`Wrote full responsive: ${fn} (${fullHtml.length} bytes)`);
   });
 });
 
-console.log('Finished rebuilding all 35+ routes with 100% SVG icons and unified responsive architecture!');
+console.log('Finished rebuilding all 35+ routes in root and public/ for Vercel deployment!');

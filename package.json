@@ -4,8 +4,8 @@
   "description": "Clean, production-grade responsive Web3 dashboard for OKN Token",
   "main": "serve.js",
   "scripts": {
-    "dev": "node serve.js",
-    "start": "node serve.js",
+    "dev": "node build.js && node serve.js",
+    "start": "node build.js && node serve.js",
     "build": "node build.js"
   },
   "keywords": [

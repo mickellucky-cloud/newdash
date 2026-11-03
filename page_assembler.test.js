@@ -26,3 +26,32 @@ test('assemblePage generates complete HTML with active navigation and scripts', 
   assert.match(html, /function openWalletModal\(\)/);
   assert.match(html, /function copyReferralLink\(\)/);
 });
+
+test('responsive CSS stacks 2-column and 3-column grids on mobile (<768px)', () => {
+  const css = fs.readFileSync(path.join(rootDir, 'css', 'responsive.css'), 'utf8');
+  assert.match(css, /\.resp-grid-2,\s*\.resp-grid-3\s*\{\s*grid-template-columns:\s*1fr\s*!important;/);
+});
+
+test('vercel.json is configured for static deployment from public directory', () => {
+  const vercelConfigPath = path.join(rootDir, 'vercel.json');
+  assert.equal(fs.existsSync(vercelConfigPath), true);
+  const vercelConfig = JSON.parse(fs.readFileSync(vercelConfigPath, 'utf8'));
+  assert.equal(vercelConfig.buildCommand, 'npm run build');
+  assert.equal(vercelConfig.outputDirectory, 'public');
+});
+
+test('build output populates public/ directory and referral.html has full Partner Package', () => {
+  const publicDir = path.join(rootDir, 'public');
+  assert.equal(fs.existsSync(path.join(publicDir, 'index.html')), true);
+  assert.equal(fs.existsSync(path.join(publicDir, 'referral.html')), true);
+  assert.equal(fs.existsSync(path.join(publicDir, 'css', 'responsive.css')), true);
+  assert.equal(fs.existsSync(path.join(publicDir, 'assets', 'okn-logo.png')), true);
+  assert.equal(fs.existsSync(path.join(publicDir, 'favicon.ico')), true);
+
+  const referralHtml = fs.readFileSync(path.join(publicDir, 'referral.html'), 'utf8');
+  assert.match(referralHtml, /Tiered Performance Commissions/);
+  assert.match(referralHtml, /The OKN Token Allocation/);
+  assert.match(referralHtml, /VIP Access &amp; Status/);
+  assert.match(referralHtml, /What We Provide You/);
+  assert.match(referralHtml, /DE-71C49/);
+});

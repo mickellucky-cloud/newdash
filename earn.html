@@ -75,7 +75,7 @@
       <div class="sidebar-hide-tablet" style="padding: 4px 14px 8px;">
         <div style="position: relative; display: flex; align-items: center;">
           <svg class="i" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="position: absolute; left: 14px; color: var(--mut);"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.35-4.35"></path></svg>
-          <input type="text" placeholder="Search" style="width: 100%; height: 42px; border-radius: 14px; border: 1px solid var(--line); background: var(--s2); color: var(--tx); font-size: 14px; font-weight: 600; padding: 0px 14px 0px 42px; outline: none; transition: border-color 0.2s ease;">
+          <input type="text" placeholder="Search" aria-label="Search navigation" oninput="filterSidebarNav(this.value)" style="width: 100%; height: 42px; border-radius: 14px; border: 1px solid var(--line); background: var(--s2); color: var(--tx); font-size: 14px; font-weight: 600; padding: 0px 14px 0px 42px; outline: none; transition: border-color 0.2s ease;">
         </div>
       </div>
 
@@ -229,7 +229,7 @@
 
       <div style="display: flex; align-items: center; gap: 12px;">
         <!-- Language selector -->
-        <button style="height: 40px; padding: 0 14px; border-radius: 20px; background: var(--s2); border: 1px solid var(--line); color: var(--tx); font-size: 13px; font-weight: 700; display: flex; align-items: center; gap: 8px; cursor: pointer; transition: all 0.2s ease;">
+        <button onclick="showToast('Language set to English (EN)')" aria-label="Select language" style="height: 40px; padding: 0 14px; border-radius: 20px; background: var(--s2); border: 1px solid var(--line); color: var(--tx); font-size: 13px; font-weight: 700; display: flex; align-items: center; gap: 8px; cursor: pointer; transition: all 0.2s ease;">
           <svg class="i" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--mut);"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
           <span>EN</span>
           <svg class="i" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--mut);"><polyline points="6 9 12 15 18 9"></polyline></svg>
@@ -241,15 +241,15 @@
         </button>
 
         <!-- Notification bell -->
-        <button aria-label="Notifications" style="position: relative; width: 40px; height: 40px; border-radius: 50%; background: var(--s2); border: 1px solid var(--line); color: var(--tx); display: flex; align-items: center; justify-content: center; cursor: pointer;">
+        <button onclick="showToast('All caught up! Day 6 check-in recorded (+20 OK Points)')" aria-label="Notifications" style="position: relative; width: 40px; height: 40px; border-radius: 50%; background: var(--s2); border: 1px solid var(--line); color: var(--tx); display: flex; align-items: center; justify-content: center; cursor: pointer;">
           <svg class="i" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
           <span style="position: absolute; top: 9px; right: 9px; width: 8px; height: 8px; border-radius: 50%; background: var(--yel); border: 1.5px solid var(--s1);"></span>
         </button>
 
         <!-- User profile avatar -->
-        <div style="width: 40px; height: 40px; border-radius: 50%; background: var(--vio); color: #fff; font-weight: 800; font-size: 14px; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 0 12px rgba(122,18,245,0.4);">
+        <button onclick="window.location.href='wallet.html'" aria-label="User profile DE" style="width: 40px; height: 40px; border-radius: 50%; background: var(--vio); color: #fff; font-weight: 800; font-size: 14px; display: flex; align-items: center; justify-content: center; cursor: pointer; border: none; box-shadow: 0 0 12px rgba(122,18,245,0.4);">
           DE
-        </div>
+        </button>
       </div>
     </header>
   
@@ -257,23 +257,27 @@
       <!-- Mobile Topbar -->
       
     <header class="mobile-header">
-      <div style="display: flex; align-items: center; gap: 10px;">
+      <a href="home.html" style="display: flex; align-items: center; gap: 10px; text-decoration: none; color: inherit;">
         <div class="logo-box" style="width: 42px; height: 42px; border-radius: 12px; background: var(--s2); border: 1px solid var(--line); display: flex; align-items: center; justify-content: center; flex: 0 0 auto; box-shadow: 0 4px 14px rgba(0,0,0,0.12);"><img src="assets/okn-logo.png" alt="OKN logo" style="width: 34px; height: 34px; object-fit: contain; display: block; filter: drop-shadow(0 2px 6px rgba(122, 18, 245, 0.35));"></div>
         <div>
           <div style="font-size: 11px; font-weight: 600; color: var(--mut);">Welcome back</div>
           <div style="font-size: 15px; font-weight: 800;">DE</div>
         </div>
-      </div>
+      </a>
 
       <div style="display: flex; align-items: center; gap: 8px;">
         <button onclick="toggleTheme()" class="theme-toggle-btn" aria-label="Toggle theme" style="width: 38px; height: 38px; border-radius: 50%; background: var(--s2); border: 1px solid var(--line); color: var(--tx); display: flex; align-items: center; justify-content: center; cursor: pointer;">
           <svg class="i theme-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
         </button>
 
-        <button aria-label="Notifications" style="position: relative; width: 38px; height: 38px; border-radius: 50%; background: var(--s2); border: 1px solid var(--line); color: var(--tx); display: flex; align-items: center; justify-content: center; cursor: pointer;">
+        <button onclick="showToast('All caught up! Day 6 check-in recorded (+20 OK Points)')" aria-label="Notifications" style="position: relative; width: 38px; height: 38px; border-radius: 50%; background: var(--s2); border: 1px solid var(--line); color: var(--tx); display: flex; align-items: center; justify-content: center; cursor: pointer;">
           <svg class="i" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
           <span style="position: absolute; top: 8px; right: 8px; width: 8px; height: 8px; border-radius: 50%; background: var(--yel); border: 1.5px solid var(--s1);"></span>
         </button>
+
+        <a href="wallet.html" aria-label="Wallet DE" style="width: 38px; height: 38px; border-radius: 50%; background: var(--vio); color: #fff; font-weight: 800; font-size: 13px; display: flex; align-items: center; justify-content: center; text-decoration: none; box-shadow: 0 0 10px rgba(122,18,245,0.35);">
+          DE
+        </a>
       </div>
     </header>
   
@@ -363,7 +367,7 @@
 
       <!-- Page Content: Mobile View -->
       <div class="content-container mobile-only" style="display: none;">
-        <div class="sc-host" data-sc-name="1715b220-b136-47f8-9763-3cba73af26ed"><div data-dc-tpl="3" data-theme="dark" style="width: 100%; max-width: 460px; min-height: 100vh; height: auto; margin: 0 auto; background: var(--bg); color: var(--tx); font-family: Manrope, sans-serif; display: flex; flex-direction: column; overflow: visible;"><section data-dc-tpl="4" class="hero" style="background: var(--vio); color: rgb(255, 255, 255); border-radius: 0px 0px 36px 36px; padding: 20px 20px 24px; display: flex; flex-direction: column;"><div data-dc-tpl="25" style="font-size: 14px; font-weight: 600; color: rgb(228, 211, 255); margin-top: 24px;">Available to earn</div><div data-dc-tpl="26" style="display: flex; align-items: baseline; gap: 8px; margin-top: 6px;"><div data-dc-tpl="27" class="num" style="font-size: 56px; font-weight: 700; line-height: 1;">555</div><div data-dc-tpl="28" style="font-size: 15px; font-weight: 700; color: rgb(228, 211, 255);">OK Points</div></div><div data-dc-tpl="29" style="display: flex; align-items: center; justify-content: space-between; margin-top: 18px; font-size: 13px; font-weight: 700;"><span data-dc-tpl="30">Progress</span><span data-dc-tpl="31" class="num">0 / 11 tasks</span></div><div data-dc-tpl="32" role="img" aria-label="0 of 11 tasks done" style="height: 10px; border-radius: 5px; background: rgba(255, 255, 255, 0.22); margin-top: 8px; overflow: visible;"><div data-dc-tpl="33" style="width: 4%; height: 100%; border-radius: 5px; background: rgb(255, 255, 255);"></div></div></section><main data-dc-tpl="34" style="flex: 1 1 0%; padding: 16px 20px; display: flex; flex-direction: column; gap: 10px;"><div data-dc-tpl="35" style="display: flex; gap: 8px; margin-bottom: 2px;"><button data-dc-tpl="36" style="height: 44px; padding: 0px 20px; border-radius: 22px; background: var(--vio); color: rgb(255, 255, 255); font-size: 13px; font-weight: 800;">All</button><button data-dc-tpl="37" style="height: 44px; padding: 0px 20px; border-radius: 22px; background: var(--s1); border: 1px solid var(--line); color: var(--tx); font-size: 13px; font-weight: 700;">Social</button><button data-dc-tpl="38" style="height: 44px; padding: 0px 20px; border-radius: 22px; background: var(--s1); border: 1px solid var(--line); color: var(--tx); font-size: 13px; font-weight: 700;">Daily</button><button data-dc-tpl="39" style="height: 44px; padding: 0px 20px; border-radius: 22px; background: var(--s1); border: 1px solid var(--line); color: var(--tx); font-size: 13px; font-weight: 700;">Referral</button></div><div data-dc-tpl="40" style="display: flex; align-items: center; gap: 14px; height: 72px; padding: 0px 12px 0px 16px; border-radius: 22px; background: var(--s1); border: 1px solid var(--line);"><span data-dc-tpl="41" style="width: 44px; height: 44px; border-radius: 50%; background: var(--s2); color: var(--cyan-t); display: flex; align-items: center; justify-content: center;"><svg data-dc-tpl="42" class="i" width="21" height="21" viewBox="0 0 24 24" aria-hidden="true"><path data-dc-tpl="43" d="M21 3L3 10.5l6 2.5 2.5 6z"></path><path data-dc-tpl="44" d="M9 13l12-10"></path></svg></span><div data-dc-tpl="45" style="flex: 1 1 0%; min-width: 0px;"><div data-dc-tpl="46" style="font-size: 15px; font-weight: 800;">Join our Telegram</div><div data-dc-tpl="47" class="num" style="font-size: 12px; color: var(--yel-t); margin-top: 3px; font-weight: 700;">+50 OK Points</div></div><button data-dc-tpl="48" style="width: 64px; height: 44px; border-radius: 22px; background: var(--vio); color: rgb(255, 255, 255); font-size: 14px; font-weight: 800;">Claim</button></div><div data-dc-tpl="49" style="display: flex; align-items: center; gap: 14px; height: 72px; padding: 0px 12px 0px 16px; border-radius: 22px; background: var(--s1); border: 1px solid var(--line);"><span data-dc-tpl="50" style="width: 44px; height: 44px; border-radius: 50%; background: var(--s2); color: var(--cyan-t); display: flex; align-items: center; justify-content: center;"><svg data-dc-tpl="51" class="i" width="21" height="21" viewBox="0 0 24 24" aria-hidden="true"><path data-dc-tpl="52" d="M4 4l16 16M20 4L4 20"></path></svg></span><div data-dc-tpl="53" style="flex: 1 1 0%; min-width: 0px;"><div data-dc-tpl="54" style="font-size: 15px; font-weight: 800;">Follow us on X</div><div data-dc-tpl="55" class="num" style="font-size: 12px; color: var(--yel-t); margin-top: 3px; font-weight: 700;">+70 OK Points</div></div><button data-dc-tpl="56" style="width: 64px; height: 44px; border-radius: 22px; background: var(--vio); color: rgb(255, 255, 255); font-size: 14px; font-weight: 800;">Claim</button></div><div data-dc-tpl="57" style="display: flex; align-items: center; gap: 14px; height: 72px; padding: 0px 12px 0px 16px; border-radius: 22px; background: var(--s1); border: 1px solid var(--line);"><span data-dc-tpl="58" style="width: 44px; height: 44px; border-radius: 50%; background: var(--s2); color: var(--cyan-t); display: flex; align-items: center; justify-content: center;"><svg data-dc-tpl="59" class="i" width="21" height="21" viewBox="0 0 24 24" aria-hidden="true"><path data-dc-tpl="60" d="M14 8h3V4h-3a4 4 0 0 0-4 4v3H7v4h3v6h4v-6h3l1-4h-4V8z"></path></svg></span><div data-dc-tpl="61" style="flex: 1 1 0%; min-width: 0px;"><div data-dc-tpl="62" style="font-size: 15px; font-weight: 800;">Follow $OKN on Facebook</div><div data-dc-tpl="63" class="num" style="font-size: 12px; color: var(--yel-t); margin-top: 3px; font-weight: 700;">+50 OK Points</div></div><button data-dc-tpl="64" style="width: 64px; height: 44px; border-radius: 22px; background: var(--vio); color: rgb(255, 255, 255); font-size: 14px; font-weight: 800;">Claim</button></div><div data-dc-tpl="65" style="display: flex; align-items: center; gap: 14px; height: 72px; padding: 0px 12px 0px 16px; border-radius: 22px; background: var(--s1); border: 1px solid var(--line);"><span data-dc-tpl="66" style="width: 44px; height: 44px; border-radius: 50%; background: var(--s2); color: var(--cyan-t); display: flex; align-items: center; justify-content: center;"><svg data-dc-tpl="67" class="i" width="21" height="21" viewBox="0 0 24 24" aria-hidden="true"><rect data-dc-tpl="68" x="3" y="5" width="18" height="14" rx="4"></rect><path data-dc-tpl="69" d="M10 9.5v5l4.5-2.5z"></path></svg></span><div data-dc-tpl="70" style="flex: 1 1 0%; min-width: 0px;"><div data-dc-tpl="71" style="font-size: 15px; font-weight: 800;">Subscribe on [platform]</div><div data-dc-tpl="72" class="num" style="font-size: 12px; color: var(--yel-t); margin-top: 3px; font-weight: 700;">+65 OK Points</div></div><button data-dc-tpl="73" style="width: 64px; height: 44px; border-radius: 22px; background: var(--vio); color: rgb(255, 255, 255); font-size: 14px; font-weight: 800;">Claim</button></div><div data-dc-tpl="74" style="display: flex; align-items: center; gap: 14px; height: 72px; padding: 0px 12px 0px 16px; border-radius: 22px; background: var(--s1); border: 1px solid var(--line);"><span data-dc-tpl="75" style="width: 44px; height: 44px; border-radius: 50%; background: var(--s2); color: var(--cyan-t); display: flex; align-items: center; justify-content: center;"><svg data-dc-tpl="76" class="i" width="21" height="21" viewBox="0 0 24 24" aria-hidden="true"><path data-dc-tpl="77" d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"></path><path data-dc-tpl="78" d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"></path></svg></span><div data-dc-tpl="79" style="flex: 1 1 0%; min-width: 0px;"><div data-dc-tpl="80" style="font-size: 15px; font-weight: 800;">Follow $OKN on [platform]</div><div data-dc-tpl="81" class="num" style="font-size: 12px; color: var(--yel-t); margin-top: 3px; font-weight: 700;">+40 OK Points</div></div><button data-dc-tpl="82" style="width: 64px; height: 44px; border-radius: 22px; background: var(--vio); color: rgb(255, 255, 255); font-size: 14px; font-weight: 800;">Claim</button></div><button data-dc-tpl="83" style="display: flex; align-items: center; justify-content: center; gap: 6px; height: 48px; border-radius: 24px; background: transparent; border: 1px dashed var(--dash); color: var(--vio-l); font-size: 13px; font-weight: 800;">6 more tasks<svg data-dc-tpl="84" class="i" width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path data-dc-tpl="85" d="M6 9l6 6 6-6"></path></svg></button><div data-dc-tpl="86" style="margin-top: auto; padding: 18px; border-radius: 24px; background: var(--inv-bg); color: var(--inv-tx); display: flex; align-items: center; justify-content: space-between; gap: 12px;"><div data-dc-tpl="87" style="min-width: 0px;"><div data-dc-tpl="88" style="font-size: 16px; font-weight: 800;">Invite friends</div><div data-dc-tpl="89" style="font-size: 12px; color: var(--inv-mut); margin-top: 3px; font-weight: 600;">Referrals earn you more points.</div></div><a data-dc-tpl="90" href="Referral.html" style="display: flex; align-items: center; height: 44px; padding: 0px 18px; border-radius: 22px; background: var(--inv-tx); color: var(--inv-bg); font-size: 13px; font-weight: 800; white-space: nowrap;">Invite</a></div></main><nav data-dc-tpl="91" aria-label="Primary" style="display: flex; align-items: center; justify-content: space-between; padding: 10px 16px 26px; background: var(--bg); border-top: 1px solid var(--line);"><a data-dc-tpl="92" href="home.html" aria-label="Home" style="width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; color: var(--mut);"><svg data-dc-tpl="93" class="i" width="23" height="23" viewBox="0 0 24 24" aria-hidden="true"><path data-dc-tpl="94" d="M3 11l9-8 9 8v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"></path></svg></a><a data-dc-tpl="95" href="tasks.html" aria-current="page" style="display: flex; align-items: center; gap: 8px; height: 48px; padding: 0px 18px; border-radius: 24px; background: var(--vio); color: rgb(255, 255, 255); font-size: 13px; font-weight: 800;"><svg data-dc-tpl="96" class="i" width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path data-dc-tpl="97" d="M13 2L4 14h7l-1 8 9-12h-7z"></path></svg>Earn</a><a data-dc-tpl="98" href="Claim.html" aria-label="Claim" style="width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; color: var(--mut);"><svg data-dc-tpl="99" class="i" width="23" height="23" viewBox="0 0 24 24" aria-hidden="true"><path data-dc-tpl="100" d="M12 3v12m0 0l-4-4m4 4l4-4M4 21h16"></path></svg></a><a data-dc-tpl="101" href="Buy.html" aria-label="Buy" style="width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; color: var(--mut);"><svg data-dc-tpl="102" class="i" width="23" height="23" viewBox="0 0 24 24" aria-hidden="true"><circle data-dc-tpl="103" cx="12" cy="12" r="9"></circle><path data-dc-tpl="104" d="M12 8v8M8 12h8"></path></svg></a><a data-dc-tpl="105" href="Agents.html" aria-label="Agents" style="width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; color: var(--mut);"><svg data-dc-tpl="106" class="i" width="23" height="23" viewBox="0 0 24 24" aria-hidden="true"><rect data-dc-tpl="107" x="5" y="5" width="14" height="14" rx="3"></rect><path data-dc-tpl="108" d="M9 2v3M15 2v3M9 19v3M15 19v3M2 9h3M2 15h3M19 9h3M19 15h3"></path></svg></a></nav>
+        <div class="sc-host" data-sc-name="1715b220-b136-47f8-9763-3cba73af26ed"><div data-dc-tpl="3" style="width: 100%; max-width: 480px; min-height: auto; height: auto; margin: 0 auto; background: var(--bg); color: var(--tx); font-family: Manrope, sans-serif; display: flex; flex-direction: column; overflow: visible;"><section data-dc-tpl="4" class="hero" style="background: var(--vio); color: rgb(255, 255, 255); border-radius: 0px 0px 36px 36px; padding: 20px 20px 24px; display: flex; flex-direction: column;"><div data-dc-tpl="25" style="font-size: 14px; font-weight: 600; color: rgb(228, 211, 255); margin-top: 24px;">Available to earn</div><div data-dc-tpl="26" style="display: flex; align-items: baseline; gap: 8px; margin-top: 6px;"><div data-dc-tpl="27" class="num" style="font-size: 56px; font-weight: 700; line-height: 1;">555</div><div data-dc-tpl="28" style="font-size: 15px; font-weight: 700; color: rgb(228, 211, 255);">OK Points</div></div><div data-dc-tpl="29" style="display: flex; align-items: center; justify-content: space-between; margin-top: 18px; font-size: 13px; font-weight: 700;"><span data-dc-tpl="30">Progress</span><span data-dc-tpl="31" class="num">0 / 11 tasks</span></div><div data-dc-tpl="32" role="img" aria-label="0 of 11 tasks done" style="height: 10px; border-radius: 5px; background: rgba(255, 255, 255, 0.22); margin-top: 8px; overflow: visible;"><div data-dc-tpl="33" style="width: 4%; height: 100%; border-radius: 5px; background: rgb(255, 255, 255);"></div></div></section><main data-dc-tpl="34" style="flex: 1 1 0%; padding: 16px 20px; display: flex; flex-direction: column; gap: 10px;"><div data-dc-tpl="35" style="display: flex; gap: 8px; margin-bottom: 2px;"><button data-dc-tpl="36" style="height: 44px; padding: 0px 20px; border-radius: 22px; background: var(--vio); color: rgb(255, 255, 255); font-size: 13px; font-weight: 800;">All</button><button data-dc-tpl="37" style="height: 44px; padding: 0px 20px; border-radius: 22px; background: var(--s1); border: 1px solid var(--line); color: var(--tx); font-size: 13px; font-weight: 700;">Social</button><button data-dc-tpl="38" style="height: 44px; padding: 0px 20px; border-radius: 22px; background: var(--s1); border: 1px solid var(--line); color: var(--tx); font-size: 13px; font-weight: 700;">Daily</button><button data-dc-tpl="39" style="height: 44px; padding: 0px 20px; border-radius: 22px; background: var(--s1); border: 1px solid var(--line); color: var(--tx); font-size: 13px; font-weight: 700;">Referral</button></div><div data-dc-tpl="40" style="display: flex; align-items: center; gap: 14px; height: 72px; padding: 0px 12px 0px 16px; border-radius: 22px; background: var(--s1); border: 1px solid var(--line);"><span data-dc-tpl="41" style="width: 44px; height: 44px; border-radius: 50%; background: var(--s2); color: var(--cyan-t); display: flex; align-items: center; justify-content: center;"><svg data-dc-tpl="42" class="i" width="21" height="21" viewBox="0 0 24 24" aria-hidden="true"><path data-dc-tpl="43" d="M21 3L3 10.5l6 2.5 2.5 6z"></path><path data-dc-tpl="44" d="M9 13l12-10"></path></svg></span><div data-dc-tpl="45" style="flex: 1 1 0%; min-width: 0px;"><div data-dc-tpl="46" style="font-size: 15px; font-weight: 800;">Join our Telegram</div><div data-dc-tpl="47" class="num" style="font-size: 12px; color: var(--yel-t); margin-top: 3px; font-weight: 700;">+50 OK Points</div></div><button data-dc-tpl="48" style="width: 64px; height: 44px; border-radius: 22px; background: var(--vio); color: rgb(255, 255, 255); font-size: 14px; font-weight: 800;">Claim</button></div><div data-dc-tpl="49" style="display: flex; align-items: center; gap: 14px; height: 72px; padding: 0px 12px 0px 16px; border-radius: 22px; background: var(--s1); border: 1px solid var(--line);"><span data-dc-tpl="50" style="width: 44px; height: 44px; border-radius: 50%; background: var(--s2); color: var(--cyan-t); display: flex; align-items: center; justify-content: center;"><svg data-dc-tpl="51" class="i" width="21" height="21" viewBox="0 0 24 24" aria-hidden="true"><path data-dc-tpl="52" d="M4 4l16 16M20 4L4 20"></path></svg></span><div data-dc-tpl="53" style="flex: 1 1 0%; min-width: 0px;"><div data-dc-tpl="54" style="font-size: 15px; font-weight: 800;">Follow us on X</div><div data-dc-tpl="55" class="num" style="font-size: 12px; color: var(--yel-t); margin-top: 3px; font-weight: 700;">+70 OK Points</div></div><button data-dc-tpl="56" style="width: 64px; height: 44px; border-radius: 22px; background: var(--vio); color: rgb(255, 255, 255); font-size: 14px; font-weight: 800;">Claim</button></div><div data-dc-tpl="57" style="display: flex; align-items: center; gap: 14px; height: 72px; padding: 0px 12px 0px 16px; border-radius: 22px; background: var(--s1); border: 1px solid var(--line);"><span data-dc-tpl="58" style="width: 44px; height: 44px; border-radius: 50%; background: var(--s2); color: var(--cyan-t); display: flex; align-items: center; justify-content: center;"><svg data-dc-tpl="59" class="i" width="21" height="21" viewBox="0 0 24 24" aria-hidden="true"><path data-dc-tpl="60" d="M14 8h3V4h-3a4 4 0 0 0-4 4v3H7v4h3v6h4v-6h3l1-4h-4V8z"></path></svg></span><div data-dc-tpl="61" style="flex: 1 1 0%; min-width: 0px;"><div data-dc-tpl="62" style="font-size: 15px; font-weight: 800;">Follow $OKN on Facebook</div><div data-dc-tpl="63" class="num" style="font-size: 12px; color: var(--yel-t); margin-top: 3px; font-weight: 700;">+50 OK Points</div></div><button data-dc-tpl="64" style="width: 64px; height: 44px; border-radius: 22px; background: var(--vio); color: rgb(255, 255, 255); font-size: 14px; font-weight: 800;">Claim</button></div><div data-dc-tpl="65" style="display: flex; align-items: center; gap: 14px; height: 72px; padding: 0px 12px 0px 16px; border-radius: 22px; background: var(--s1); border: 1px solid var(--line);"><span data-dc-tpl="66" style="width: 44px; height: 44px; border-radius: 50%; background: var(--s2); color: var(--cyan-t); display: flex; align-items: center; justify-content: center;"><svg data-dc-tpl="67" class="i" width="21" height="21" viewBox="0 0 24 24" aria-hidden="true"><rect data-dc-tpl="68" x="3" y="5" width="18" height="14" rx="4"></rect><path data-dc-tpl="69" d="M10 9.5v5l4.5-2.5z"></path></svg></span><div data-dc-tpl="70" style="flex: 1 1 0%; min-width: 0px;"><div data-dc-tpl="71" style="font-size: 15px; font-weight: 800;">Subscribe on YouTube</div><div data-dc-tpl="72" class="num" style="font-size: 12px; color: var(--yel-t); margin-top: 3px; font-weight: 700;">+65 OK Points</div></div><button data-dc-tpl="73" style="width: 64px; height: 44px; border-radius: 22px; background: var(--vio); color: rgb(255, 255, 255); font-size: 14px; font-weight: 800;">Claim</button></div><div data-dc-tpl="74" style="display: flex; align-items: center; gap: 14px; height: 72px; padding: 0px 12px 0px 16px; border-radius: 22px; background: var(--s1); border: 1px solid var(--line);"><span data-dc-tpl="75" style="width: 44px; height: 44px; border-radius: 50%; background: var(--s2); color: var(--cyan-t); display: flex; align-items: center; justify-content: center;"><svg data-dc-tpl="76" class="i" width="21" height="21" viewBox="0 0 24 24" aria-hidden="true"><path data-dc-tpl="77" d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"></path><path data-dc-tpl="78" d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"></path></svg></span><div data-dc-tpl="79" style="flex: 1 1 0%; min-width: 0px;"><div data-dc-tpl="80" style="font-size: 15px; font-weight: 800;">Follow $OKN on Discord</div><div data-dc-tpl="81" class="num" style="font-size: 12px; color: var(--yel-t); margin-top: 3px; font-weight: 700;">+40 OK Points</div></div><button data-dc-tpl="82" style="width: 64px; height: 44px; border-radius: 22px; background: var(--vio); color: rgb(255, 255, 255); font-size: 14px; font-weight: 800;">Claim</button></div><button data-dc-tpl="83" style="display: flex; align-items: center; justify-content: center; gap: 6px; height: 48px; border-radius: 24px; background: transparent; border: 1px dashed var(--dash); color: var(--vio-l); font-size: 13px; font-weight: 800;">6 more tasks<svg data-dc-tpl="84" class="i" width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path data-dc-tpl="85" d="M6 9l6 6 6-6"></path></svg></button><div data-dc-tpl="86" style="margin-top: auto; padding: 18px; border-radius: 24px; background: var(--inv-bg); color: var(--inv-tx); display: flex; align-items: center; justify-content: space-between; gap: 12px;"><div data-dc-tpl="87" style="min-width: 0px;"><div data-dc-tpl="88" style="font-size: 16px; font-weight: 800;">Invite friends</div><div data-dc-tpl="89" style="font-size: 12px; color: var(--inv-mut); margin-top: 3px; font-weight: 600;">Referrals earn you more points.</div></div><a data-dc-tpl="90" href="referral.html" style="display: flex; align-items: center; height: 44px; padding: 0px 18px; border-radius: 22px; background: var(--inv-tx); color: var(--inv-bg); font-size: 13px; font-weight: 800; white-space: nowrap;">Invite</a></div></main>
       </div>
     </div>
   </div>
@@ -372,28 +376,33 @@
   
     <nav class="bottom-nav-bar" aria-label="Bottom Navigation">
       
-          <a href="home.html" class="bottom-nav-item ">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
+          <a href="home.html" class="bottom-nav-item " >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
             <span>Home</span>
           </a>
         
-          <a href="earn.html" class="bottom-nav-item active">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+          <a href="earn.html" class="bottom-nav-item active" aria-current="page">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
             <span>Earn</span>
           </a>
         
-          <a href="claim.html" class="bottom-nav-item ">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v13m0 0l-5-5m5 5l5-5M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"></path></svg>
+          <a href="claim.html" class="bottom-nav-item " >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v13m0 0l-5-5m5 5l5-5M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"></path></svg>
             <span>Claim</span>
           </a>
         
-          <a href="buy.html" class="bottom-nav-item ">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg>
+          <a href="buy.html" class="bottom-nav-item " >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg>
             <span>Buy</span>
           </a>
         
-          <a href="agents.html" class="bottom-nav-item ">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"></rect><rect x="9" y="9" width="6" height="6"></rect><line x1="9" y1="1" x2="9" y2="4"></line><line x1="15" y1="1" x2="15" y2="4"></line><line x1="9" y1="20" x2="9" y2="23"></line><line x1="15" y1="20" x2="15" y2="23"></line></svg>
+          <a href="referral.html" class="bottom-nav-item " >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+            <span>Referral</span>
+          </a>
+        
+          <a href="agents.html" class="bottom-nav-item " >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"></rect><rect x="9" y="9" width="6" height="6"></rect><line x1="9" y1="1" x2="9" y2="4"></line><line x1="15" y1="1" x2="15" y2="4"></line><line x1="9" y1="20" x2="9" y2="23"></line><line x1="15" y1="20" x2="15" y2="23"></line></svg>
             <span>Agents</span>
           </a>
         
@@ -420,6 +429,14 @@
         updateThemeIcons(next);
       }
 
+      function filterSidebarNav(query) {
+        const q = (query || '').trim().toLowerCase();
+        document.querySelectorAll('aside[aria-label="Sidebar"] .nav-i').forEach(link => {
+          const text = (link.textContent || '').toLowerCase();
+          link.style.display = (!q || text.includes(q)) ? 'flex' : 'none';
+        });
+      }
+
       (function() {
         const saved = localStorage.getItem('okn_theme') || 'dark';
         document.documentElement.setAttribute('data-theme', saved);
@@ -430,24 +447,141 @@
         }
       })();
 
-      // Smooth Page Transitions & Scroll Choreography
+      // Always restore main-wrapper visibility when navigating back/forward (bfcache)
+      window.addEventListener('pageshow', () => {
+        const main = document.querySelector('.main-wrapper');
+        if (main) {
+          main.style.opacity = '1';
+          main.style.transform = 'none';
+        }
+      });
+
+      // Smooth Page Transitions & Interactive Enhancements
       document.addEventListener('DOMContentLoaded', () => {
+        const mainWrapper = document.querySelector('.main-wrapper');
+        if (mainWrapper) {
+          mainWrapper.addEventListener('animationend', () => {
+            mainWrapper.style.animation = 'none';
+          }, { once: true });
+        }
+
         document.querySelectorAll('a[href]').forEach(a => {
           const href = a.getAttribute('href');
           if (!href || href.startsWith('#') || href.startsWith('javascript:') || a.target === '_blank') return;
           if (href.endsWith('.html') || (!href.includes('://') && !href.startsWith('mailto:'))) {
             a.addEventListener('click', (e) => {
-              if (e.metaKey || e.ctrlKey || e.shiftKey) return;
-              const main = document.querySelector('.main-wrapper') || document.body;
-              e.preventDefault();
-              main.style.transition = 'opacity 0.16s cubic-bezier(0.22, 1, 0.36, 1), transform 0.16s cubic-bezier(0.22, 1, 0.36, 1)';
-              main.style.opacity = '0.35';
-              main.style.transform = 'translateY(6px)';
-              setTimeout(() => {
-                window.location.href = href;
-              }, 130);
+              if (e.metaKey || e.ctrlKey || e.shiftKey || e.defaultPrevented) return;
+              const currentFile = (window.location.pathname.split('/').pop() || 'index.html').toLowerCase();
+              const targetFile = href.split('?')[0].split('#')[0].replace(/^\/+/, '').toLowerCase();
+
+              // Immediately highlight bottom nav item if clicked
+              if (a.classList.contains('bottom-nav-item')) {
+                document.querySelectorAll('.bottom-nav-item').forEach(item => item.classList.remove('active'));
+                a.classList.add('active');
+              }
+
+              if (currentFile === targetFile) {
+                e.preventDefault();
+                if (mainWrapper) mainWrapper.scrollTo({ top: 0, behavior: 'smooth' });
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                return;
+              }
+
+              const main = document.querySelector('.main-wrapper');
+              if (main) {
+                e.preventDefault();
+                main.style.animation = 'none';
+                main.style.transition = 'opacity 0.09s ease-out';
+                main.style.opacity = '0.45';
+                setTimeout(() => {
+                  window.location.href = href;
+                }, 70);
+              }
             });
           }
+        });
+
+        // Wire all Connect Wallet buttons across desktop & mobile
+        document.querySelectorAll('button').forEach(btn => {
+          const txt = (btn.textContent || '').trim().toLowerCase();
+          if (txt.includes('connect wallet') && !btn.getAttribute('onclick')) {
+            btn.addEventListener('click', () => openWalletModal());
+          }
+        });
+
+        // Wire Transaction History & Activity filter buttons (All / OK Points / $OKN)
+        document.querySelectorAll('.content-container').forEach(container => {
+          const buttons = Array.from(container.querySelectorAll('button'));
+          const filterGroup = buttons.filter(b => ['All', 'OK Points', '$OKN'].includes((b.textContent || '').trim()));
+          if (filterGroup.length >= 3) {
+            filterGroup.forEach(btn => {
+              btn.addEventListener('click', () => {
+                const mode = (btn.textContent || '').trim();
+                filterGroup.forEach(other => {
+                  const active = other === btn;
+                  other.style.background = active ? 'var(--vio)' : (other.parentElement && other.parentElement.style.display === 'inline-flex' ? 'transparent' : 'var(--s2)');
+                  other.style.color = active ? '#FFF' : 'var(--mut)';
+                  other.style.fontWeight = active ? '700' : '600';
+                });
+                const tbody = container.querySelector('tbody');
+                if (tbody) {
+                  const rows = Array.from(tbody.querySelectorAll('tr:not(.empty-filter-row)'));
+                  let visibleCount = 0;
+                  rows.forEach(r => {
+                    const show = mode === 'All' || (r.textContent || '').includes(mode);
+                    r.style.display = show ? '' : 'none';
+                    if (show) visibleCount++;
+                  });
+                  let emptyRow = tbody.querySelector('.empty-filter-row');
+                  if (visibleCount === 0) {
+                    if (!emptyRow) {
+                      emptyRow = document.createElement('tr');
+                      emptyRow.className = 'empty-filter-row';
+                      emptyRow.innerHTML = '<td colspan="5" style="padding:24px;text-align:center;color:var(--mut);font-weight:600;">No ' + mode + ' transactions yet.</td>';
+                      tbody.appendChild(emptyRow);
+                    } else {
+                      emptyRow.firstElementChild.textContent = 'No ' + mode + ' transactions yet.';
+                      emptyRow.style.display = '';
+                    }
+                  } else if (emptyRow) {
+                    emptyRow.style.display = 'none';
+                  }
+                }
+              });
+            });
+          }
+
+          // Wire Task Claim buttons on Tasks / Earn page
+          buttons.filter(b => (b.textContent || '').trim() === 'Claim').forEach(btn => {
+            btn.addEventListener('click', () => {
+              if (btn.getAttribute('data-claimed') === 'true') return;
+              btn.setAttribute('data-claimed', 'true');
+              btn.textContent = 'Claimed ✓';
+              btn.style.background = 'var(--ok)';
+              btn.style.color = '#fff';
+              showToast('Task verified! Points added to your balance.');
+            });
+          });
+
+          // Wire Buy page BNB calculator
+          const bnbInputs = Array.from(container.querySelectorAll('input[type="text"]:not([readonly])'));
+          bnbInputs.forEach(input => {
+            const receiveEl = Array.from(container.querySelectorAll('.num')).find(el => (el.textContent || '').includes('~'));
+            const updateReceive = (val) => {
+              const num = parseFloat(val);
+              if (receiveEl && !isNaN(num) && num >= 0) {
+                receiveEl.textContent = '~' + Math.round(num * 1000000).toLocaleString('en-US');
+              }
+            };
+            input.addEventListener('input', () => updateReceive(input.value));
+            buttons.filter(b => ['0.1', '0.5', '1', 'Max 10'].includes((b.textContent || '').trim())).forEach(preset => {
+              preset.addEventListener('click', () => {
+                const raw = (preset.textContent || '').trim().replace('Max ', '');
+                input.value = raw;
+                updateReceive(raw);
+              });
+            });
+          });
         });
       });
 
@@ -490,6 +624,7 @@
         if (!toast) {
           toast = document.createElement('div');
           toast.id = 'okn-toast';
+          toast.setAttribute('role', 'status');
           toast.style.cssText = 'position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(20px);background:rgba(19,19,22,0.95);backdrop-filter:blur(16px);border:1px solid var(--line);border-radius:16px;color:#fff;padding:12px 24px;font-size:13px;font-weight:700;z-index:999999;box-shadow:0 10px 30px rgba(0,0,0,0.5);display:flex;align-items:center;gap:10px;opacity:0;transition:all 0.3s cubic-bezier(0.22,1,0.36,1);pointer-events:none;';
           document.body.appendChild(toast);
         }
@@ -526,36 +661,39 @@
         if (!overlay) {
           overlay = document.createElement('div');
           overlay.id = 'wallet-modal-overlay';
+          overlay.setAttribute('role', 'dialog');
+          overlay.setAttribute('aria-modal', 'true');
+          overlay.setAttribute('aria-label', 'Connect Wallet');
           overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.8);backdrop-filter:blur(10px);z-index:999999;display:flex;align-items:center;justify-content:center;padding:20px;';
           overlay.innerHTML = `
             <div style="background:var(--s1);border:1px solid var(--line);border-radius:24px;padding:24px;max-width:380px;width:100%;color:var(--tx);font-family:Manrope,sans-serif;box-shadow:0 30px 90px rgba(0,0,0,0.9);">
               <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
                 <div style="font-size:16px;font-weight:800;">Connect Wallet</div>
-                <button onclick="document.getElementById('wallet-modal-overlay').remove()" style="background:var(--s2);border:1px solid var(--line);border-radius:50%;width:32px;height:32px;color:var(--mut);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all 0.2s ease;">
+                <button aria-label="Close wallet modal" onclick="document.getElementById('wallet-modal-overlay').remove()" style="background:var(--s2);border:1px solid var(--line);border-radius:50%;width:32px;height:32px;color:var(--mut);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all 0.2s ease;">
                   <svg class="i" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
                 </button>
               </div>
               <div style="font-size:12px;color:var(--mut);margin-bottom:16px;">Select your Web3 wallet provider on BNB Smart Chain.</div>
-              <div onclick="selectWallet('MetaMask')" class="wallet-opt" style="display:flex;align-items:center;justify-content:space-between;padding:12px 16px;border-radius:14px;background:var(--s2);border:1px solid var(--line);margin-bottom:10px;cursor:pointer;transition:all 0.2s ease;">
+              <button onclick="selectWallet('MetaMask')" class="wallet-opt" style="width:100%;color:var(--tx);display:flex;align-items:center;justify-content:space-between;padding:12px 16px;border-radius:14px;background:var(--s2);border:1px solid var(--line);margin-bottom:10px;cursor:pointer;transition:all 0.2s ease;">
                 <div style="display:flex;align-items:center;gap:12px;font-weight:700;font-size:14px;">
                   <svg width="22" height="22" viewBox="0 0 32 32" fill="none"><path d="M28.4 4.5l-10.8 8 2 4.7 6.4-1.9 2.4-10.8z" fill="#E2761B"/><path d="M3.6 4.5l10.8 8-2 4.7-6.4-1.9L3.6 4.5z" fill="#E4751F"/><path d="M24.7 21.6l-6.3 1.9.9 2.5 4.3 1.3 1.1-5.7z" fill="#E4761B"/><path d="M7.3 21.6l6.3 1.9-.9 2.5-4.3 1.3-1.1-5.7z" fill="#E4761B"/><path d="M13.6 23.5l-5.3-1.6 3.8 6.7 1.5-5.1z" fill="#D7C1B3"/><path d="M18.4 23.5l5.3-1.6-3.8 6.7-1.5-5.1z" fill="#D7C1B3"/><path d="M11.9 14.8l-1.9 3.5 4.7.2-.2-4.1-2.6.4z" fill="#233447"/><path d="M20.1 14.8l1.9 3.5-4.7.2.2-4.1 2.6.4z" fill="#233447"/><path d="M16 18.5l-4.7-.2 3.4 5.2.9-5z" fill="#E4751F"/></svg>
                   <span>MetaMask</span>
                 </div>
                 <span style="font-size:10px;background:var(--vio);color:#fff;padding:2px 8px;border-radius:6px;font-weight:700;">Popular</span>
-              </div>
-              <div onclick="selectWallet('Binance Web3 Wallet')" class="wallet-opt" style="display:flex;align-items:center;justify-content:space-between;padding:12px 16px;border-radius:14px;background:var(--s2);border:1px solid var(--line);margin-bottom:10px;cursor:pointer;transition:all 0.2s ease;">
+              </button>
+              <button onclick="selectWallet('Binance Web3 Wallet')" class="wallet-opt" style="width:100%;color:var(--tx);display:flex;align-items:center;justify-content:space-between;padding:12px 16px;border-radius:14px;background:var(--s2);border:1px solid var(--line);margin-bottom:10px;cursor:pointer;transition:all 0.2s ease;">
                 <div style="display:flex;align-items:center;gap:12px;font-weight:700;font-size:14px;">
                   <svg width="22" height="22" viewBox="0 0 24 24" fill="#F3BA2F"><path d="M12 3.2L16.2 7.4L18.4 5.2L12 0L5.6 5.2L7.8 7.4L12 3.2ZM20.8 7.6L18.6 9.8L20.8 12L23 9.8L20.8 7.6ZM12 8.4L15.6 12L12 15.6L8.4 12L12 8.4ZM3.2 7.6L1 9.8L3.2 12L5.4 9.8L3.2 7.6ZM12 16.6L7.8 12.4L5.6 14.6L12 21L18.4 14.6L16.2 12.4L12 16.6ZM20.8 12L18.6 14.2L20.8 16.4L23 14.2L20.8 12ZM3.2 12L1 14.2L3.2 16.4L5.4 14.2L3.2 12Z"/></svg>
                   <span>Binance Web3</span>
                 </div>
                 <span style="font-size:10px;background:rgba(255,170,0,0.2);color:var(--org);padding:2px 8px;border-radius:6px;font-weight:700;">BSC Native</span>
-              </div>
-              <div onclick="selectWallet('Trust Wallet')" class="wallet-opt" style="display:flex;align-items:center;justify-content:space-between;padding:12px 16px;border-radius:14px;background:var(--s2);border:1px solid var(--line);cursor:pointer;transition:all 0.2s ease;">
+              </button>
+              <button onclick="selectWallet('Trust Wallet')" class="wallet-opt" style="width:100%;color:var(--tx);display:flex;align-items:center;justify-content:space-between;padding:12px 16px;border-radius:14px;background:var(--s2);border:1px solid var(--line);cursor:pointer;transition:all 0.2s ease;">
                 <div style="display:flex;align-items:center;gap:12px;font-weight:700;font-size:14px;">
                   <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 2L4 6v6.2c0 5.5 3.4 10.7 8 11.8 4.6-1.1 8-6.3 8-11.8V6l-8-4z" fill="#0500FF"/><path d="M12 4.2L5.8 7.3v5c0 4.3 2.6 8.3 6.2 9.4 3.6-1.1 6.2-5.1 6.2-9.4v-5L12 4.2z" fill="#fff"/><path d="M12 6.5l4 2.5v3.4c0 2.8-1.7 5.4-4 6.3V6.5z" fill="#0500FF"/></svg>
                   <span>Trust Wallet</span>
                 </div>
-              </div>
+              </button>
             </div>
           `;
           document.body.appendChild(overlay);
