@@ -194,7 +194,7 @@ function getCoreScripts() {
         const current = document.documentElement.getAttribute('data-theme') || 'dark';
         const next = current === 'dark' ? 'light' : 'dark';
         document.documentElement.setAttribute('data-theme', next);
-        localStorage.setItem('okn_theme', next);
+        try { localStorage.setItem('okn_theme', next); } catch (e) {}
         updateThemeIcons(next);
       }
 
@@ -207,7 +207,8 @@ function getCoreScripts() {
       }
 
       (function() {
-        const saved = localStorage.getItem('okn_theme') || 'dark';
+        let saved = 'dark';
+        try { saved = localStorage.getItem('okn_theme') || 'dark'; } catch (e) {}
         document.documentElement.setAttribute('data-theme', saved);
         if (document.readyState === 'loading') {
           document.addEventListener('DOMContentLoaded', () => updateThemeIcons(saved));

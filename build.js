@@ -503,17 +503,17 @@ const mobileReferralRaw = getMobileBoard('Referral.html')
       <div data-dc-tpl="25" class="num" style="font-size: 28px; font-weight: 800; line-height: 1.15; letter-spacing: -0.02em; margin-top: 4px;">Partner package</div>
       <div style="font-size: 13px; font-weight: 500; line-height: 1.45; color: rgba(240, 230, 255, 0.88); margin-top: 6px;">Earn direct sales commissions, OKN token allocations, and VIP partner rewards.</div>
       <div data-dc-tpl="26" style="display: grid; grid-template-columns: repeat(3, minmax(0px, 1fr)); gap: 8px; margin-top: 16px;">
-        <div data-dc-tpl="27" style="padding: 12px 10px; border-radius: 16px; background: rgba(255, 255, 255, 0.16); min-width: 0; overflow: hidden;">
-          <div data-dc-tpl="28" class="num" style="font-size: clamp(15px, 4.2vw, 18px); font-weight: 800; line-height: 1.2; white-space: nowrap;">10–15%</div>
-          <div data-dc-tpl="29" style="font-size: 11px; font-weight: 600; line-height: 1.3; color: rgba(240, 230, 255, 0.9); margin-top: 4px;">Commission</div>
+        <div data-dc-tpl="27" style="padding: 10px 6px; border-radius: 14px; background: rgba(255, 255, 255, 0.16); min-width: 0; overflow: hidden; text-align: center;">
+          <div data-dc-tpl="28" class="num" style="font-size: 14px; font-weight: 800; line-height: 1.2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">10–15%</div>
+          <div data-dc-tpl="29" style="font-size: 10.5px; font-weight: 600; line-height: 1.3; color: rgba(240, 230, 255, 0.9); margin-top: 4px; word-break: break-word;">Commission</div>
         </div>
-        <div data-dc-tpl="30" style="padding: 12px 10px; border-radius: 16px; background: rgba(255, 255, 255, 0.16); min-width: 0; overflow: hidden;">
-          <div data-dc-tpl="31" class="num" style="font-size: clamp(15px, 4.2vw, 18px); font-weight: 800; line-height: 1.2; white-space: nowrap;">$200,000</div>
-          <div data-dc-tpl="32" style="font-size: 11px; font-weight: 600; line-height: 1.3; color: rgba(240, 230, 255, 0.9); margin-top: 4px;">Marketing budget</div>
+        <div data-dc-tpl="30" style="padding: 10px 6px; border-radius: 14px; background: rgba(255, 255, 255, 0.16); min-width: 0; overflow: hidden; text-align: center;">
+          <div data-dc-tpl="31" class="num" style="font-size: 14px; font-weight: 800; line-height: 1.2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">$200,000</div>
+          <div data-dc-tpl="32" style="font-size: 10.5px; font-weight: 600; line-height: 1.3; color: rgba(240, 230, 255, 0.9); margin-top: 4px; word-break: break-word;">Marketing budget</div>
         </div>
-        <div data-dc-tpl="33" style="padding: 12px 10px; border-radius: 16px; background: rgba(255, 255, 255, 0.16); min-width: 0; overflow: hidden;">
-          <div data-dc-tpl="34" class="num" style="font-size: clamp(15px, 4.2vw, 18px); font-weight: 800; line-height: 1.2; white-space: nowrap;">12 mo</div>
-          <div data-dc-tpl="35" style="font-size: 11px; font-weight: 600; line-height: 1.3; color: rgba(240, 230, 255, 0.9); margin-top: 4px;">Token vesting</div>
+        <div data-dc-tpl="33" style="padding: 10px 6px; border-radius: 14px; background: rgba(255, 255, 255, 0.16); min-width: 0; overflow: hidden; text-align: center;">
+          <div data-dc-tpl="34" class="num" style="font-size: 14px; font-weight: 800; line-height: 1.2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">12 mo</div>
+          <div data-dc-tpl="35" style="font-size: 10.5px; font-weight: 600; line-height: 1.3; color: rgba(240, 230, 255, 0.9); margin-top: 4px; word-break: break-word;">Token vesting</div>
         </div>
       </div>
     </section>`
@@ -1188,27 +1188,27 @@ const desktopWalletMain = `
       </div>
     </section>
 
-    <div class="resp-grid-2" style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 24px;">
+    <div class="resp-grid-2 wallet-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 24px;">
       <div style="background: var(--s1); border: 1px solid var(--line); border-radius: 20px; padding: 24px;">
         <div style="font-size: 17px; font-weight: 800; margin-bottom: 16px; color: var(--tx);">Asset Balances</div>
         <div class="kv-row" style="display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 14px 0; border-bottom: 1px solid var(--line);">
           <div style="display: flex; align-items: center; gap: 10px; min-width: 0;">
             <span style="flex-shrink: 0; display: flex;">${ICONS.bnb}</span>
-            <span style="color: var(--mut); font-size: 14px; font-weight: 700;">BNB (Native Gas)</span>
+            <span style="color: var(--mut); font-size: 14px; font-weight: 700; white-space: nowrap;">BNB (Native Gas)</span>
           </div>
           <span class="num" style="font-weight: 800; font-size: 16px; color: var(--tx); white-space: nowrap; flex-shrink: 0;">1.45 BNB</span>
         </div>
         <div class="kv-row" style="display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 14px 0; border-bottom: 1px solid var(--line);">
           <div style="display: flex; align-items: center; gap: 10px; min-width: 0;">
             <span style="flex-shrink: 0; display: flex;">${logoImgDesktop}</span>
-            <span style="color: var(--mut); font-size: 14px; font-weight: 700;">$OKN Token</span>
+            <span style="color: var(--mut); font-size: 14px; font-weight: 700; white-space: nowrap;">$OKN Token</span>
           </div>
           <span class="num" style="font-weight: 800; font-size: 16px; color: var(--vio-l); white-space: nowrap; flex-shrink: 0;">0 $OKN</span>
         </div>
         <div class="kv-row" style="display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 14px 0;">
           <div style="display: flex; align-items: center; gap: 10px; min-width: 0;">
             <span style="width: 20px; height: 20px; border-radius: 6px; background: rgba(47,189,142,0.15); color: var(--ok); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">${ICONS.gift}</span>
-            <span style="color: var(--mut); font-size: 14px; font-weight: 700;">OK Points Balance</span>
+            <span style="color: var(--mut); font-size: 14px; font-weight: 700; white-space: nowrap;">OK Points Balance</span>
           </div>
           <span class="num" style="font-weight: 800; font-size: 16px; color: var(--ok); white-space: nowrap; flex-shrink: 0;">135 pts</span>
         </div>
@@ -1392,7 +1392,7 @@ const pagesToBuild = [
     activeBottomTab: 'Home',
     desktopMain: desktopPortfolioMain,
     mobile: mobileHome,
-    filenames: ['portfolio.html', 'Desktop.dc.html', 'index.html', 'desktop.html', 'DesktopCollapsed.dc.html', 'Desktop__Portfolio__sidebar_collapsed.html']
+    filenames: ['portfolio.html', 'index.html']
   },
   {
     title: 'Tasks',
@@ -1400,7 +1400,7 @@ const pagesToBuild = [
     activeBottomTab: 'Earn',
     desktopMain: desktopEarnMain,
     mobile: mobileEarn,
-    filenames: ['tasks.html', 'Earn.dc.html', 'earn.html', 'Earn.html']
+    filenames: ['tasks.html', 'earn.html']
   },
   {
     title: 'Claim',
@@ -1408,7 +1408,7 @@ const pagesToBuild = [
     activeBottomTab: 'Claim',
     desktopMain: desktopClaimMain,
     mobile: mobileClaim,
-    filenames: ['claim.html', 'Claim.dc.html', 'Claim.html']
+    filenames: ['claim.html']
   },
   {
     title: 'Buy',
@@ -1416,7 +1416,7 @@ const pagesToBuild = [
     activeBottomTab: 'Buy',
     desktopMain: desktopBuyMain,
     mobile: mobileBuy,
-    filenames: ['buy.html', 'Buy.dc.html', 'Buy.html']
+    filenames: ['buy.html']
   },
   {
     title: 'Agents',
@@ -1424,7 +1424,7 @@ const pagesToBuild = [
     activeBottomTab: 'Agents',
     desktopMain: desktopAgentsMain,
     mobile: mobileAgents,
-    filenames: ['agents.html', 'Agents.dc.html', 'Agents.html']
+    filenames: ['agents.html']
   },
   {
     title: 'Referral',
@@ -1432,7 +1432,7 @@ const pagesToBuild = [
     activeBottomTab: 'Referral',
     desktopMain: desktopReferralMain,
     mobile: mobileReferral,
-    filenames: ['referral.html', 'Referral.dc.html', 'Referral.html']
+    filenames: ['referral.html']
   },
   {
     title: 'Activity',
@@ -1440,7 +1440,7 @@ const pagesToBuild = [
     activeBottomTab: 'Home',
     desktopMain: desktopActivityMain,
     mobile: mobileActivity,
-    filenames: ['activity.html', 'Activity.dc.html', 'Activity.html']
+    filenames: ['activity.html']
   },
   {
     title: 'Home',
@@ -1448,7 +1448,7 @@ const pagesToBuild = [
     activeBottomTab: 'Home',
     desktopMain: desktopPortfolioMain,
     mobile: mobileHome,
-    filenames: ['home.html', 'Main.dc.html', 'Home.dc.html', 'Main.html', 'mobile.html']
+    filenames: ['home.html']
   },
   {
     title: 'Wallet',
@@ -1538,4 +1538,4 @@ pagesToBuild.forEach(p => {
   });
 });
 
-console.log('Finished rebuilding all 35+ routes in root and public/ for Vercel deployment!');
+console.log('Finished rebuilding canonical routes in root and public/ for Vercel deployment!');

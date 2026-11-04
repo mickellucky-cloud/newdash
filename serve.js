@@ -22,9 +22,29 @@ const mimeTypes = {
 const server = http.createServer((req, res) => {
   let reqPath = decodeURIComponent(req.url.split('?')[0]);
   if (reqPath === '/') reqPath = '/index.html';
-  const filePath = path.join(dir, reqPath);
-  
-  if (fs.existsSync(filePath) && fs.statSync(filePath).isFile()) {
+
+  const publicDir = path.join(dir, 'public');
+  const candidates = [
+    path.join(publicDir, reqPath),
+    path.join(dir, reqPath)
+  ];
+
+  if (!path.extname(reqPath)) {
+    candidates.unshift(
+      path.join(publicDir, reqPath + '.html'),
+      path.join(dir, reqPath + '.html')
+    );
+  }
+
+  let filePath = null;
+  for (const c of candidates) {
+    if (fs.existsSync(c) && fs.statSync(c).isFile()) {
+      filePath = c;
+      break;
+    }
+  }
+
+  if (filePath) {
     const ext = path.extname(filePath).toLowerCase();
     const contentType = mimeTypes[ext] || 'application/octet-stream';
     res.writeHead(200, { 'Content-Type': contentType });

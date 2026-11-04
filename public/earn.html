@@ -275,8 +275,8 @@
           <span style="position: absolute; top: 8px; right: 8px; width: 8px; height: 8px; border-radius: 50%; background: var(--yel); border: 1.5px solid var(--s1);"></span>
         </button>
 
-        <a href="wallet.html" aria-label="Wallet DE" style="width: 38px; height: 38px; border-radius: 50%; background: var(--vio); color: #fff; font-weight: 800; font-size: 13px; display: flex; align-items: center; justify-content: center; text-decoration: none; box-shadow: 0 0 10px rgba(122,18,245,0.35);">
-          DE
+        <a href="wallet.html" aria-label="Wallet" style="width: 38px; height: 38px; border-radius: 50%; background: var(--vio); color: #fff; display: flex; align-items: center; justify-content: center; text-decoration: none; box-shadow: 0 0 10px rgba(122,18,245,0.35);">
+          <svg class="i" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12V7H5a2 2 0 0 1 0-4h14v4"></path><path d="M3 5v14a2 2 0 0 0 2 2h16v-5"></path><path d="M18 12a2 2 0 0 0 0 4h4v-4Z"></path></svg>
         </a>
       </div>
     </header>
@@ -425,7 +425,7 @@
         const current = document.documentElement.getAttribute('data-theme') || 'dark';
         const next = current === 'dark' ? 'light' : 'dark';
         document.documentElement.setAttribute('data-theme', next);
-        localStorage.setItem('okn_theme', next);
+        try { localStorage.setItem('okn_theme', next); } catch (e) {}
         updateThemeIcons(next);
       }
 
@@ -438,7 +438,8 @@
       }
 
       (function() {
-        const saved = localStorage.getItem('okn_theme') || 'dark';
+        let saved = 'dark';
+        try { saved = localStorage.getItem('okn_theme') || 'dark'; } catch (e) {}
         document.documentElement.setAttribute('data-theme', saved);
         if (document.readyState === 'loading') {
           document.addEventListener('DOMContentLoaded', () => updateThemeIcons(saved));
@@ -706,7 +707,7 @@
         const addr = '0x71C...49A1';
         document.querySelectorAll('button').forEach(b => {
           if ((b.innerText || '').toLowerCase().includes('connect wallet')) {
-            b.innerHTML = '<span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:currentColor;margin-right:8px;box-shadow:0 0 8px currentColor;"></span> ' + addr;
+            b.innerHTML = '<svg class="i" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:6px;"><path d="M21 12V7H5a2 2 0 0 1 0-4h14v4"></path><path d="M3 5v14a2 2 0 0 0 2 2h16v-5"></path><path d="M18 12a2 2 0 0 0 0 4h4v-4Z"></path></svg> ' + addr;
             b.style.background = 'var(--ok)';
             b.style.color = '#fff';
           }

@@ -733,12 +733,38 @@ main > *:nth-child(5) { animation: staggerCardIn 0.45s cubic-bezier(0.16, 1, 0.3
   .resp-grid-2,
   .resp-grid-3 {
     grid-template-columns: 1fr !important;
-    gap: 14px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    gap: 16px !important;
+  }
+  .wallet-grid {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    gap: 16px !important;
   }
   .resp-grid-2 > div,
-  .resp-grid-3 > div {
+  .resp-grid-3 > div,
+  .wallet-grid > div {
+    width: 100% !important;
+    min-width: 0 !important;
     padding: 20px 18px !important;
     border-radius: 20px !important;
+  }
+  .mobile-page-wrap .resp-grid-2,
+  .mobile-page-wrap .resp-grid-3,
+  .mobile-page-wrap .wallet-grid {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    gap: 16px !important;
+  }
+  .mobile-page-wrap .resp-grid-2 > div,
+  .mobile-page-wrap .resp-grid-3 > div,
+  .mobile-page-wrap .wallet-grid > div {
+    width: 100% !important;
+    min-width: 0 !important;
   }
   .mobile-page-wrap section[style*="background: var(--vio)"],
   .mobile-page-wrap .page-hero {
