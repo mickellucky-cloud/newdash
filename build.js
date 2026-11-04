@@ -1492,35 +1492,39 @@ const pagesToBuild = [
   }
 ];
 
-// Ensure public/ output directory is populated for Vercel static deployment
+// Ensure public/ and dist/ output directories are populated for static and container deployments
 const publicDir = path.join(rootDir, 'public');
-fs.mkdirSync(publicDir, { recursive: true });
-fs.mkdirSync(path.join(publicDir, 'css'), { recursive: true });
-fs.mkdirSync(path.join(publicDir, 'assets'), { recursive: true });
+const distDir = path.join(rootDir, 'dist');
 
-if (fs.existsSync(path.join(rootDir, 'css', 'responsive.css'))) {
-  fs.copyFileSync(
-    path.join(rootDir, 'css', 'responsive.css'),
-    path.join(publicDir, 'css', 'responsive.css')
-  );
-}
-if (fs.existsSync(path.join(rootDir, 'favicon.ico'))) {
-  fs.copyFileSync(
-    path.join(rootDir, 'favicon.ico'),
-    path.join(publicDir, 'favicon.ico')
-  );
-}
-const assetsSrcDir = path.join(rootDir, 'assets');
-if (fs.existsSync(assetsSrcDir)) {
-  for (const entry of fs.readdirSync(assetsSrcDir, { withFileTypes: true })) {
-    if (entry.isFile()) {
-      fs.copyFileSync(
-        path.join(assetsSrcDir, entry.name),
-        path.join(publicDir, 'assets', entry.name)
-      );
+[publicDir, distDir].forEach(outDir => {
+  fs.mkdirSync(outDir, { recursive: true });
+  fs.mkdirSync(path.join(outDir, 'css'), { recursive: true });
+  fs.mkdirSync(path.join(outDir, 'assets'), { recursive: true });
+
+  if (fs.existsSync(path.join(rootDir, 'css', 'responsive.css'))) {
+    fs.copyFileSync(
+      path.join(rootDir, 'css', 'responsive.css'),
+      path.join(outDir, 'css', 'responsive.css')
+    );
+  }
+  if (fs.existsSync(path.join(rootDir, 'favicon.ico'))) {
+    fs.copyFileSync(
+      path.join(rootDir, 'favicon.ico'),
+      path.join(outDir, 'favicon.ico')
+    );
+  }
+  const assetsSrcDir = path.join(rootDir, 'assets');
+  if (fs.existsSync(assetsSrcDir)) {
+    for (const entry of fs.readdirSync(assetsSrcDir, { withFileTypes: true })) {
+      if (entry.isFile()) {
+        fs.copyFileSync(
+          path.join(assetsSrcDir, entry.name),
+          path.join(outDir, 'assets', entry.name)
+        );
+      }
     }
   }
-}
+});
 
 pagesToBuild.forEach(p => {
   const fullHtml = assemblePage({
@@ -1534,8 +1538,10 @@ pagesToBuild.forEach(p => {
   p.filenames.forEach(fn => {
     fs.writeFileSync(path.join(rootDir, fn), fullHtml, 'utf8');
     fs.writeFileSync(path.join(publicDir, fn), fullHtml, 'utf8');
+    fs.writeFileSync(path.join(distDir, fn), fullHtml, 'utf8');
     console.log(`Wrote full responsive: ${fn} (${fullHtml.length} bytes)`);
   });
 });
 
-console.log('Finished rebuilding canonical routes in root and public/ for Vercel deployment!');
+console.log('Finished rebuilding canonical routes in root, public/, and dist/!');
+
