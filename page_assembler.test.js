@@ -78,7 +78,7 @@ test('build output populates public/ directory and referral.html has full Partne
   assert.match(referralHtml, /DE-71C49/);
 });
 
-test('BNB logo, BSC logo, and Polymarket logo assets are deployed and mobile-only Polymarket banner opens agent directly', () => {
+test('BNB logo, BSC logo, and Polymarket logo assets are deployed and responsive Polymarket banner opens agent directly across desktop, tablet, and mobile', () => {
   const publicDir = path.join(rootDir, 'public');
   assert.equal(fs.existsSync(path.join(publicDir, 'assets', 'bnb-logo.png')), true);
   assert.equal(fs.existsSync(path.join(publicDir, 'assets', 'bsc-logo.svg')), true);
@@ -91,11 +91,23 @@ test('BNB logo, BSC logo, and Polymarket logo assets are deployed and mobile-onl
   assert.match(indexHtml, /onclick="openPolymarketAgent\(event\)"/);
   assert.match(indexHtml, /function openPolymarketAgent\(e\)/);
 
-  // Ensure polymarket-live-banner only appears once (inside mobile-only, not in desktopMainContent)
+  // Ensure polymarket-live-banner appears in both desktop/tablet and mobile containers
   const bannerMatches = indexHtml.match(/class="polymarket-live-banner"/g) || [];
-  assert.equal(bannerMatches.length, 1);
+  assert.equal(bannerMatches.length, 2);
 
   const css = fs.readFileSync(path.join(rootDir, 'css', 'responsive.css'), 'utf8');
-  assert.match(css, /@media\s*\(min-width:\s*768px\)\s*\{\s*\.polymarket-live-banner\s*\{\s*display:\s*none\s*!important;/);
+  assert.doesNotMatch(css, /\.polymarket-live-banner\s*\{\s*display:\s*none\s*!important;/);
+  assert.match(css, /@media\s*\(min-width:\s*768px\)[\s\S]*?\.poly-banner-inner\s*\{\s*display:\s*grid;/);
+
+  // Ensure mobile bottom nav has 5 tabs (Home, Earn, Buy, Referral, Agents) and no Claim button
+  const bottomNavMatch = indexHtml.match(/<nav class="bottom-nav-bar"[\s\S]*?<\/nav>/);
+  assert.ok(bottomNavMatch, 'bottom-nav-bar should exist');
+  assert.doesNotMatch(bottomNavMatch[0], /<span>Claim<\/span>/);
+  assert.match(bottomNavMatch[0], /<span>Home<\/span>/);
+  assert.match(bottomNavMatch[0], /<span>Earn<\/span>/);
+  assert.match(bottomNavMatch[0], /<span>Buy<\/span>/);
+  assert.match(bottomNavMatch[0], /<span>Referral<\/span>/);
+  assert.match(bottomNavMatch[0], /<span>Agents<\/span>/);
 });
+
 

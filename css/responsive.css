@@ -1178,14 +1178,9 @@ tbody tr:hover {
 }
 
 /* --------------------------------------------------------------------------
-   Spectacular Mobile-Only Polymarket Copy Agent Live Announcement Banner
+   Spectacular Responsive Polymarket Copy Agent Live Announcement Banner
+   (Mobile, Tablet & Desktop)
    -------------------------------------------------------------------------- */
-@media (min-width: 768px) {
-  .polymarket-live-banner {
-    display: none !important;
-  }
-}
-
 .polymarket-live-banner {
   position: relative;
   display: block;
@@ -1203,6 +1198,14 @@ tbody tr:hover {
   overflow: hidden;
   cursor: pointer;
   transition: transform 0.22s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.22s ease;
+}
+
+.polymarket-live-banner:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 18px 44px -6px rgba(22, 82, 240, 0.62),
+    0 6px 22px rgba(9, 180, 255, 0.36),
+    inset 0 1px 0 rgba(255, 255, 255, 0.45);
 }
 
 .polymarket-live-banner:active {
@@ -1469,6 +1472,118 @@ tbody tr:hover {
   flex: 0 0 auto;
   box-shadow: 0 4px 14px rgba(9, 180, 255, 0.45);
   border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+/* Tablet & Desktop Responsive Widescreen Layout for Polymarket Banner */
+@media (min-width: 768px) {
+  .polymarket-live-banner {
+    margin-bottom: 22px;
+    border-radius: 24px;
+  }
+
+  .poly-banner-inner {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-areas:
+      "top action"
+      "main action";
+    align-items: center;
+    column-gap: 24px;
+    row-gap: 10px;
+    padding: 20px 26px;
+    border-radius: 22.5px;
+  }
+
+  .poly-orb-1 {
+    width: 240px;
+    height: 240px;
+    top: -80px;
+    right: -40px;
+  }
+
+  .poly-orb-2 {
+    width: 200px;
+    height: 200px;
+    bottom: -80px;
+    left: 20%;
+  }
+
+  .poly-banner-top-row {
+    grid-area: top;
+    justify-content: flex-start;
+    gap: 10px;
+  }
+
+  .poly-banner-main-row {
+    grid-area: main;
+    gap: 18px;
+  }
+
+  .poly-logo-frame {
+    width: 64px;
+    height: 64px;
+    border-radius: 18px;
+  }
+
+  .poly-banner-logo {
+    border-radius: 16px;
+  }
+
+  .poly-banner-title {
+    font-size: 20px;
+  }
+
+  .poly-banner-sub {
+    font-size: 13.5px;
+    max-width: 640px;
+  }
+
+  .poly-banner-action-row {
+    grid-area: action;
+    border-top: none;
+    border-left: 1px solid rgba(148, 163, 184, 0.22);
+    padding-top: 0;
+    padding-left: 24px;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 12px;
+  }
+
+  .poly-whale-av {
+    width: 25px;
+    height: 25px;
+    font-size: 10px;
+  }
+
+  .poly-whale-text {
+    font-size: 12px;
+  }
+
+  .poly-banner-cta {
+    height: 42px;
+    padding: 0 18px;
+    font-size: 13px;
+    border-radius: 12px;
+  }
+}
+
+@media (min-width: 1120px) {
+  .poly-banner-inner {
+    padding: 22px 30px;
+    column-gap: 32px;
+  }
+
+  .poly-banner-title {
+    font-size: 22px;
+  }
+
+  .poly-banner-action-row {
+    flex-direction: row;
+    align-items: center;
+    gap: 18px;
+    padding-left: 28px;
+  }
 }
 
 .balance-eye-btn {
