@@ -1178,15 +1178,69 @@ tbody tr:hover {
 }
 
 /* --------------------------------------------------------------------------
-   Spectacular Responsive Polymarket Copy Agent Live Announcement Banner
+   Spectacular Responsive Announcement Carousel:
+   Slide 1: Polymarket Copy Agent Live
+   Slide 2: Buy $OKN Presale Multi-Gateway Live
    (Mobile, Tablet & Desktop)
    -------------------------------------------------------------------------- */
-.polymarket-live-banner {
+.announcement-carousel {
+  position: relative;
+  margin-bottom: 18px;
+  user-select: none;
+}
+
+.announcement-carousel-viewport {
+  position: relative;
+  overflow: hidden;
+  border-radius: 22px;
+  padding: 2px 0;
+}
+
+.announcement-carousel-track {
+  display: flex;
+  width: 100%;
+  transition: transform 0.68s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+}
+
+.announcement-slide {
+  flex: 0 0 100%;
+  width: 100%;
+  min-width: 0;
+  opacity: 0.42;
+  transform: scale(0.975);
+  filter: blur(1px);
+  transition:
+    opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.68s cubic-bezier(0.22, 1, 0.36, 1),
+    filter 0.55s ease;
+}
+
+.announcement-slide.active {
+  opacity: 1;
+  transform: scale(1);
+  filter: blur(0);
+}
+
+.polymarket-live-banner,
+.okn-presale-live-banner {
   position: relative;
   display: block;
   text-decoration: none !important;
   border-radius: 22px;
   padding: 1.5px;
+  margin-bottom: 18px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.22s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.22s ease;
+}
+
+.announcement-carousel .polymarket-live-banner,
+.announcement-carousel .okn-presale-live-banner {
+  margin-bottom: 0;
+}
+
+.polymarket-live-banner {
   background: linear-gradient(125deg, #38BDF8 0%, #1652F0 35%, #00F0FF 70%, #1652F0 100%);
   background-size: 260% 260%;
   animation: polySpectacularBorder 5s ease infinite;
@@ -1194,10 +1248,6 @@ tbody tr:hover {
     0 14px 36px -6px rgba(22, 82, 240, 0.52),
     0 4px 16px rgba(9, 180, 255, 0.28),
     inset 0 1px 0 rgba(255, 255, 255, 0.35);
-  margin-bottom: 18px;
-  overflow: hidden;
-  cursor: pointer;
-  transition: transform 0.22s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.22s ease;
 }
 
 .polymarket-live-banner:hover {
@@ -1208,7 +1258,26 @@ tbody tr:hover {
     inset 0 1px 0 rgba(255, 255, 255, 0.45);
 }
 
-.polymarket-live-banner:active {
+.okn-presale-live-banner {
+  background: linear-gradient(125deg, #F3BA2F 0%, #7C3AED 38%, #00F0FF 72%, #EC4899 100%);
+  background-size: 260% 260%;
+  animation: polySpectacularBorder 5s ease infinite;
+  box-shadow:
+    0 14px 36px -6px rgba(124, 58, 237, 0.52),
+    0 4px 16px rgba(243, 186, 47, 0.26),
+    inset 0 1px 0 rgba(255, 255, 255, 0.35);
+}
+
+.okn-presale-live-banner:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 18px 44px -6px rgba(124, 58, 237, 0.65),
+    0 6px 22px rgba(243, 186, 47, 0.36),
+    inset 0 1px 0 rgba(255, 255, 255, 0.45);
+}
+
+.polymarket-live-banner:active,
+.okn-presale-live-banner:active {
   transform: scale(0.985);
 }
 
@@ -1218,17 +1287,26 @@ tbody tr:hover {
   100% { background-position: 0% 50%; }
 }
 
-.poly-banner-inner {
+.poly-banner-inner,
+.okn-banner-inner {
   position: relative;
   z-index: 2;
   border-radius: 20.5px;
   padding: 15px 16px;
-  background:
-    radial-gradient(120% 130% at 100% 0%, rgba(22, 82, 240, 0.55) 0%, rgba(10, 25, 78, 0.92) 55%, #060D24 100%);
   display: flex;
   flex-direction: column;
   gap: 12px;
   overflow: hidden;
+}
+
+.poly-banner-inner {
+  background:
+    radial-gradient(120% 130% at 100% 0%, rgba(22, 82, 240, 0.55) 0%, rgba(10, 25, 78, 0.92) 55%, #060D24 100%);
+}
+
+.okn-banner-inner {
+  background:
+    radial-gradient(120% 130% at 100% 0%, rgba(124, 58, 237, 0.58) 0%, rgba(36, 14, 78, 0.94) 52%, #09061B 100%);
 }
 
 .poly-banner-glow-orb {
@@ -1253,6 +1331,22 @@ tbody tr:hover {
   bottom: -55px;
   left: -30px;
   background: rgba(22, 82, 240, 0.55);
+}
+
+.okn-orb-1 {
+  width: 160px;
+  height: 160px;
+  top: -55px;
+  right: -35px;
+  background: rgba(243, 186, 47, 0.36);
+}
+
+.okn-orb-2 {
+  width: 140px;
+  height: 140px;
+  bottom: -55px;
+  left: -30px;
+  background: rgba(124, 58, 237, 0.58);
 }
 
 .poly-topo-bg {
@@ -1291,6 +1385,13 @@ tbody tr:hover {
   box-shadow: 0 0 16px rgba(16, 185, 129, 0.25);
 }
 
+.okn-live-badge {
+  background: rgba(243, 186, 47, 0.18);
+  border-color: rgba(251, 191, 36, 0.48);
+  color: #FDE68A;
+  box-shadow: 0 0 16px rgba(243, 186, 47, 0.25);
+}
+
 .poly-live-dot {
   width: 7px;
   height: 7px;
@@ -1299,10 +1400,21 @@ tbody tr:hover {
   animation: liveDotPulse 1.6s infinite;
 }
 
+.okn-live-dot {
+  background: #FBBF24;
+  animation: oknDotPulse 1.6s infinite;
+}
+
 @keyframes liveDotPulse {
   0% { transform: scale(0.9); box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.85); }
   70% { transform: scale(1.2); box-shadow: 0 0 0 7px rgba(52, 211, 153, 0); }
   100% { transform: scale(0.9); box-shadow: 0 0 0 0 rgba(52, 211, 153, 0); }
+}
+
+@keyframes oknDotPulse {
+  0% { transform: scale(0.9); box-shadow: 0 0 0 0 rgba(251, 191, 36, 0.85); }
+  70% { transform: scale(1.2); box-shadow: 0 0 0 7px rgba(251, 191, 36, 0); }
+  100% { transform: scale(0.9); box-shadow: 0 0 0 0 rgba(251, 191, 36, 0); }
 }
 
 .poly-roi-pill {
@@ -1317,6 +1429,12 @@ tbody tr:hover {
   font-size: 10.5px;
   font-weight: 800;
   letter-spacing: 0.01em;
+}
+
+.okn-rate-pill {
+  background: rgba(167, 139, 250, 0.18);
+  border-color: rgba(167, 139, 250, 0.42);
+  color: #DDD6FE;
 }
 
 .poly-network-tag {
@@ -1353,6 +1471,13 @@ tbody tr:hover {
   flex: 0 0 auto;
 }
 
+.okn-logo-frame {
+  background: linear-gradient(135deg, #F3BA2F 0%, #9F6BFF 52%, #00F0FF 100%);
+  box-shadow:
+    0 8px 22px rgba(124, 58, 237, 0.65),
+    0 0 0 1px rgba(255, 255, 255, 0.25);
+}
+
 .poly-banner-logo {
   width: 100%;
   height: 100%;
@@ -1368,6 +1493,10 @@ tbody tr:hover {
   border: 1.5px solid rgba(56, 189, 248, 0.55);
   animation: polyRingPulse 2.4s ease-out infinite;
   pointer-events: none;
+}
+
+.okn-logo-ring {
+  border-color: rgba(243, 186, 47, 0.6);
 }
 
 @keyframes polyRingPulse {
@@ -1395,6 +1524,13 @@ tbody tr:hover {
 
 .poly-title-highlight {
   background: linear-gradient(90deg, #38BDF8 0%, #A5F3FC 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 800;
+}
+
+.okn-title-highlight {
+  background: linear-gradient(90deg, #FDE68A 0%, #F3BA2F 45%, #38BDF8 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   font-weight: 800;
@@ -1474,14 +1610,140 @@ tbody tr:hover {
   border: 1px solid rgba(255, 255, 255, 0.25);
 }
 
-/* Tablet & Desktop Responsive Widescreen Layout for Polymarket Banner */
+.okn-banner-cta {
+  background: linear-gradient(135deg, #7C3AED 0%, #F3BA2F 100%);
+  box-shadow: 0 4px 14px rgba(124, 58, 237, 0.5);
+}
+
+/* Carousel Control Bar & Animated Progress Pills */
+.announcement-carousel-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 10px;
+  padding: 0 4px;
+}
+
+.carousel-dots {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  min-width: 0;
+}
+
+.carousel-dot {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: var(--card2, rgba(255, 255, 255, 0.05));
+  border: 1px solid var(--line, rgba(255, 255, 255, 0.1));
+  color: var(--mut, #94A3B8);
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+  overflow: hidden;
+  min-width: 0;
+}
+
+.carousel-dot:hover {
+  border-color: rgba(124, 58, 237, 0.45);
+  color: var(--txt, #FFFFFF);
+}
+
+.carousel-dot.active {
+  background: linear-gradient(135deg, rgba(22, 82, 240, 0.16) 0%, rgba(124, 58, 237, 0.2) 100%);
+  border-color: rgba(56, 189, 248, 0.55);
+  color: var(--txt, #FFFFFF);
+  box-shadow: 0 4px 12px rgba(22, 82, 240, 0.18);
+}
+
+.carousel-dot-label {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.carousel-dot-track {
+  width: 24px;
+  height: 4px;
+  border-radius: 999px;
+  background: rgba(148, 163, 184, 0.25);
+  overflow: hidden;
+  flex: 0 0 auto;
+}
+
+.carousel-dot-fill {
+  display: block;
+  height: 100%;
+  width: 0%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #38BDF8 0%, #F3BA2F 100%);
+}
+
+.carousel-dot.active .carousel-dot-fill {
+  animation: carouselProgressFill 5.5s linear forwards;
+}
+
+.announcement-carousel:hover .carousel-dot.active .carousel-dot-fill {
+  animation-play-state: paused;
+}
+
+@keyframes carouselProgressFill {
+  0% { width: 0%; }
+  100% { width: 100%; }
+}
+
+.carousel-nav-group {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex: 0 0 auto;
+}
+
+.carousel-nav-btn {
+  width: 30px;
+  height: 30px;
+  border-radius: 10px;
+  background: var(--card2, rgba(255, 255, 255, 0.05));
+  border: 1px solid var(--line, rgba(255, 255, 255, 0.1));
+  color: var(--txt, #FFFFFF);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.carousel-nav-btn:hover {
+  background: rgba(124, 58, 237, 0.18);
+  border-color: rgba(124, 58, 237, 0.5);
+  transform: translateY(-1px);
+}
+
+.carousel-nav-btn:active {
+  transform: scale(0.94);
+}
+
+/* Tablet & Desktop Responsive Widescreen Layout for Announcement Carousel */
 @media (min-width: 768px) {
-  .polymarket-live-banner {
+  .announcement-carousel {
     margin-bottom: 22px;
+  }
+
+  .announcement-carousel-viewport,
+  .polymarket-live-banner,
+  .okn-presale-live-banner {
     border-radius: 24px;
   }
 
-  .poly-banner-inner {
+  .poly-banner-inner,
+  .okn-banner-inner {
     display: grid;
     grid-template-columns: 1fr auto;
     grid-template-areas:
@@ -1494,14 +1756,16 @@ tbody tr:hover {
     border-radius: 22.5px;
   }
 
-  .poly-orb-1 {
+  .poly-orb-1,
+  .okn-orb-1 {
     width: 240px;
     height: 240px;
     top: -80px;
     right: -40px;
   }
 
-  .poly-orb-2 {
+  .poly-orb-2,
+  .okn-orb-2 {
     width: 200px;
     height: 200px;
     bottom: -80px;
@@ -1569,7 +1833,8 @@ tbody tr:hover {
 }
 
 @media (min-width: 1120px) {
-  .poly-banner-inner {
+  .poly-banner-inner,
+  .okn-banner-inner {
     padding: 22px 30px;
     column-gap: 32px;
   }
@@ -1583,6 +1848,22 @@ tbody tr:hover {
     align-items: center;
     gap: 18px;
     padding-left: 28px;
+  }
+}
+
+/* Fintech Wallet Page Responsive Adjustments */
+@media (max-width: 1024px) {
+  .fintech-kpi-strip {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+  .fintech-main-columns {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .fintech-kpi-strip {
+    grid-template-columns: 1fr !important;
   }
 }
 

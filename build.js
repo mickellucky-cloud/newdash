@@ -90,50 +90,127 @@ function getPortfolioHeader(activeSubTab) {
   `;
 }
 
-// Spectacular Responsive Polymarket Copy Agent Live Announcement Banner (Desktop, Tablet & Mobile)
-const polymarketLiveBanner = `
-  <a href="agents.html#polymarket-agent-card" onclick="openPolymarketAgent(event)" class="polymarket-live-banner" aria-label="Open Polymarket Copy Agent">
-    <div class="poly-banner-glow-orb poly-orb-1"></div>
-    <div class="poly-banner-glow-orb poly-orb-2"></div>
-    <svg class="poly-topo-bg" viewBox="0 0 800 180" preserveAspectRatio="none" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <path d="M-40 30C90 5 210 95 360 65C510 35 640 -10 840 40" stroke="rgba(255,255,255,0.14)" stroke-width="1.2"/>
-      <path d="M-30 75C110 40 250 125 410 95C570 65 690 20 850 75" stroke="rgba(255,255,255,0.10)" stroke-width="1.2"/>
-      <path d="M-20 120C140 90 290 165 460 130C630 95 730 60 860 120" stroke="rgba(255,255,255,0.08)" stroke-width="1.2"/>
-      <circle cx="680" cy="44" r="64" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>
-      <circle cx="680" cy="44" r="36" stroke="rgba(255,255,255,0.13)" stroke-width="1" stroke-dasharray="3 3"/>
-    </svg>
-    <div class="poly-banner-inner">
-      <div class="poly-banner-top-row">
-        <span class="poly-live-badge"><span class="poly-live-dot"></span> LIVE COPY AGENT</span>
-        <span class="poly-roi-pill">+38.4% 7D ROI · 78% Win</span>
-      </div>
-      <div class="poly-banner-main-row">
-        <div class="poly-logo-frame">
-          <img src="assets/polymarket.png" alt="Polymarket" class="poly-banner-logo">
-          <span class="poly-logo-ring"></span>
-        </div>
-        <div class="poly-banner-copy">
-          <div class="poly-banner-title">Polymarket <span class="poly-title-highlight">Copy Agent</span> is Live!</div>
-          <div class="poly-banner-sub">Auto-mirror top 1% prediction whales in real time with 1-click execution.</div>
-        </div>
-      </div>
-      <div class="poly-banner-action-row">
-        <div class="poly-whale-ticker">
-          <div class="poly-whale-avatars">
-            <span class="poly-whale-av" style="background:linear-gradient(135deg,#1652F0,#38BDF8);">0x</span>
-            <span class="poly-whale-av" style="background:linear-gradient(135deg,#10B981,#059669);">W1</span>
-            <span class="poly-whale-av" style="background:linear-gradient(135deg,#8B5CF6,#6D28D9);">+9</span>
+// Spectacular Responsive Announcement Carousel Slider (Polymarket Copy Agent + Buy $OKN Presale)
+function getAnnouncementCarousel(carouselId) {
+  return `
+    <section id="${carouselId}" class="announcement-carousel" aria-roledescription="carousel" aria-label="Featured Announcements" data-active-slide="0">
+      <div class="announcement-carousel-viewport">
+        <div class="announcement-carousel-track">
+          <!-- Slide 0: Polymarket Copy Agent Live -->
+          <div class="announcement-slide active" data-slide-idx="0" aria-hidden="false">
+            <a href="agents.html#polymarket-agent-card" onclick="openPolymarketAgent(event)" class="polymarket-live-banner" aria-label="Open Polymarket Copy Agent">
+              <div class="poly-banner-glow-orb poly-orb-1"></div>
+              <div class="poly-banner-glow-orb poly-orb-2"></div>
+              <svg class="poly-topo-bg" viewBox="0 0 800 180" preserveAspectRatio="none" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M-40 30C90 5 210 95 360 65C510 35 640 -10 840 40" stroke="rgba(255,255,255,0.14)" stroke-width="1.2"/>
+                <path d="M-30 75C110 40 250 125 410 95C570 65 690 20 850 75" stroke="rgba(255,255,255,0.10)" stroke-width="1.2"/>
+                <path d="M-20 120C140 90 290 165 460 130C630 95 730 60 860 120" stroke="rgba(255,255,255,0.08)" stroke-width="1.2"/>
+                <circle cx="680" cy="44" r="64" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>
+                <circle cx="680" cy="44" r="36" stroke="rgba(255,255,255,0.13)" stroke-width="1" stroke-dasharray="3 3"/>
+              </svg>
+              <div class="poly-banner-inner">
+                <div class="poly-banner-top-row">
+                  <span class="poly-live-badge"><span class="poly-live-dot"></span> LIVE COPY AGENT</span>
+                  <span class="poly-roi-pill">+38.4% 7D ROI · 78% Win</span>
+                </div>
+                <div class="poly-banner-main-row">
+                  <div class="poly-logo-frame">
+                    <img src="assets/polymarket.png" alt="Polymarket" class="poly-banner-logo">
+                    <span class="poly-logo-ring"></span>
+                  </div>
+                  <div class="poly-banner-copy">
+                    <div class="poly-banner-title">Polymarket <span class="poly-title-highlight">Copy Agent</span> is Live!</div>
+                    <div class="poly-banner-sub">Auto-mirror top 1% prediction whales in real time with 1-click execution.</div>
+                  </div>
+                </div>
+                <div class="poly-banner-action-row">
+                  <div class="poly-whale-ticker">
+                    <div class="poly-whale-avatars">
+                      <span class="poly-whale-av" style="background:linear-gradient(135deg,#1652F0,#38BDF8);">0x</span>
+                      <span class="poly-whale-av" style="background:linear-gradient(135deg,#10B981,#059669);">W1</span>
+                      <span class="poly-whale-av" style="background:linear-gradient(135deg,#8B5CF6,#6D28D9);">+9</span>
+                    </div>
+                    <span class="poly-whale-text">142 whales mirrored</span>
+                  </div>
+                  <span class="poly-banner-cta">
+                    <span>Open Agent</span>
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                  </span>
+                </div>
+              </div>
+            </a>
           </div>
-          <span class="poly-whale-text">142 whales mirrored</span>
+
+          <!-- Slide 1: Buy $OKN Presale Multi-Gateway Banner -->
+          <div class="announcement-slide" data-slide-idx="1" aria-hidden="true">
+            <a href="buy.html" class="okn-presale-live-banner" aria-label="Buy $OKN Presale">
+              <div class="poly-banner-glow-orb okn-orb-1"></div>
+              <div class="poly-banner-glow-orb okn-orb-2"></div>
+              <svg class="poly-topo-bg" viewBox="0 0 800 180" preserveAspectRatio="none" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M-30 140C120 85 260 15 430 60C600 105 710 35 840 20" stroke="rgba(255,214,10,0.16)" stroke-width="1.2"/>
+                <path d="M-20 95C150 45 290 120 460 75C630 30 740 90 850 65" stroke="rgba(201,166,255,0.14)" stroke-width="1.2"/>
+                <circle cx="690" cy="48" r="68" stroke="rgba(255,214,10,0.12)" stroke-width="1"/>
+                <circle cx="690" cy="48" r="38" stroke="rgba(9,180,255,0.16)" stroke-width="1" stroke-dasharray="4 4"/>
+              </svg>
+              <div class="okn-banner-inner">
+                <div class="poly-banner-top-row">
+                  <span class="poly-live-badge okn-live-badge"><span class="poly-live-dot okn-live-dot"></span> PRESALE STAGE 2 LIVE</span>
+                  <span class="poly-roi-pill okn-rate-pill">1 BNB = 1,000,000 $OKN · $0.0006</span>
+                </div>
+                <div class="poly-banner-main-row">
+                  <div class="poly-logo-frame okn-logo-frame">
+                    <img src="assets/okn-logo.png" alt="$OKN Presale" class="poly-banner-logo" style="background:#000;">
+                    <span class="poly-logo-ring okn-logo-ring"></span>
+                  </div>
+                  <div class="poly-banner-copy">
+                    <div class="poly-banner-title">Buy $OKN Presale — <span class="okn-title-highlight">Multi-Gateway</span> Live!</div>
+                    <div class="poly-banner-sub">Multi-Gateway: Web3 BNB, NOWPayments (300+ crypto), &amp; Credit Card with instant allocation.</div>
+                  </div>
+                </div>
+                <div class="poly-banner-action-row">
+                  <div class="poly-whale-ticker">
+                    <div class="poly-whale-avatars">
+                      <span class="poly-whale-av" style="background:#1E2026;padding:2px;"><img src="assets/bnb-logo.png" alt="BNB" style="width:14px;height:14px;object-fit:contain;"></span>
+                      <span class="poly-whale-av" style="background:linear-gradient(135deg,#00C2FF,#0066FF);font-size:8px;">300+</span>
+                      <span class="poly-whale-av" style="background:linear-gradient(135deg,#F59E0B,#D97706);font-size:8px;">CARD</span>
+                    </div>
+                    <span class="poly-whale-text">68.4% Sold · $412.8K Raised</span>
+                  </div>
+                  <span class="poly-banner-cta okn-banner-cta">
+                    <span>Open the sale</span>
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                  </span>
+                </div>
+              </div>
+            </a>
+          </div>
         </div>
-        <span class="poly-banner-cta">
-          <span>Open Agent</span>
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-        </span>
       </div>
-    </div>
-  </a>
-`;
+
+      <!-- Interactive Carousel Controls & Animated Progress Pills -->
+      <div class="announcement-carousel-bar">
+        <div class="carousel-dots" role="tablist" aria-label="Announcement slides">
+          <button type="button" role="tab" aria-selected="true" class="carousel-dot active" data-target="0" onclick="switchAnnouncementSlide(0, '${carouselId}')" aria-label="Slide 1: Polymarket Copy Agent">
+            <span class="carousel-dot-label">Polymarket Agent</span>
+            <span class="carousel-dot-track"><span class="carousel-dot-fill"></span></span>
+          </button>
+          <button type="button" role="tab" aria-selected="false" class="carousel-dot" data-target="1" onclick="switchAnnouncementSlide(1, '${carouselId}')" aria-label="Slide 2: Buy $OKN Presale">
+            <span class="carousel-dot-label">Buy $OKN Presale</span>
+            <span class="carousel-dot-track"><span class="carousel-dot-fill"></span></span>
+          </button>
+        </div>
+        <div class="carousel-nav-group">
+          <button type="button" class="carousel-nav-btn" onclick="stepAnnouncementSlide(-1, '${carouselId}')" aria-label="Previous announcement">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+          </button>
+          <button type="button" class="carousel-nav-btn" onclick="stepAnnouncementSlide(1, '${carouselId}')" aria-label="Next announcement">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          </button>
+        </div>
+      </div>
+    </section>
+  `;
+}
 
 // 1. Live Production Portfolio Layout with Modernized UI/UX
 const desktopPortfolioMain = `
@@ -141,8 +218,8 @@ const desktopPortfolioMain = `
     <!-- Top Header & Tabs -->
     ${getPortfolioHeader('overview')}
 
-    <!-- Responsive Polymarket Live Copy Agent Announcement Banner -->
-    ${polymarketLiveBanner}
+    <!-- Responsive Announcement Carousel (Polymarket Copy Agent + Buy $OKN Presale) -->
+    ${getAnnouncementCarousel('desktop-ann-carousel')}
 
     <!-- Account Total Asset Valuation Hero Card with Hide/Unhide Toggle -->
     <div style="background: linear-gradient(135deg, rgba(122, 18, 245, 0.22) 0%, rgba(9, 180, 255, 0.12) 100%), var(--s1); border: 1px solid var(--line); border-radius: 24px; padding: 24px 28px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 18px; box-shadow: 0 4px 24px rgba(0,0,0,0.12);">
@@ -326,18 +403,6 @@ const desktopPortfolioMain = `
               ${ICONS.arrowRight}
             </a>
           </div>
-        </div>
-
-        <!-- Buy $OKN with BNB Card -->
-        <div style="background: var(--s1); border: 1px solid var(--line); border-radius: 20px; padding: 24px; box-shadow: 0 1px 3px rgba(0,0,0,0.06);">
-          <div style="margin-bottom: 18px;">
-            <h3 style="font-size: 18px; font-weight: 800; color: var(--tx); margin: 0 0 6px;">Buy $OKN Presale</h3>
-            <p style="font-size: 13px; color: var(--mut); line-height: 1.5; margin: 0;">Multi-Gateway: Web3 BNB, NOWPayments (300+ crypto), & Credit Card</p>
-          </div>
-          <a href="buy.html" style="display: inline-flex; align-items: center; gap: 10px; height: 42px; padding: 0 20px; border-radius: 12px; background: var(--s2); border: 1px solid var(--line); color: var(--tx); font-weight: 800; font-size: 13px; text-decoration: none; transition: background 0.2s ease;">
-            ${ICONS.cart}
-            <span>Open the sale</span>
-          </a>
         </div>
 
       </div>
@@ -548,49 +613,7 @@ mobileHome = mobileHome.replace(/>100<\/div>/g, '>135</div>');
 mobileHome = mobileHome.replace(/100 pts/g, '135 pts');
 mobileHome = mobileHome.replace(/5-day streak/g, '6-day streak');
 mobileHome = mobileHome.replace(/5 days\. Longest: 5/g, '6 days. Longest: 6');
-const mobilePolymarketBanner = `
-  <a href="agents.html#polymarket-agent-card" onclick="openPolymarketAgent(event)" class="polymarket-live-banner" aria-label="Open Polymarket Copy Agent">
-    <div class="poly-banner-glow-orb poly-orb-1"></div>
-    <div class="poly-banner-glow-orb poly-orb-2"></div>
-    <svg class="poly-topo-bg" viewBox="0 0 400 180" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <path d="M-40 30C40 10 90 85 180 65C270 45 320 -10 430 35" stroke="rgba(255,255,255,0.14)" stroke-width="1.2"/>
-      <path d="M-30 75C55 45 120 120 210 95C300 70 345 25 440 70" stroke="rgba(255,255,255,0.10)" stroke-width="1.2"/>
-      <path d="M-20 120C70 95 140 165 240 130C340 95 370 65 450 115" stroke="rgba(255,255,255,0.08)" stroke-width="1.2"/>
-      <circle cx="330" cy="42" r="58" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>
-      <circle cx="330" cy="42" r="32" stroke="rgba(255,255,255,0.13)" stroke-width="1" stroke-dasharray="3 3"/>
-    </svg>
-    <div class="poly-banner-inner">
-      <div class="poly-banner-top-row">
-        <span class="poly-live-badge"><span class="poly-live-dot"></span> LIVE COPY AGENT</span>
-        <span class="poly-roi-pill">+38.4% 7D ROI · 78% Win</span>
-      </div>
-      <div class="poly-banner-main-row">
-        <div class="poly-logo-frame">
-          <img src="assets/polymarket.png" alt="Polymarket" class="poly-banner-logo">
-          <span class="poly-logo-ring"></span>
-        </div>
-        <div class="poly-banner-copy">
-          <div class="poly-banner-title">Polymarket <span class="poly-title-highlight">Copy Agent</span> is Live!</div>
-          <div class="poly-banner-sub">Auto-mirror top 1% prediction whales in real time with 1-click execution.</div>
-        </div>
-      </div>
-      <div class="poly-banner-action-row">
-        <div class="poly-whale-ticker">
-          <div class="poly-whale-avatars">
-            <span class="poly-whale-av" style="background:linear-gradient(135deg,#1652F0,#38BDF8);">0x</span>
-            <span class="poly-whale-av" style="background:linear-gradient(135deg,#10B981,#059669);">W1</span>
-            <span class="poly-whale-av" style="background:linear-gradient(135deg,#8B5CF6,#6D28D9);">+9</span>
-          </div>
-          <span class="poly-whale-text">142 whales mirrored</span>
-        </div>
-        <span class="poly-banner-cta">
-          <span>Open Agent</span>
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-        </span>
-      </div>
-    </div>
-  </a>
-`;
+const mobileAnnouncementCarousel = getAnnouncementCarousel('mobile-ann-carousel');
 
 const mobileHomeHeroTotalCard = `
   <div data-dc-tpl="31" style="margin-top: 18px; padding: 18px; border-radius: 24px; background: rgba(0, 0, 0, 0.22); border: 1px solid rgba(255, 255, 255, 0.15); display: flex; flex-direction: column; gap: 12px; backdrop-filter: blur(12px);">
@@ -636,10 +659,10 @@ mobileHome = mobileHome.replace(
   /<div data-dc-tpl="31"[\s\S]*?<\/button>\s*<\/div>/i,
   mobileHomeHeroTotalCard
 );
-// Insert Animated Polymarket live announcement banner at the top of Home main (mobile only)
+// Insert Animated Announcement Carousel at the top of Home main (mobile)
 mobileHome = mobileHome.replace(
   /<main[^>]*>/i,
-  m => m + mobilePolymarketBanner
+  m => m + mobileAnnouncementCarousel
 );
 
 const mobileEarn = getMobileBoard('Earn.html')
@@ -1804,61 +1827,268 @@ const desktopActivityMain = `
   </div>
 `;
 
-// 7. Wallet / Holdings Desktop & Mobile
+// 7. Fintech-Ready Wallet & Account Summary (Desktop, Tablet & Mobile)
 const desktopWalletMain = `
   <div class="portfolio-container" style="max-width: 1400px; margin: 0 auto; padding-bottom: 40px;">
     ${getPortfolioHeader('holdings')}
 
-    <section class="page-hero" style="background: var(--vio); color: #fff; border-radius: 24px; padding: 24px 28px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.12);">
-      <div style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.85; margin-bottom: 4px;">Web3 Custody</div>
-      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px;">
-        <div>
-          <div style="font-size: 13px; opacity: 0.85;">Connected Address</div>
-          <div class="num" style="font-size: 28px; font-weight: 800; line-height: 1.15; margin-top: 2px;">0x71C...49A1</div>
+    <!-- Fintech Account Summary Hero Card -->
+    <section class="page-hero fintech-wallet-hero" style="background: linear-gradient(135deg, #2D0B5A 0%, #150A2A 55%, #0D182E 100%); color: #fff; border-radius: 26px; padding: 28px 30px; margin-bottom: 20px; border: 1px solid rgba(201, 166, 255, 0.25); box-shadow: 0 18px 42px rgba(0,0,0,0.28); position: relative; overflow: hidden;">
+      <div style="position: absolute; top: -70px; right: -40px; width: 260px; height: 260px; border-radius: 50%; background: radial-gradient(circle, rgba(9, 180, 255, 0.22) 0%, transparent 70%); pointer-events: none;"></div>
+      <div style="position: relative; z-index: 2; display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 22px;">
+        <div style="flex: 1 1 320px; min-width: 0;">
+          <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 10px;">
+            <span style="display: inline-flex; align-items: center; gap: 6px; padding: 4px 11px; border-radius: 999px; background: rgba(47, 189, 142, 0.18); border: 1px solid rgba(47, 189, 142, 0.4); color: #4EEDB2; font-size: 10.5px; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase;">
+              <span style="width: 7px; height: 7px; border-radius: 50%; background: #4EEDB2;"></span>
+              Fintech Account Summary
+            </span>
+            <span style="font-size: 11.5px; font-weight: 700; color: rgba(226, 232, 240, 0.8); background: rgba(255,255,255,0.08); padding: 4px 10px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.12);">UID #849201 · Tier 2 Verified</span>
+          </div>
+
+          <div style="display: flex; align-items: center; gap: 8px; margin-top: 4px;">
+            <span style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: rgba(226, 232, 240, 0.78);">Total Account Net Worth</span>
+            <button type="button" onclick="toggleBalanceVisibility()" class="balance-eye-btn" aria-label="Toggle balance visibility" style="background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.18); border-radius: 8px; color: #fff; width: 28px; height: 28px; display: inline-flex; align-items: center; justify-content: center; cursor: pointer;">
+              ${ICONS.eye}
+            </button>
+          </div>
+
+          <div style="display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-top: 6px;">
+            <span class="num balance-display" data-value="$1,428.50" style="font-size: 40px; font-weight: 800; color: #FFFFFF; line-height: 1.05; letter-spacing: -0.03em;">$1,428.50</span>
+            <span style="font-size: 12.5px; font-weight: 800; color: #4EEDB2; background: rgba(47, 189, 142, 0.22); border: 1px solid rgba(47, 189, 142, 0.38); padding: 4px 11px; border-radius: 10px;">+$142.50 (+11.08%) 24h</span>
+          </div>
+
+          <!-- Custody & Address Bar -->
+          <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-top: 16px;">
+            <div style="background: rgba(0, 0, 0, 0.28); border: 1px solid rgba(255, 255, 255, 0.14); padding: 7px 12px; border-radius: 12px; display: inline-flex; align-items: center; gap: 8px;">
+              ${ICONS.bsc}
+              <span style="font-size: 12.5px; font-weight: 700; color: rgba(255,255,255,0.85);">0x71C...49A1</span>
+              <button type="button" onclick="copyWalletAddress()" style="background: rgba(255,255,255,0.12); border: none; color: #fff; border-radius: 6px; padding: 3px 7px; font-size: 10.5px; font-weight: 800; cursor: pointer;">Copy</button>
+            </div>
+            <div style="background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12); padding: 7px 12px; border-radius: 12px; display: inline-flex; align-items: center; gap: 7px;">
+              <span style="width: 7px; height: 7px; border-radius: 50%; background: #4EEDB2;"></span>
+              <span style="font-size: 12px; font-weight: 700; color: rgba(255,255,255,0.9);">BNB Smart Chain (Chain 97)</span>
+            </div>
+          </div>
         </div>
-        <div style="background: rgba(255,255,255,0.16); backdrop-filter: blur(10px); padding: 8px 14px; border-radius: 12px; display: inline-flex; align-items: center; gap: 8px;">
-          ${ICONS.bsc}
-          <span style="width: 8px; height: 8px; border-radius: 50%; background: var(--ok); flex-shrink: 0;"></span>
-          <span style="font-size: 13px; font-weight: 700; white-space: nowrap;">BNB Smart Chain (Testnet)</span>
+
+        <!-- Quick Fintech Action Dock -->
+        <div class="fintech-action-dock" style="display: grid; grid-template-columns: repeat(2, minmax(130px, 1fr)); gap: 10px; width: 100%; max-width: 320px; align-self: center;">
+          <a href="buy.html" style="height: 46px; padding: 0 16px; border-radius: 14px; background: linear-gradient(135deg, #7A12F5 0%, #09B4FF 100%); color: #fff; font-size: 13px; font-weight: 800; display: flex; align-items: center; justify-content: center; gap: 8px; text-decoration: none; box-shadow: 0 6px 18px rgba(9, 180, 255, 0.32); border: 1px solid rgba(255,255,255,0.22);">
+            ${ICONS.plusCircle}
+            <span>Buy $OKN</span>
+          </a>
+          <a href="claim.html" style="height: 46px; padding: 0 16px; border-radius: 14px; background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.2); color: #fff; font-size: 13px; font-weight: 800; display: flex; align-items: center; justify-content: center; gap: 8px; text-decoration: none;">
+            ${ICONS.download}
+            <span>Claim $OKN</span>
+          </a>
+          <button type="button" onclick="copyWalletAddress()" style="height: 44px; padding: 0 14px; border-radius: 14px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); color: #fff; font-size: 12.5px; font-weight: 700; display: flex; align-items: center; justify-content: center; gap: 7px; cursor: pointer;">
+            ${ICONS.copy}
+            <span>Deposit Address</span>
+          </button>
+          <button type="button" onclick="openWalletModal()" style="height: 44px; padding: 0 14px; border-radius: 14px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); color: #fff; font-size: 12.5px; font-weight: 700; display: flex; align-items: center; justify-content: center; gap: 7px; cursor: pointer;">
+            ${ICONS.wallet}
+            <span>Switch Wallet</span>
+          </button>
         </div>
       </div>
     </section>
 
-    <div class="resp-grid-2 wallet-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 24px;">
-      <div style="background: var(--s1); border: 1px solid var(--line); border-radius: 20px; padding: 24px;">
-        <div style="font-size: 17px; font-weight: 800; margin-bottom: 16px; color: var(--tx);">Asset Balances</div>
-        <div class="kv-row" style="display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 14px 0; border-bottom: 1px solid var(--line);">
-          <div style="display: flex; align-items: center; gap: 10px; min-width: 0;">
-            <span style="flex-shrink: 0; display: flex;">${ICONS.bnb}</span>
-            <span style="color: var(--mut); font-size: 14px; font-weight: 700; white-space: nowrap;">BNB (Native Gas)</span>
-          </div>
-          <span class="num" style="font-weight: 800; font-size: 16px; color: var(--tx); white-space: nowrap; flex-shrink: 0;">1.45 BNB</span>
+    <!-- 4-Column Account Summary KPI Strip -->
+    <div class="resp-grid-4 fintech-kpi-strip" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 20px;">
+      <!-- KPI 1: Liquid On-Chain Balance -->
+      <div class="stat-card" style="background: var(--s1); border: 1px solid var(--line); border-radius: 20px; padding: 20px;">
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
+          <span style="font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; color: var(--mut);">Liquid On-Chain</span>
+          <span style="width: 34px; height: 34px; border-radius: 10px; background: rgba(240, 185, 11, 0.14); display: flex; align-items: center; justify-content: center;">${ICONS.bnb}</span>
         </div>
-        <div class="kv-row" style="display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 14px 0; border-bottom: 1px solid var(--line);">
-          <div style="display: flex; align-items: center; gap: 10px; min-width: 0;">
-            <span style="flex-shrink: 0; display: flex;">${logoImgDesktop}</span>
-            <span style="color: var(--mut); font-size: 14px; font-weight: 700; white-space: nowrap;">$OKN Token</span>
-          </div>
-          <span class="num" style="font-weight: 800; font-size: 16px; color: var(--vio-l); white-space: nowrap; flex-shrink: 0;">0 $OKN</span>
+        <div class="num balance-display" data-value="$870.00" style="font-size: 25px; font-weight: 800; color: var(--tx); line-height: 1.1;">$870.00</div>
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 8px; font-size: 12px;">
+          <span style="color: #F0B90B; font-weight: 700;">1.45 BNB</span>
+          <span style="color: var(--mut); font-weight: 600;">60.9% share</span>
         </div>
-        <div class="kv-row" style="display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 14px 0;">
-          <div style="display: flex; align-items: center; gap: 10px; min-width: 0;">
-            <span style="width: 20px; height: 20px; border-radius: 6px; background: rgba(47,189,142,0.15); color: var(--ok); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">${ICONS.gift}</span>
-            <span style="color: var(--mut); font-size: 14px; font-weight: 700; white-space: nowrap;">OK Points Balance</span>
-          </div>
-          <span class="num" style="font-weight: 800; font-size: 16px; color: var(--ok); white-space: nowrap; flex-shrink: 0;">135 pts</span>
-        </div>
-        <button onclick="openWalletModal()" style="width: 100%; margin-top: 18px; height: 46px; border-radius: 14px; background: var(--s2); border: 1px solid var(--line); color: var(--tx); font-weight: 800; font-size: 14px; cursor: pointer;">Switch Wallet</button>
       </div>
 
-      <div style="background: var(--s1); border: 1px solid var(--line); border-radius: 20px; padding: 24px; display: flex; flex-direction: column; justify-content: space-between;">
-        <div>
-          <div style="font-size: 17px; font-weight: 800; margin-bottom: 10px; color: var(--tx);">Deposit & Withdraw</div>
-          <p style="font-size: 14px; color: var(--mut); line-height: 1.6; margin: 0 0 20px;">Deposit BNB to participate in the presale allocation or withdraw claimable $OKN allocations to your personal non-custodial wallet.</p>
+      <!-- KPI 2: Presale & Token Allocation -->
+      <div class="stat-card" style="background: var(--s1); border: 1px solid var(--line); border-radius: 20px; padding: 20px;">
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
+          <span style="font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; color: var(--mut);">$OKN Allocation</span>
+          <span style="width: 34px; height: 34px; border-radius: 10px; background: rgba(122, 18, 245, 0.14); display: flex; align-items: center; justify-content: center;"><img src="assets/okn-logo.png" alt="OKN" style="width: 22px; height: 22px; border-radius: 6px; object-fit: cover;"></span>
         </div>
-        <div style="display: flex; gap: 12px;">
-          <a href="buy.html" style="flex: 1; height: 46px; border-radius: 14px; background: var(--vio); color: #fff; font-weight: 800; font-size: 14px; display: flex; align-items: center; justify-content: center; text-decoration: none;">Buy $OKN</a>
-          <a href="claim.html" style="flex: 1; height: 46px; border-radius: 14px; background: var(--s2); border: 1px solid var(--line); color: var(--tx); font-weight: 800; font-size: 14px; display: flex; align-items: center; justify-content: center; text-decoration: none;">Claim $OKN</a>
+        <div class="num balance-display" data-value="$335.00" style="font-size: 25px; font-weight: 800; color: var(--tx); line-height: 1.1;">$335.00</div>
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 8px; font-size: 12px;">
+          <span style="color: var(--vio-l); font-weight: 700;"><span class="user-okn-tokens">558,333</span> $OKN</span>
+          <span style="color: var(--mut); font-weight: 600;">23.5% share</span>
+        </div>
+      </div>
+
+      <!-- KPI 3: Partner Commission Vault -->
+      <div class="stat-card" style="background: var(--s1); border: 1px solid var(--line); border-radius: 20px; padding: 20px;">
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
+          <span style="font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; color: var(--mut);">Referral Vault</span>
+          <span style="width: 34px; height: 34px; border-radius: 10px; background: rgba(47, 189, 142, 0.14); color: var(--ok); display: flex; align-items: center; justify-content: center;">${ICONS.users}</span>
+        </div>
+        <div class="num balance-display" data-value="$142.50" style="font-size: 25px; font-weight: 800; color: var(--ok); line-height: 1.1;">$142.50</div>
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 8px; font-size: 12px;">
+          <span style="color: var(--ok); font-weight: 700;">0.238 BNB (14 refs)</span>
+          <span style="color: var(--mut); font-weight: 600;">10.0% share</span>
+        </div>
+      </div>
+
+      <!-- KPI 4: Unclaimed OK Points Value -->
+      <div class="stat-card" style="background: var(--s1); border: 1px solid var(--line); border-radius: 20px; padding: 20px;">
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
+          <span style="font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; color: var(--mut);">Rewards Pool</span>
+          <span style="width: 34px; height: 34px; border-radius: 10px; background: rgba(9, 180, 255, 0.14); color: var(--cyan); display: flex; align-items: center; justify-content: center;">${ICONS.gift}</span>
+        </div>
+        <div class="num balance-display" data-value="$81.00 est." style="font-size: 25px; font-weight: 800; color: var(--tx); line-height: 1.1;">$81.00 est.</div>
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 8px; font-size: 12px;">
+          <span style="color: var(--cyan); font-weight: 700;">135 OK Points</span>
+          <span style="color: var(--mut); font-weight: 600;">5.6% share</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Portfolio Allocation Bar Card -->
+    <div style="background: var(--s1); border: 1px solid var(--line); border-radius: 20px; padding: 20px 24px; margin-bottom: 22px;">
+      <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; margin-bottom: 12px;">
+        <div>
+          <h3 style="font-size: 15px; font-weight: 800; color: var(--tx); margin: 0;">Account Asset Allocation</h3>
+          <p style="font-size: 12px; color: var(--mut); margin: 2px 0 0;">Real-time distribution across native gas, presale tokens, referral commissions, and points.</p>
+        </div>
+        <span style="font-size: 12px; font-weight: 800; color: var(--ok); background: rgba(47, 189, 142, 0.12); padding: 4px 10px; border-radius: 8px;">100% Non-Custodial Verified</span>
+      </div>
+      <div style="height: 12px; width: 100%; border-radius: 999px; background: var(--s2); overflow: hidden; display: flex; gap: 3px; padding: 2px;">
+        <div style="width: 60.9%; height: 100%; background: #F0B90B; border-radius: 999px;" title="BNB Native: 60.9%"></div>
+        <div style="width: 23.5%; height: 100%; background: #8C38F7; border-radius: 999px;" title="$OKN Allocation: 23.5%"></div>
+        <div style="width: 10.0%; height: 100%; background: #2FBD8E; border-radius: 999px;" title="Referral Vault: 10.0%"></div>
+        <div style="width: 5.6%; height: 100%; background: #09B4FF; border-radius: 999px;" title="OK Points: 5.6%"></div>
+      </div>
+      <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; margin-top: 12px; font-size: 12px; font-weight: 700;">
+        <span style="display: inline-flex; align-items: center; gap: 6px; color: var(--tx);"><span style="width: 9px; height: 9px; border-radius: 50%; background: #F0B90B;"></span>BNB Liquid (60.9%)</span>
+        <span style="display: inline-flex; align-items: center; gap: 6px; color: var(--tx);"><span style="width: 9px; height: 9px; border-radius: 50%; background: #8C38F7;"></span>$OKN Presale (23.5%)</span>
+        <span style="display: inline-flex; align-items: center; gap: 6px; color: var(--tx);"><span style="width: 9px; height: 9px; border-radius: 50%; background: #2FBD8E;"></span>Partner BNB Vault (10.0%)</span>
+        <span style="display: inline-flex; align-items: center; gap: 6px; color: var(--tx);"><span style="width: 9px; height: 9px; border-radius: 50%; background: #09B4FF;"></span>OK Points Pool (5.6%)</span>
+      </div>
+    </div>
+
+    <!-- Main 2-Column Split: Asset Breakdown & Account Summary Rails -->
+    <div class="portfolio-split-grid fintech-main-columns" style="display: grid; grid-template-columns: 3fr 2fr; gap: 22px; align-items: start;">
+      <!-- Left Column: Detailed Asset Holdings Breakdown -->
+      <div style="background: var(--s1); border: 1px solid var(--line); border-radius: 22px; padding: 24px;">
+        <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; margin-bottom: 18px;">
+          <div>
+            <h3 style="font-size: 18px; font-weight: 800; color: var(--tx); margin: 0;">Asset Holdings Breakdown</h3>
+            <p style="font-size: 12.5px; color: var(--mut); margin: 2px 0 0;">Live balances synced with BNB Smart Chain &amp; OKN Presale Registry</p>
+          </div>
+          <a href="activity.html" style="font-size: 12px; font-weight: 800; color: var(--vio-l); text-decoration: none;">View Ledger →</a>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 12px;">
+          <!-- Asset Row 1: BNB -->
+          <div class="fintech-asset-row" style="display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 14px 16px; border-radius: 16px; background: var(--s2); border: 1px solid var(--line); flex-wrap: wrap;">
+            <div style="display: flex; align-items: center; gap: 12px; min-width: 170px;">
+              <span style="width: 42px; height: 42px; border-radius: 12px; background: rgba(240, 185, 11, 0.14); display: flex; align-items: center; justify-content: center; flex: 0 0 auto;">${ICONS.bnb}</span>
+              <div>
+                <div style="font-size: 14.5px; font-weight: 800; color: var(--tx);">BNB <span style="font-size: 11px; font-weight: 700; color: #F0B90B; background: rgba(240,185,11,0.14); padding: 2px 7px; border-radius: 6px; margin-left: 4px;">Native Gas</span></div>
+                <div style="font-size: 12px; color: var(--mut); font-weight: 600;">BNB Smart Chain · $600.00 / BNB</div>
+              </div>
+            </div>
+            <div style="text-align: right; margin-left: auto;">
+              <div class="num" style="font-size: 15px; font-weight: 800; color: var(--tx);">1.45 BNB</div>
+              <div class="num balance-display" data-value="$870.00" style="font-size: 12.5px; font-weight: 700; color: var(--ok);">$870.00</div>
+            </div>
+            <a href="buy.html" style="height: 34px; padding: 0 13px; border-radius: 10px; background: var(--vio); color: #fff; font-size: 12px; font-weight: 800; display: inline-flex; align-items: center; text-decoration: none;">Swap to $OKN</a>
+          </div>
+
+          <!-- Asset Row 2: $OKN Token -->
+          <div class="fintech-asset-row" style="display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 14px 16px; border-radius: 16px; background: var(--s2); border: 1px solid var(--line); flex-wrap: wrap;">
+            <div style="display: flex; align-items: center; gap: 12px; min-width: 170px;">
+              <span style="width: 42px; height: 42px; border-radius: 12px; background: #000; display: flex; align-items: center; justify-content: center; flex: 0 0 auto; overflow: hidden; border: 1px solid var(--line);"><img src="assets/okn-logo.png" alt="$OKN" style="width: 100%; height: 100%; object-fit: cover;"></span>
+              <div>
+                <div style="font-size: 14.5px; font-weight: 800; color: var(--tx);">$OKN Token <span style="font-size: 11px; font-weight: 700; color: var(--vio-l); background: rgba(122,18,245,0.16); padding: 2px 7px; border-radius: 6px; margin-left: 4px;">Stage 2</span></div>
+                <div style="font-size: 12px; color: var(--mut); font-weight: 600;">BEP-20 Allocation · $0.0006 / OKN</div>
+              </div>
+            </div>
+            <div style="text-align: right; margin-left: auto;">
+              <div class="num" style="font-size: 15px; font-weight: 800; color: var(--tx);"><span class="user-okn-tokens">558,333</span> $OKN</div>
+              <div class="num balance-display" data-value="$335.00" style="font-size: 12.5px; font-weight: 700; color: var(--vio-l);">$335.00</div>
+            </div>
+            <a href="buy.html" style="height: 34px; padding: 0 13px; border-radius: 10px; background: var(--s1); border: 1px solid var(--line); color: var(--tx); font-size: 12px; font-weight: 800; display: inline-flex; align-items: center; text-decoration: none;">+ Buy More</a>
+          </div>
+
+          <!-- Asset Row 3: Referral BNB Commission Vault -->
+          <div class="fintech-asset-row" style="display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 14px 16px; border-radius: 16px; background: var(--s2); border: 1px solid var(--line); flex-wrap: wrap;">
+            <div style="display: flex; align-items: center; gap: 12px; min-width: 170px;">
+              <span style="width: 42px; height: 42px; border-radius: 12px; background: rgba(47, 189, 142, 0.14); color: var(--ok); display: flex; align-items: center; justify-content: center; flex: 0 0 auto;">${ICONS.users}</span>
+              <div>
+                <div style="font-size: 14.5px; font-weight: 800; color: var(--tx);">Partner Commission Vault</div>
+                <div style="font-size: 12px; color: var(--mut); font-weight: 600;">14 Active Referrals · Auto-Settled BNB</div>
+              </div>
+            </div>
+            <div style="text-align: right; margin-left: auto;">
+              <div class="num" style="font-size: 15px; font-weight: 800; color: var(--ok);">0.238 BNB</div>
+              <div class="num balance-display" data-value="$142.50" style="font-size: 12.5px; font-weight: 700; color: var(--ok);">$142.50</div>
+            </div>
+            <a href="referral.html" style="height: 34px; padding: 0 13px; border-radius: 10px; background: var(--s1); border: 1px solid var(--line); color: var(--tx); font-size: 12px; font-weight: 800; display: inline-flex; align-items: center; text-decoration: none;">Partner Hub</a>
+          </div>
+
+          <!-- Asset Row 4: OK Points -->
+          <div class="fintech-asset-row" style="display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 14px 16px; border-radius: 16px; background: var(--s2); border: 1px solid var(--line); flex-wrap: wrap;">
+            <div style="display: flex; align-items: center; gap: 12px; min-width: 170px;">
+              <span style="width: 42px; height: 42px; border-radius: 12px; background: rgba(9, 180, 255, 0.14); color: var(--cyan); display: flex; align-items: center; justify-content: center; flex: 0 0 auto;">${ICONS.gift}</span>
+              <div>
+                <div style="font-size: 14.5px; font-weight: 800; color: var(--tx);">OK Points Balance</div>
+                <div style="font-size: 12px; color: var(--mut); font-weight: 600;">Merkle Root Step 2 of 3 · Converts to $OKN</div>
+              </div>
+            </div>
+            <div style="text-align: right; margin-left: auto;">
+              <div class="num" style="font-size: 15px; font-weight: 800; color: var(--cyan);">135 pts</div>
+              <div class="num balance-display" data-value="$81.00 est." style="font-size: 12.5px; font-weight: 700; color: var(--mut);">$81.00 est.</div>
+            </div>
+            <a href="claim.html" style="height: 34px; padding: 0 13px; border-radius: 10px; background: var(--s1); border: 1px solid var(--line); color: var(--tx); font-size: 12px; font-weight: 800; display: inline-flex; align-items: center; text-decoration: none;">Claim Portal</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column: Account Summary & Connected Payment Rails -->
+      <div style="display: flex; flex-direction: column; gap: 20px;">
+        <div style="background: var(--s1); border: 1px solid var(--line); border-radius: 22px; padding: 24px;">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px;">
+            <h3 style="font-size: 17px; font-weight: 800; color: var(--tx); margin: 0;">Account Summary &amp; Rails</h3>
+            <span style="font-size: 11px; font-weight: 800; color: var(--ok); background: rgba(47, 189, 142, 0.14); padding: 4px 9px; border-radius: 8px;">All Systems Operational</span>
+          </div>
+
+          <div style="display: flex; flex-direction: column; gap: 12px;">
+            <div style="display: flex; align-items: center; justify-content: space-between; padding-bottom: 11px; border-bottom: 1px solid var(--line); font-size: 13px;">
+              <span style="color: var(--mut); font-weight: 600;">Account Profile</span>
+              <span style="color: var(--tx); font-weight: 800;">@dev_user (DE)</span>
+            </div>
+            <div style="display: flex; align-items: center; justify-content: space-between; padding-bottom: 11px; border-bottom: 1px solid var(--line); font-size: 13px;">
+              <span style="color: var(--mut); font-weight: 600;">Primary Web3 Custody</span>
+              <span style="color: var(--tx); font-weight: 800; display: inline-flex; align-items: center; gap: 6px;">${ICONS.bsc} 0x71C...49A1</span>
+            </div>
+            <div style="display: flex; align-items: center; justify-content: space-between; padding-bottom: 11px; border-bottom: 1px solid var(--line); font-size: 13px;">
+              <span style="color: var(--mut); font-weight: 600;">NOWPayments Crypto Rail</span>
+              <span style="color: #00C2FF; font-weight: 800;">300+ Assets Enabled</span>
+            </div>
+            <div style="display: flex; align-items: center; justify-content: space-between; padding-bottom: 11px; border-bottom: 1px solid var(--line); font-size: 13px;">
+              <span style="color: var(--mut); font-weight: 600;">Card Checkout (3DS 2.0)</span>
+              <span style="color: var(--ok); font-weight: 800;">Visa / Mastercard Ready</span>
+            </div>
+            <div style="display: flex; align-items: center; justify-content: space-between; padding-bottom: 11px; border-bottom: 1px solid var(--line); font-size: 13px;">
+              <span style="color: var(--mut); font-weight: 600;">Polymarket Copy Agent</span>
+              <a href="agents.html#polymarket-agent-card" onclick="openPolymarketAgent(event)" style="color: #38BDF8; font-weight: 800; text-decoration: none;">Active · +38.4% 7D ROI →</a>
+            </div>
+            <div style="display: flex; align-items: center; justify-content: space-between; font-size: 13px;">
+              <span style="color: var(--mut); font-weight: 600;">$OKN Smart Contract</span>
+              <span style="color: var(--vio-l); font-weight: 800; font-family: Sora, monospace;">0x9A4...E812 (Verified)</span>
+            </div>
+          </div>
+
+          <div style="display: flex; gap: 10px; margin-top: 20px;">
+            <a href="buy.html" style="flex: 1; height: 44px; border-radius: 12px; background: var(--vio); color: #fff; font-weight: 800; font-size: 13px; display: flex; align-items: center; justify-content: center; text-decoration: none;">Open Multi-Gateway Buy</a>
+            <button type="button" onclick="openWalletModal()" style="height: 44px; padding: 0 16px; border-radius: 12px; background: var(--s2); border: 1px solid var(--line); color: var(--tx); font-weight: 800; font-size: 13px; cursor: pointer;">Switch</button>
+          </div>
         </div>
       </div>
     </div>

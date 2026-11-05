@@ -792,6 +792,118 @@ function getCoreScripts() {
         }
       }
 
+      // Copy Wallet Address to Clipboard
+      function copyWalletAddress() {
+        const addr = '0x71C49A18F3E9201B4C88291049A1';
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(addr).then(() => showToast('Wallet address 0x71C...49A1 copied!')).catch(fallbackAddr);
+        } else {
+          fallbackAddr();
+        }
+        function fallbackAddr() {
+          const ta = document.createElement('textarea');
+          ta.value = addr;
+          document.body.appendChild(ta);
+          ta.select();
+          document.execCommand('copy');
+          document.body.removeChild(ta);
+          showToast('Wallet address 0x71C...49A1 copied!');
+        }
+      }
+
+      // Announcement Carousel Slider Controller (Polymarket Copy Agent + Buy $OKN Presale)
+      const carouselTimers = {};
+
+      function switchAnnouncementSlide(targetIdx, carouselId) {
+        const containers = carouselId
+          ? [document.getElementById(carouselId)].filter(Boolean)
+          : Array.from(document.querySelectorAll('.announcement-carousel'));
+
+        containers.forEach(carousel => {
+          const id = carousel.id;
+          const track = carousel.querySelector('.announcement-carousel-track');
+          const slides = Array.from(carousel.querySelectorAll('.announcement-slide'));
+          const dots = Array.from(carousel.querySelectorAll('.carousel-dot'));
+          if (!track || slides.length === 0) return;
+
+          const count = slides.length;
+          const idx = ((targetIdx % count) + count) % count;
+          carousel.setAttribute('data-active-slide', String(idx));
+          track.style.transform = 'translate3d(-' + (idx * 100) + '%, 0, 0)';
+
+          slides.forEach((s, i) => {
+            s.classList.toggle('active', i === idx);
+          });
+
+          dots.forEach((d, i) => {
+            const isActive = i === idx;
+            d.classList.toggle('active', isActive);
+            d.setAttribute('aria-selected', isActive ? 'true' : 'false');
+            const fill = d.querySelector('.carousel-dot-fill');
+            if (fill) {
+              fill.style.animation = 'none';
+              void fill.offsetWidth;
+              fill.style.animation = '';
+            }
+          });
+
+          resetCarouselTimer(id);
+        });
+      }
+
+      function stepAnnouncementSlide(delta, carouselId) {
+        const carousel = carouselId
+          ? document.getElementById(carouselId)
+          : document.querySelector('.announcement-carousel');
+        if (!carousel) return;
+        const current = parseInt(carousel.getAttribute('data-active-slide') || '0', 10);
+        switchAnnouncementSlide(current + delta, carousel.id);
+      }
+
+      function resetCarouselTimer(carouselId) {
+        if (!carouselId) return;
+        if (carouselTimers[carouselId]) {
+          clearInterval(carouselTimers[carouselId]);
+        }
+        carouselTimers[carouselId] = setInterval(() => {
+          const carousel = document.getElementById(carouselId);
+          if (!carousel || carousel.getAttribute('data-paused') === 'true') return;
+          const current = parseInt(carousel.getAttribute('data-active-slide') || '0', 10);
+          switchAnnouncementSlide(current + 1, carouselId);
+        }, 5500);
+      }
+
+      document.addEventListener('DOMContentLoaded', () => {
+        document.querySelectorAll('.announcement-carousel').forEach(carousel => {
+          const id = carousel.id;
+          if (!id) return;
+          resetCarouselTimer(id);
+
+          carousel.addEventListener('mouseenter', () => carousel.setAttribute('data-paused', 'true'));
+          carousel.addEventListener('mouseleave', () => carousel.setAttribute('data-paused', 'false'));
+
+          let touchStartX = 0;
+          let touchEndX = 0;
+          carousel.addEventListener('touchstart', (e) => {
+            carousel.setAttribute('data-paused', 'true');
+            if (e.changedTouches && e.changedTouches[0]) {
+              touchStartX = e.changedTouches[0].screenX;
+            }
+          }, { passive: true });
+
+          carousel.addEventListener('touchend', (e) => {
+            carousel.setAttribute('data-paused', 'false');
+            if (e.changedTouches && e.changedTouches[0]) {
+              touchEndX = e.changedTouches[0].screenX;
+              const diff = touchStartX - touchEndX;
+              if (Math.abs(diff) > 36) {
+                stepAnnouncementSlide(diff > 0 ? 1 : -1, id);
+              }
+            }
+          }, { passive: true });
+        });
+      });
+
       function showToast(msg) {
         let toast = document.getElementById('okn-toast');
         if (!toast) {

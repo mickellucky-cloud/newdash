@@ -97,7 +97,7 @@ test('BNB logo, BSC logo, and Polymarket logo assets are deployed and responsive
 
   const css = fs.readFileSync(path.join(rootDir, 'css', 'responsive.css'), 'utf8');
   assert.doesNotMatch(css, /\.polymarket-live-banner\s*\{\s*display:\s*none\s*!important;/);
-  assert.match(css, /@media\s*\(min-width:\s*768px\)[\s\S]*?\.poly-banner-inner\s*\{\s*display:\s*grid;/);
+  assert.match(css, /@media\s*\(min-width:\s*768px\)[\s\S]*?\.poly-banner-inner,\s*\.okn-banner-inner\s*\{\s*display:\s*grid;/);
 
   // Ensure mobile bottom nav has 5 tabs (Home, Earn, Buy, Referral, Agents) and no Claim button
   const bottomNavMatch = indexHtml.match(/<nav class="bottom-nav-bar"[\s\S]*?<\/nav>/);
@@ -108,6 +108,39 @@ test('BNB logo, BSC logo, and Polymarket logo assets are deployed and responsive
   assert.match(bottomNavMatch[0], /<span>Buy<\/span>/);
   assert.match(bottomNavMatch[0], /<span>Referral<\/span>/);
   assert.match(bottomNavMatch[0], /<span>Agents<\/span>/);
+});
+
+test('Announcement carousel combines Polymarket Copy Agent and Buy $OKN Presale slides and removes static Buy card from Portfolio split grid', () => {
+  const publicDir = path.join(rootDir, 'public');
+  const indexHtml = fs.readFileSync(path.join(publicDir, 'index.html'), 'utf8');
+
+  // Both desktop and mobile announcement carousels exist
+  assert.match(indexHtml, /id="desktop-ann-carousel"/);
+  assert.match(indexHtml, /id="mobile-ann-carousel"/);
+  assert.match(indexHtml, /class="okn-presale-live-banner"/);
+  assert.match(indexHtml, /PRESALE STAGE 2 LIVE/);
+  assert.match(indexHtml, /Buy \$OKN Presale[\s\S]*?Multi-Gateway<\/span> Live!/);
+  assert.match(indexHtml, /function switchAnnouncementSlide\(/);
+  assert.match(indexHtml, /function stepAnnouncementSlide\(/);
+
+  // Static Buy $OKN Presale card inside portfolio-split-grid should be removed
+  const splitGridMatch = indexHtml.match(/<div class="portfolio-split-grid"[\s\S]*?Transaction history/);
+  assert.ok(splitGridMatch, 'portfolio-split-grid should exist');
+  assert.doesNotMatch(splitGridMatch[0], /Open the sale/);
+});
+
+test('wallet.html renders Fintech-ready Account Summary, allocation bar, holdings breakdown, and rails', () => {
+  const publicDir = path.join(rootDir, 'public');
+  const walletHtml = fs.readFileSync(path.join(publicDir, 'wallet.html'), 'utf8');
+
+  assert.match(walletHtml, /Fintech Account Summary/);
+  assert.match(walletHtml, /Total Account Net Worth/);
+  assert.match(walletHtml, /\$1,428\.50/);
+  assert.match(walletHtml, /UID #849201 · Tier 2 Verified/);
+  assert.match(walletHtml, /Account Asset Allocation/);
+  assert.match(walletHtml, /Asset Holdings Breakdown/);
+  assert.match(walletHtml, /Account Summary &amp; Rails/);
+  assert.match(walletHtml, /function copyWalletAddress\(\)/);
 });
 
 
