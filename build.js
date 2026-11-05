@@ -60,7 +60,9 @@ const ICONS = {
   usdt: '<svg width="18" height="18" viewBox="0 0 24 24" fill="#26A17B"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm1.385 13.785v3.834h-2.77v-3.834c-3.105-.18-5.35-1.042-5.35-2.075 0-1.034 2.245-1.895 5.35-2.075V7.47h2.77v2.165c3.105.18 5.35 1.041 5.35 2.075 0 1.033-2.245 1.895-5.35 2.075zm0-2.002c2.45-.145 4.095-.694 4.095-1.143 0-.45-1.645-.998-4.095-1.143v2.286zm-2.77-2.286c-2.45.145-4.095.694-4.095 1.143 0 .45 1.645.998 4.095 1.143v-2.286z"/></svg>',
   btc: '<svg width="18" height="18" viewBox="0 0 24 24" fill="#F7931A"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm3.87 9.42c-.22 1.48-1.13 2.15-2.38 2.37 1.58.46 2.17 1.5 1.84 3.16-.44 2.16-2.12 2.76-4.52 2.76v2.19h-1.42v-2.15H8v-1.43h1.39V7.67H8V6.24h1.39V4.1h1.42v2.12c1.78.04 3.75-.12 4.67 1.25.32.48.43 1.14.39 1.95zm-3.32-.44c0-1.17-.96-1.44-2.13-1.42v2.85c1.17.02 2.13-.26 2.13-1.43zm.32 4.88c0-1.32-1.08-1.6-2.45-1.58v3.17c1.37.01 2.45-.27 2.45-1.59z"/></svg>',
   eth: '<svg width="18" height="18" viewBox="0 0 24 24" fill="#627EEA"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm.065 4.5l5.228 8.683-5.228 3.09-5.227-3.09 5.227-8.683zm0 12.87l5.233-3.1-5.233 7.23-5.233-7.23 5.233 3.1z"/></svg>',
-  sol: '<svg width="18" height="18" viewBox="0 0 24 24" fill="#9945FF"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zM6.5 15.8h8.8l2.2-2.3H8.7L6.5 15.8zm2.2-5.3h8.8l2.2-2.3H8.7L6.5 8.2h8.8l2.2 2.3zm0 2.8H17.5l-2.2-2.3H6.5l2.2 2.3z"/></svg>'
+  sol: '<svg width="18" height="18" viewBox="0 0 24 24" fill="#9945FF"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zM6.5 15.8h8.8l2.2-2.3H8.7L6.5 15.8zm2.2-5.3h8.8l2.2-2.3H8.7L6.5 8.2h8.8l2.2 2.3zm0 2.8H17.5l-2.2-2.3H6.5l2.2 2.3z"/></svg>',
+  eye: '<svg class="i" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>',
+  eyeOff: '<svg class="i" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path><line x1="1" y1="1" x2="23" y2="23"></line></svg>'
 };
 
 // Helper for Portfolio / Activity / Holdings segmented header
@@ -93,6 +95,62 @@ const desktopPortfolioMain = `
     <!-- Top Header & Tabs -->
     ${getPortfolioHeader('overview')}
 
+    <!-- Animated Polymarket Copy Agent Live Banner -->
+    <aside class="polymarket-live-banner" aria-label="Polymarket Announcement">
+      <div class="poly-banner-inner">
+        <div class="poly-banner-left">
+          <img src="assets/polymarket-banner.jpeg" alt="Polymarket" class="poly-banner-logo">
+          <div>
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <span class="poly-live-badge"><span class="poly-live-dot"></span> LIVE NOW</span>
+              <span style="font-size: 11px; font-weight: 800; color: var(--cyan); background: rgba(9, 180, 255, 0.12); padding: 2px 8px; border-radius: 6px;">AI Prediction Copy</span>
+            </div>
+            <div style="font-size: 17px; font-weight: 800; color: var(--tx); margin-top: 3px;">Polymarket Copy Agent is Live!</div>
+            <div style="font-size: 12.5px; color: var(--mut); margin-top: 2px;">Automated prediction trading active · Mirror top prediction traders with 1-click execution.</div>
+          </div>
+        </div>
+        <a href="agents.html" class="poly-banner-btn">
+          <span>Open Copy Agent</span>
+          <svg class="i" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+        </a>
+      </div>
+    </aside>
+
+    <!-- Account Total Asset Valuation Hero Card with Hide/Unhide Toggle -->
+    <div style="background: linear-gradient(135deg, rgba(122, 18, 245, 0.22) 0%, rgba(9, 180, 255, 0.12) 100%), var(--s1); border: 1px solid var(--line); border-radius: 24px; padding: 24px 28px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 18px; box-shadow: 0 4px 24px rgba(0,0,0,0.12);">
+      <div style="display: flex; align-items: center; gap: 20px;">
+        <div style="width: 54px; height: 54px; border-radius: 16px; background: var(--vio); color: #fff; display: flex; align-items: center; justify-content: center; flex: 0 0 auto; box-shadow: 0 0 20px rgba(122, 18, 245, 0.4);">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+        </div>
+        <div>
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--mut);">Total Asset Balance</span>
+            <button type="button" onclick="toggleBalanceVisibility()" class="balance-eye-btn" aria-label="Toggle balance visibility" style="background: var(--s2); border: 1px solid var(--line); border-radius: 8px; color: var(--tx); width: 28px; height: 28px; display: inline-flex; align-items: center; justify-content: center; cursor: pointer;">
+              <svg class="i" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+            </button>
+          </div>
+          <div style="display: flex; align-items: baseline; gap: 12px; margin-top: 4px;">
+            <span class="num balance-display" data-value="$1,428.50" style="font-size: 34px; font-weight: 800; color: var(--tx); line-height: 1;">$1,428.50</span>
+            <span style="font-size: 12px; font-weight: 800; color: var(--ok); background: rgba(47, 189, 142, 0.15); padding: 3px 10px; border-radius: 8px;">+$142.50 (24h)</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Referral Earnings Summary Badge -->
+      <a href="referral.html" style="background: var(--s2); border: 1px solid var(--line); border-radius: 18px; padding: 14px 20px; display: flex; align-items: center; gap: 14px; text-decoration: none; transition: transform 0.15s ease;">
+        <span style="width: 40px; height: 40px; border-radius: 12px; background: rgba(255, 214, 10, 0.15); color: #FFD60A; display: flex; align-items: center; justify-content: center; flex: 0 0 auto;">
+          <svg class="i" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+        </span>
+        <div>
+          <div style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--mut);">Referral Earnings</div>
+          <div style="display: flex; align-items: center; gap: 8px; margin-top: 2px;">
+            <span class="num balance-display" data-value="$142.50 USD" style="font-size: 18px; font-weight: 800; color: var(--tx);">$142.50 USD</span>
+            <span style="font-size: 11px; font-weight: 700; color: #F3BA2F;">(0.238 BNB)</span>
+          </div>
+        </div>
+        <div style="font-size: 12px; font-weight: 700; color: var(--vio-l); margin-left: 6px;">14 invites →</div>
+      </a>
+    </div>
 
     <!-- 4 Stat Cards Grid -->
     <div class="resp-grid-4" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 16px;">
@@ -139,18 +197,18 @@ const desktopPortfolioMain = `
       </div>
 
       <!-- Card 4: Referrals -->
-      <div class="stat-card" style="background: var(--s1); border: 1px solid var(--line); border-radius: 20px; padding: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.06); transition: transform 0.2s cubic-bezier(0.16,1,0.3,1), box-shadow 0.2s ease;">
+      <a href="referral.html" class="stat-card" style="background: var(--s1); border: 1px solid var(--line); border-radius: 20px; padding: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.06); transition: transform 0.2s cubic-bezier(0.16,1,0.3,1), box-shadow 0.2s ease; text-decoration: none; color: inherit;">
         <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 12px;">
           <span style="display: flex; width: 44px; height: 44px; align-items: center; justify-content: center; border-radius: 14px; background: rgba(255, 170, 0, 0.12); color: #FFAA00; flex: 0 0 auto;">
             ${ICONS.users}
           </span>
           <div style="min-width: 0;">
-            <p style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--mut); margin: 0;">Referrals</p>
-            <p class="num" style="font-size: 26px; font-weight: 800; color: var(--tx); margin: 2px 0 0; line-height: 1.1;">0</p>
+            <p style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--mut); margin: 0;">Referral Earnings</p>
+            <p class="num balance-display" data-value="$142.50" style="font-size: 26px; font-weight: 800; color: var(--ok); margin: 2px 0 0; line-height: 1.1;">$142.50</p>
           </div>
         </div>
-        <p style="font-size: 12px; color: var(--mut); margin: 0;">0 OK Points earned</p>
-      </div>
+        <p style="font-size: 12px; color: var(--mut); margin: 0;">0.238 BNB · 14 friends invited</p>
+      </a>
     </div>
 
     <!-- Daily Streak Card with Modern 7-Day Capsule Visualizer -->
@@ -462,35 +520,116 @@ mobileHome = mobileHome.replace(/>100<\/div>/g, '>135</div>');
 mobileHome = mobileHome.replace(/100 pts/g, '135 pts');
 mobileHome = mobileHome.replace(/5-day streak/g, '6-day streak');
 mobileHome = mobileHome.replace(/5 days\. Longest: 5/g, '6 days. Longest: 6');
-// Connect wallet modal handler on mobile Home (matches data-dc-tpl="33" or "34")
+const mobilePolymarketBanner = `
+  <aside class="polymarket-live-banner" aria-label="Polymarket Announcement" style="margin-bottom: 14px;">
+    <div class="poly-banner-inner">
+      <div class="poly-banner-left">
+        <img src="assets/polymarket-banner.jpeg" alt="Polymarket" class="poly-banner-logo">
+        <div>
+          <div style="display: flex; align-items: center; gap: 6px;">
+            <span class="poly-live-badge"><span class="poly-live-dot"></span> LIVE</span>
+            <span style="font-size: 10.5px; font-weight: 800; color: var(--cyan);">AI Copy Agent</span>
+          </div>
+          <div style="font-size: 15px; font-weight: 800; color: var(--tx); margin-top: 2px;">Polymarket Copy Agent is Live!</div>
+          <div style="font-size: 11.5px; color: var(--mut); margin-top: 1px;">Copy winning prediction trades automatically.</div>
+        </div>
+      </div>
+      <a href="agents.html" class="poly-banner-btn">
+        <span>Open Agent</span>
+        <svg class="i" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+      </a>
+    </div>
+  </aside>
+`;
+
+const mobileHomeHeroTotalCard = `
+  <div data-dc-tpl="31" style="margin-top: 18px; padding: 18px; border-radius: 24px; background: rgba(0, 0, 0, 0.22); border: 1px solid rgba(255, 255, 255, 0.15); display: flex; flex-direction: column; gap: 12px; backdrop-filter: blur(12px);">
+    <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+      <div>
+        <div style="font-size: 11.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: rgba(230, 215, 255, 0.85); display: flex; align-items: center; gap: 6px;">
+          <span>Total Asset Value</span>
+          <button type="button" onclick="toggleBalanceVisibility()" class="balance-eye-btn" aria-label="Toggle balance visibility" style="background: transparent; border: none; color: rgba(255, 255, 255, 0.9); padding: 2px 4px; display: inline-flex; align-items: center; justify-content: center; cursor: pointer;">
+            ${ICONS.eye}
+          </button>
+        </div>
+        <div class="num balance-display" data-value="$1,428.50" style="font-size: 32px; font-weight: 800; color: #FFFFFF; line-height: 1.15; margin-top: 4px;">$1,428.50</div>
+      </div>
+      <span style="font-size: 11px; font-weight: 800; padding: 4px 10px; border-radius: 10px; background: rgba(47, 189, 142, 0.25); color: #4EEDB2; border: 1px solid rgba(47, 189, 142, 0.35); flex: 0 0 auto;">+$142.50 (24h)</span>
+    </div>
+
+    <div style="height: 1px; background: rgba(255, 255, 255, 0.12);"></div>
+
+    <!-- Referral Earnings on Home Screen -->
+    <a href="referral.html" style="display: flex; justify-content: space-between; align-items: center; text-decoration: none; color: inherit; background: rgba(255, 255, 255, 0.08); padding: 10px 12px; border-radius: 14px; transition: background 0.2s ease;">
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <span style="width: 32px; height: 32px; border-radius: 10px; background: rgba(255, 214, 10, 0.2); color: #FFD60A; display: flex; align-items: center; justify-content: center; flex: 0 0 auto;">
+          ${ICONS.users}
+        </span>
+        <div>
+          <div style="font-size: 11px; font-weight: 600; color: rgba(240, 230, 255, 0.85);">Referral Earnings</div>
+          <div style="display: flex; align-items: center; gap: 6px;">
+            <span class="num balance-display" data-value="$142.50 USD" style="font-size: 14px; font-weight: 800; color: #FFFFFF;">$142.50 USD</span>
+            <span style="font-size: 10.5px; font-weight: 700; color: #FFD60A;">(0.238 BNB)</span>
+          </div>
+        </div>
+      </div>
+      <div style="display: flex; align-items: center; gap: 4px; font-size: 11.5px; font-weight: 700; color: rgba(255, 255, 255, 0.9);">
+        <span>14 friends</span>
+        ${ICONS.arrowRight}
+      </div>
+    </a>
+  </div>
+`;
+
+// Replace connect wallet card with Total Asset Value & Referral Earnings
 mobileHome = mobileHome.replace(
-  /<button[^>]*data-dc-tpl="3[34]"[^>]*>[\s\S]*?<\/button>/i,
-  `<button onclick="openWalletModal()" style="display: flex; align-items: center; justify-content: space-between; height: 52px; width: 100%; border-radius: 26px; background: #FFFFFF; color: #0A0A0C; font-weight: 800; font-size: 14px; border: none; cursor: pointer; padding: 0 16px 0 6px; box-shadow: 0 6px 20px rgba(0,0,0,0.2); transition: all 0.2s cubic-bezier(0.16,1,0.3,1); margin-top: 6px;">
-    <span style="display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 50%; background: #000; color: #fff;">
-      ${ICONS.wallet}
-    </span>
-    <span style="font-weight: 800; font-size: 15px;">Connect wallet</span>
-    <svg class="i" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="13 17 18 12 13 7"></polyline><polyline points="6 17 11 12 6 7"></polyline></svg>
-  </button>`
+  /<div data-dc-tpl="31"[\s\S]*?<\/button>\s*<\/div>/i,
+  mobileHomeHeroTotalCard
+);
+// Insert Animated Polymarket live announcement banner at the top of Home main
+mobileHome = mobileHome.replace(
+  /<main[^>]*>/i,
+  m => m + mobilePolymarketBanner
 );
 
 const mobileEarn = getMobileBoard('Earn.html')
   .replace('Subscribe on [platform]', 'Subscribe on YouTube')
   .replace('Follow $OKN on [platform]', 'Follow $OKN on Discord');
 
+const mobileClaimHeroTotalCard = `
+  <div data-dc-tpl="31" style="margin-top: 18px; padding: 18px; border-radius: 24px; background: rgba(0, 0, 0, 0.22); border: 1px solid rgba(255, 255, 255, 0.15); display: flex; flex-direction: column; gap: 12px; backdrop-filter: blur(12px);">
+    <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+      <div>
+        <div style="font-size: 11.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: rgba(230, 215, 255, 0.85); display: flex; align-items: center; gap: 6px;">
+          <span>Total Asset Valuation</span>
+          <button type="button" onclick="toggleBalanceVisibility()" class="balance-eye-btn" aria-label="Toggle balance visibility" style="background: transparent; border: none; color: rgba(255, 255, 255, 0.9); padding: 2px 4px; display: inline-flex; align-items: center; justify-content: center; cursor: pointer;">
+            ${ICONS.eye}
+          </button>
+        </div>
+        <div class="num balance-display" data-value="$1,428.50" style="font-size: 32px; font-weight: 800; color: #FFFFFF; line-height: 1.15; margin-top: 4px;">$1,428.50</div>
+      </div>
+      <span style="font-size: 11px; font-weight: 800; padding: 4px 10px; border-radius: 10px; background: rgba(255, 214, 10, 0.22); color: #FFD60A; border: 1px solid rgba(255, 214, 10, 0.35); flex: 0 0 auto;">Pending Commit</span>
+    </div>
+
+    <div style="height: 1px; background: rgba(255, 255, 255, 0.12);"></div>
+
+    <div style="display: flex; justify-content: space-between; align-items: center; background: rgba(255, 255, 255, 0.08); padding: 10px 12px; border-radius: 14px;">
+      <div style="display: flex; align-items: center; gap: 8px;">
+        <svg class="i" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FFD60A" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+        <span style="font-size: 12px; color: rgba(240, 230, 255, 0.9); font-weight: 600;">Merkle root commit in progress</span>
+      </div>
+      <span style="font-size: 11.5px; font-weight: 800; color: #FFF;">Step 2 of 3</span>
+    </div>
+  </div>
+`;
+
 const mobileClaim = getMobileBoard('Claim.html')
   .replace(/>100<\/div>/g, '>135</div>')
   .replace(/100 pts/g, '135 pts')
   .replace(/100<\/span>/g, '135</span>')
   .replace(
-    /<button[^>]*data-dc-tpl="34"[^>]*>[\s\S]*?<\/button>/i,
-    `<button onclick="openWalletModal()" style="display: flex; align-items: center; justify-content: space-between; height: 52px; width: 100%; border-radius: 26px; background: #FFFFFF; color: #0A0A0C; font-weight: 800; font-size: 14px; border: none; cursor: pointer; padding: 0 16px 0 6px; box-shadow: 0 6px 20px rgba(0,0,0,0.2); transition: all 0.2s cubic-bezier(0.16,1,0.3,1); margin-top: 6px;">
-      <span style="display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 50%; background: #000; color: #fff;">
-        ${ICONS.wallet}
-      </span>
-      <span style="font-weight: 800; font-size: 15px;">Connect wallet</span>
-      <svg class="i" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="13 17 18 12 13 7"></polyline><polyline points="6 17 11 12 6 7"></polyline></svg>
-    </button>`
+    /<div data-dc-tpl="31"[\s\S]*?<\/button>\s*<\/div>/i,
+    mobileClaimHeroTotalCard
   );
 
 const mobileBuy = getMobileBoard('Buy.html')
@@ -498,6 +637,7 @@ const mobileBuy = getMobileBoard('Buy.html')
   .replace(/<a data-dc-tpl="75" href="#"/i, '<a data-dc-tpl="75" href="https://testnet.bnbchain.org/faucet-smart" target="_blank" rel="noopener noreferrer"');
 
 const mobileAgents = getMobileBoard('Agents.html')
+  .replace(/<main[^>]*>/i, m => m + mobilePolymarketBanner)
   .replace(/<span data-dc-tpl="56"[^>]*>.*?<\/span><div data-dc-tpl="60"/s, '<img src="assets/polymarket.png" alt="Polymarket" style="width: 44px; height: 44px; border-radius: 14px; object-fit: contain; box-shadow: 0 4px 14px rgba(9, 180, 255, 0.25); flex: 0 0 auto;"><div data-dc-tpl="60"')
   .replace(/<a data-dc-tpl="65" href="#"/i, '<a data-dc-tpl="65" href="missions.html"')
   .replace(/<a data-dc-tpl="76" href="#"/i, '<a data-dc-tpl="76" href="leaderboard.html"')
@@ -532,8 +672,9 @@ const mobileReferralRaw = getMobileBoard('Referral.html')
     /<div data-dc-tpl="37"[^>]*>Here is the package:<\/div>/i,
     '<div data-dc-tpl="37" style="font-size: 18px; font-weight: 800; letter-spacing: -0.01em; color: var(--tx); padding: 6px 2px 2px;">Here is the package:</div>'
   );
+
 const mobileReferralCard = `
-  <div style="background: var(--s1); border: 1px solid var(--line); border-radius: 20px; padding: 18px 16px; margin-bottom: 4px; display: flex; flex-direction: column; gap: 12px;">
+  <div style="background: var(--s1); border: 1px solid var(--line); border-radius: 20px; padding: 18px 16px; margin-bottom: 12px; display: flex; flex-direction: column; gap: 12px;">
     <div style="display: flex; justify-content: space-between; align-items: center; gap: 8px;">
       <div style="font-size: 16px; font-weight: 800; line-height: 1.25; color: var(--tx);">Your Referral Link</div>
       <span style="font-size: 11px; font-weight: 700; color: var(--mut); background: var(--s2); padding: 4px 10px; border-radius: 8px; white-space: nowrap;">Code: <strong style="color: var(--tx);">DE-71C49</strong></span>
@@ -556,32 +697,71 @@ const mobileReferralCard = `
     </div>
   </div>
 `;
-const mobileReferralStats = `
-  <section style="padding: 20px 18px; border-radius: 24px; background: var(--s1); border: 1px solid var(--line);">
-    <div style="font-size: 16px; font-weight: 800; margin-bottom: 14px; color: var(--tx);">Your Referral Statistics</div>
-    <div style="display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--line);">
-      <span style="color: var(--mut); font-size: 13px; font-weight: 600;">Total Referrals</span>
-      <span class="num" style="font-weight: 800; font-size: 14px; color: var(--tx);">0 friends</span>
+
+// Upgraded Mobile Referral Account Statistics — placed directly beneath Referral Link Share Card
+const upgradedMobileReferralStats = `
+  <section class="upgraded-referral-stats" style="margin-bottom: 18px; padding: 18px 16px; border-radius: 20px; background: var(--s1); border: 1px solid var(--line); box-shadow: 0 2px 10px rgba(0,0,0,0.06);">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; flex-wrap: wrap; gap: 8px;">
+      <div>
+        <div style="font-size: 15px; font-weight: 800; color: var(--tx);">Referral Account Statistics</div>
+        <div style="font-size: 11.5px; color: var(--mut); margin-top: 1px;">Live earnings & partner tier metrics</div>
+      </div>
+      <span style="font-size: 11px; font-weight: 800; padding: 3px 10px; border-radius: 8px; background: rgba(122, 18, 245, 0.15); color: var(--vio-l); border: 1px solid rgba(122, 18, 245, 0.3);">Silver Partner (Tier 2)</span>
     </div>
-    <div style="display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--line);">
-      <span style="color: var(--mut); font-size: 13px; font-weight: 600;">Total Commission Earned</span>
-      <span class="num" style="font-weight: 800; font-size: 14px; color: var(--ok);">0.00 BNB</span>
+
+    <!-- 4-Stat Primary Metric Cards Grid -->
+    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; margin-bottom: 12px;">
+      <div style="background: var(--s2); border: 1px solid var(--line); border-radius: 14px; padding: 12px 14px;">
+        <div style="font-size: 11px; font-weight: 700; color: var(--mut); margin-bottom: 4px;">Total Referrals</div>
+        <div class="num" style="font-size: 20px; font-weight: 800; color: var(--tx);">14 <span style="font-size: 12px; font-weight: 600; color: var(--mut);">friends</span></div>
+        <div style="font-size: 10.5px; font-weight: 600; color: var(--ok); margin-top: 2px;">11 active buyers</div>
+      </div>
+
+      <div style="background: var(--s2); border: 1px solid var(--line); border-radius: 14px; padding: 12px 14px;">
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px;">
+          <span style="font-size: 11px; font-weight: 700; color: var(--mut);">Total Earned</span>
+          <button type="button" onclick="toggleBalanceVisibility()" class="balance-eye-btn" aria-label="Toggle balance visibility" style="background: transparent; border: none; color: var(--mut); padding: 0; cursor: pointer;">
+            ${ICONS.eye}
+          </button>
+        </div>
+        <div class="num balance-display" data-value="$142.50" style="font-size: 20px; font-weight: 800; color: var(--ok);">$142.50</div>
+        <div style="font-size: 10.5px; font-weight: 700; color: #F3BA2F; margin-top: 2px;">~0.238 BNB</div>
+      </div>
+
+      <div style="background: var(--s2); border: 1px solid var(--line); border-radius: 14px; padding: 12px 14px;">
+        <div style="font-size: 11px; font-weight: 700; color: var(--mut); margin-bottom: 4px;">Commission Rate</div>
+        <div class="num" style="font-size: 20px; font-weight: 800; color: var(--tx);">12.5%</div>
+        <div style="font-size: 10.5px; font-weight: 600; color: var(--mut); margin-top: 2px;">15% at 25 refs</div>
+      </div>
+
+      <div style="background: var(--s2); border: 1px solid var(--line); border-radius: 14px; padding: 12px 14px;">
+        <div style="font-size: 11px; font-weight: 700; color: var(--mut); margin-bottom: 4px;">Multiplier</div>
+        <div class="num" style="font-size: 20px; font-weight: 800; color: var(--yel-t);">1.5x</div>
+        <div style="font-size: 10.5px; font-weight: 600; color: var(--mut); margin-top: 2px;">+1,420 OK Points</div>
+      </div>
     </div>
-    <div style="display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--line);">
-      <span style="color: var(--mut); font-size: 13px; font-weight: 600;">Point Multiplier</span>
-      <span class="num" style="font-weight: 800; font-size: 14px; color: var(--yel-t);">1.0x</span>
-    </div>
-    <div style="display: flex; justify-content: space-between; padding: 10px 0;">
-      <span style="color: var(--mut); font-size: 13px; font-weight: 600;">Tier Status</span>
-      <span style="font-size: 11px; font-weight: 800; padding: 3px 10px; border-radius: 8px; background: var(--s2); color: var(--tx);">Bronze Partner</span>
+
+    <!-- Progress to Gold Partner -->
+    <div style="background: var(--s2); border: 1px solid var(--line); border-radius: 14px; padding: 12px 14px;">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+        <span style="font-size: 11.5px; font-weight: 700; color: var(--tx);">Next Tier: Gold Partner (15%)</span>
+        <span style="font-size: 11.5px; font-weight: 800; color: var(--vio-l);">14 / 25</span>
+      </div>
+      <div style="width: 100%; height: 6px; border-radius: 3px; background: rgba(255, 255, 255, 0.08); overflow: hidden;">
+        <div style="width: 56%; height: 100%; border-radius: 3px; background: linear-gradient(90deg, var(--vio), var(--cyan));"></div>
+      </div>
+      <div style="margin-top: 6px; font-size: 10.5px; color: var(--mut);">
+        11 more invites to unlock VIP commission rate
+      </div>
     </div>
   </section>
 `;
+
+// Assembles mobile referral page with stats placed directly beneath share section
 const mobileReferral = mobileReferralRaw.includes('<main')
-  ? mobileReferralRaw
-      .replace(/<main[^>]*>/, m => m + mobileReferralCard)
-      .replace(/<\/main>/, mobileReferralStats + '</main>')
-  : (mobileReferralCard + mobileReferralRaw + mobileReferralStats);
+  ? mobileReferralRaw.replace(/<main[^>]*>/, m => m + mobileReferralCard + upgradedMobileReferralStats)
+  : (mobileReferralCard + upgradedMobileReferralStats + mobileReferralRaw);
+
 const mobileActivity = getMobileBoard('Activity.html')
   .replace(/>100<\/div>/g, '>135</div>');
 
@@ -682,10 +862,18 @@ const desktopClaimMain = `
           <span style="font-size: 12px; font-weight: 700; padding: 4px 10px; border-radius: 12px; background: rgba(0,0,0,0.25); color: #fff; display: inline-flex; align-items: center; gap: 6px;">${ICONS.timer} Not open yet</span>
         </div>
       </div>
-      <button onclick="openWalletModal()" style="height: 44px; padding: 0 24px; border-radius: 14px; background: #fff; color: #000; font-weight: 800; font-size: 13px; border: none; cursor: pointer; display: flex; align-items: center; gap: 8px;">
-        ${ICONS.wallet}
-        <span>Connect wallet</span>
-      </button>
+      <div style="background: rgba(0,0,0,0.25); border: 1px solid rgba(255,255,255,0.18); border-radius: 18px; padding: 12px 20px; display: flex; align-items: center; gap: 14px;">
+        <div>
+          <div style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; opacity: 0.85; display: flex; align-items: center; gap: 6px;">
+            <span>Total Asset Valuation</span>
+            <button type="button" onclick="toggleBalanceVisibility()" class="balance-eye-btn" aria-label="Toggle balance visibility" style="background: transparent; border: none; color: #fff; padding: 0; cursor: pointer; display: inline-flex;">
+              ${ICONS.eye}
+            </button>
+          </div>
+          <div class="num balance-display" data-value="$1,428.50" style="font-size: 24px; font-weight: 800; color: #fff; margin-top: 2px;">$1,428.50</div>
+        </div>
+        <span style="font-size: 11px; font-weight: 800; padding: 4px 10px; border-radius: 8px; background: rgba(255,214,10,0.25); color: #FFD60A; border: 1px solid rgba(255,214,10,0.4);">Awaiting Commit</span>
+      </div>
     </div>
   </section>
 
@@ -704,10 +892,13 @@ const desktopClaimMain = `
         <span style="color: var(--mut); font-size: 14px;">You receive</span>
         <span class="num" style="font-weight: 800; font-size: 16px; color: var(--vio-l);">0 $OKN</span>
       </div>
-      <button onclick="openWalletModal()" style="width: 100%; margin-top: 24px; height: 48px; border-radius: 14px; background: var(--vio); color: #fff; font-weight: 800; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px;">
-        ${ICONS.wallet}
-        <span>Connect wallet to claim</span>
-      </button>
+      <div style="margin-top: 24px; padding: 16px; border-radius: 16px; background: var(--s2); border: 1px solid var(--line); display: flex; align-items: center; justify-content: space-between; gap: 12px;">
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <span style="width: 10px; height: 10px; border-radius: 50%; background: var(--yel); display: inline-block;"></span>
+          <span style="font-size: 13px; font-weight: 700; color: var(--tx);">Claims Open After Merkle Commit</span>
+        </div>
+        <span class="num balance-display" data-value="$135.00 USD" style="font-size: 13px; font-weight: 800; color: var(--vio-l);">$135.00 USD</span>
+      </div>
     </div>
 
     <div style="background: var(--s1); border: 1px solid var(--line); border-radius: 24px; padding: 28px;">
@@ -1119,6 +1310,27 @@ const desktopBuyMain = `
 
 // 4. Agents Desktop
 const desktopAgentsMain = `
+  <!-- Animated Polymarket Copy Agent Live Banner -->
+  <aside class="polymarket-live-banner" aria-label="Polymarket Announcement" style="margin-bottom: 24px;">
+    <div class="poly-banner-inner">
+      <div class="poly-banner-left">
+        <img src="assets/polymarket-banner.jpeg" alt="Polymarket" class="poly-banner-logo">
+        <div>
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span class="poly-live-badge"><span class="poly-live-dot"></span> LIVE NOW</span>
+            <span style="font-size: 11px; font-weight: 800; color: var(--cyan); background: rgba(9, 180, 255, 0.12); padding: 2px 8px; border-radius: 6px;">AI Prediction Copy</span>
+          </div>
+          <div style="font-size: 17px; font-weight: 800; color: var(--tx); margin-top: 3px;">Polymarket Copy Agent is Live!</div>
+          <div style="font-size: 12.5px; color: var(--mut); margin-top: 2px;">Automated prediction trading active · Mirror top prediction traders with 1-click execution.</div>
+        </div>
+      </div>
+      <a href="#polymarket-agent-card" class="poly-banner-btn">
+        <span>View Agent</span>
+        <svg class="i" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+      </a>
+    </div>
+  </aside>
+
   <section style="background: var(--vio); color: #fff; border-radius: 28px; padding: 32px 36px; margin-bottom: 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.12);">
     <div style="font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.8; margin-bottom: 6px;">Protocol Roadmap</div>
     <h1 style="font-size: 32px; font-weight: 800; margin: 0 0 8px; letter-spacing: -0.02em;">Coming to OKN</h1>
@@ -1236,6 +1448,65 @@ const desktopReferralMain = `
       </a>
     </div>
   </div>
+
+  <!-- Upgraded Referral Account Statistics (Desktop) -->
+  <section class="upgraded-referral-stats" style="margin-bottom: 24px; padding: 24px 28px; border-radius: 24px; background: var(--s1); border: 1px solid var(--line); box-shadow: 0 2px 10px rgba(0,0,0,0.06);">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; flex-wrap: wrap; gap: 12px;">
+      <div>
+        <div style="font-size: 18px; font-weight: 800; color: var(--tx);">Referral Account Statistics</div>
+        <div style="font-size: 13px; color: var(--mut); margin-top: 3px;">Real-time earnings performance, active downstream buyers, and partner rank</div>
+      </div>
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <span style="font-size: 12px; font-weight: 800; padding: 6px 14px; border-radius: 10px; background: rgba(122, 18, 245, 0.15); color: var(--vio-l); border: 1px solid rgba(122, 18, 245, 0.3);">Silver Partner (Tier 2)</span>
+        <button type="button" onclick="toggleBalanceVisibility()" class="balance-eye-btn" aria-label="Toggle balance visibility" style="height: 36px; padding: 0 14px; border-radius: 10px; background: var(--s2); border: 1px solid var(--line); color: var(--mut); cursor: pointer; display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 700;">
+          ${ICONS.eye}
+          <span style="font-size: 11px;">Toggle Balances</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- 4-Stat Metric Grid -->
+    <div class="resp-grid-4" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 16px;">
+      <div style="background: var(--s2); border: 1px solid var(--line); border-radius: 16px; padding: 16px 18px;">
+        <div style="font-size: 12px; font-weight: 700; color: var(--mut); margin-bottom: 6px;">Total Referrals</div>
+        <div class="num" style="font-size: 26px; font-weight: 800; color: var(--tx);">14 <span style="font-size: 14px; font-weight: 600; color: var(--mut);">friends</span></div>
+        <div style="font-size: 12px; font-weight: 600; color: var(--ok); margin-top: 4px;">11 active buyers (78%)</div>
+      </div>
+
+      <div style="background: var(--s2); border: 1px solid var(--line); border-radius: 16px; padding: 16px 18px;">
+        <div style="font-size: 12px; font-weight: 700; color: var(--mut); margin-bottom: 6px;">Total Earned ($)</div>
+        <div class="num balance-display" data-value="$142.50" style="font-size: 26px; font-weight: 800; color: var(--ok);">$142.50</div>
+        <div style="font-size: 12px; font-weight: 700; color: #F3BA2F; margin-top: 4px;">~0.238 BNB Payout</div>
+      </div>
+
+      <div style="background: var(--s2); border: 1px solid var(--line); border-radius: 16px; padding: 16px 18px;">
+        <div style="font-size: 12px; font-weight: 700; color: var(--mut); margin-bottom: 6px;">Active Commission Rate</div>
+        <div class="num" style="font-size: 26px; font-weight: 800; color: var(--tx);">12.5%</div>
+        <div style="font-size: 12px; font-weight: 600; color: var(--mut); margin-top: 4px;">Next tier: 15.0%</div>
+      </div>
+
+      <div style="background: var(--s2); border: 1px solid var(--line); border-radius: 16px; padding: 16px 18px;">
+        <div style="font-size: 12px; font-weight: 700; color: var(--mut); margin-bottom: 6px;">Ecosystem Multiplier</div>
+        <div class="num" style="font-size: 26px; font-weight: 800; color: var(--yel-t);">1.5x</div>
+        <div style="font-size: 12px; font-weight: 600; color: var(--mut); margin-top: 4px;">+1,420 OK Points</div>
+      </div>
+    </div>
+
+    <!-- Tier Progress Bar -->
+    <div style="background: var(--s2); border: 1px solid var(--line); border-radius: 16px; padding: 14px 18px; display: flex; flex-direction: column; gap: 8px;">
+      <div style="display: flex; justify-content: space-between; align-items: center;">
+        <span style="font-size: 13px; font-weight: 700; color: var(--tx);">Rank Progression: <strong style="color: var(--vio-l);">Gold Partner (15% Commission)</strong></span>
+        <span style="font-size: 13px; font-weight: 800; color: var(--vio-l);">14 / 25 Referrals (56%)</span>
+      </div>
+      <div style="width: 100%; height: 8px; border-radius: 4px; background: rgba(255, 255, 255, 0.08); overflow: hidden;">
+        <div style="width: 56%; height: 100%; border-radius: 4px; background: linear-gradient(90deg, var(--vio), var(--cyan));"></div>
+      </div>
+      <div style="display: flex; justify-content: space-between; font-size: 12px; color: var(--mut);">
+        <span>11 more successful friend joins needed to reach maximum Tier 3 tier status</span>
+        <span style="color: var(--tx); font-weight: 600;">Instant auto-upgrade upon qualification</span>
+      </div>
+    </div>
+  </section>
 
   <!-- Full 4-Section Partner Package Details (Restored from Referral.html) -->
   <div style="font-size: 16px; font-weight: 800; margin: 0 0 16px; color: var(--tx);">Here is the package:</div>

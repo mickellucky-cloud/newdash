@@ -1176,6 +1176,125 @@ tbody tr:hover {
   }
 }
 
+/* --------------------------------------------------------------------------
+   Polymarket Copy Agent Animated Live Banner
+   -------------------------------------------------------------------------- */
+.polymarket-live-banner {
+  position: relative;
+  border-radius: 22px;
+  padding: 1.5px;
+  background: linear-gradient(135deg, #09B4FF, #7A12F5, #00E5FF, #7A12F5);
+  background-size: 300% 300%;
+  animation: polyGlow 6s ease infinite;
+  box-shadow: 0 8px 28px rgba(9, 180, 255, 0.22), 0 2px 10px rgba(122, 18, 245, 0.18);
+  margin-bottom: 20px;
+  overflow: hidden;
+}
 
+@keyframes polyGlow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
 
+.poly-banner-inner {
+  background: var(--s1);
+  border-radius: 20.5px;
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  position: relative;
+  z-index: 1;
+}
 
+.poly-banner-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-width: 0;
+}
+
+.poly-banner-logo {
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  object-fit: cover;
+  flex: 0 0 auto;
+  box-shadow: 0 4px 14px rgba(9, 180, 255, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.poly-live-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 8px;
+  border-radius: 8px;
+  background: rgba(47, 189, 142, 0.15);
+  border: 1px solid rgba(47, 189, 142, 0.3);
+  color: var(--ok);
+  font-size: 10.5px;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  margin-bottom: 3px;
+}
+
+.poly-live-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--ok);
+  animation: liveDotPulse 1.8s infinite;
+}
+
+@keyframes liveDotPulse {
+  0% { transform: scale(0.9); box-shadow: 0 0 0 0 rgba(47, 189, 142, 0.7); }
+  70% { transform: scale(1.15); box-shadow: 0 0 0 6px rgba(47, 189, 142, 0); }
+  100% { transform: scale(0.9); box-shadow: 0 0 0 0 rgba(47, 189, 142, 0); }
+}
+
+.poly-banner-btn {
+  height: 42px;
+  padding: 0 20px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #09B4FF 0%, #0077FE 100%);
+  color: #FFFFFF !important;
+  font-weight: 800;
+  font-size: 13px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  white-space: nowrap;
+  box-shadow: 0 4px 14px rgba(9, 180, 255, 0.35);
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+  flex: 0 0 auto;
+}
+.poly-banner-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(9, 180, 255, 0.5);
+}
+
+.balance-eye-btn {
+  transition: opacity 0.2s ease, transform 0.15s ease;
+}
+.balance-eye-btn:hover {
+  opacity: 0.8;
+  transform: scale(1.1);
+}
+
+@media (max-width: 767px) {
+  .poly-banner-inner {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    padding: 14px 16px !important;
+    gap: 12px !important;
+  }
+  .poly-banner-btn {
+    width: 100% !important;
+    justify-content: center !important;
+    height: 40px !important;
+  }
+}

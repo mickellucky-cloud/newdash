@@ -285,19 +285,19 @@
       <!-- Page Content: Desktop/Tablet View -->
       <div class="content-container hide-on-mobile">
         
-  <section style="background: var(--vio); color: #fff; border-radius: 28px; padding: 30px 32px; margin-bottom: 24px; box-shadow: 0 4px 20px rgba(122,18,245,0.25);">
-    <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 16px;">
+  <section class="buy-hero" style="background: var(--vio); color: #fff; border-radius: 28px; padding: 26px 30px; margin-bottom: 20px; box-shadow: 0 4px 20px rgba(122,18,245,0.22);">
+    <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 14px;">
       <div>
-        <div style="font-size: 12.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.85; margin-bottom: 6px;">Multi-Gateway Presale Allocation</div>
-        <div class="num" style="font-size: 34px; font-weight: 800; line-height: 1.15;">Buy $OKN Tokens</div>
-        <div style="font-size: 13.5px; opacity: 0.9; margin-top: 6px;">Select your preferred payment gateway: Web3 Wallet (BNB), NOWPayments Crypto Gateway (300+ coins), or Credit/Debit Card.</div>
+        <div class="buy-hero-sub" style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.85; margin-bottom: 4px;">Presale Allocation</div>
+        <div class="num buy-hero-title" style="font-size: 32px; font-weight: 800; line-height: 1.15; margin: 0 0 4px;">Buy $OKN Tokens</div>
+        <div class="buy-hero-desc" style="font-size: 13.5px; opacity: 0.9; max-width: 540px;">Select your preferred payment gateway: Web3 Wallet (BNB), NOWPayments Crypto Gateway (300+ coins), or Credit/Debit Card.</div>
       </div>
       <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 6px;">
-        <div style="font-size: 12px; font-weight: 800; padding: 6px 14px; border-radius: 12px; background: rgba(0,0,0,0.25); color: #fff; display: flex; align-items: center; gap: 8px;">
+        <div class="buy-hero-badge" style="font-size: 12px; font-weight: 800; padding: 6px 14px; border-radius: 12px; background: rgba(0,0,0,0.25); color: #fff; display: flex; align-items: center; gap: 8px;">
           <svg class="i" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><path d="m9 12 2 2 4-4"></path></svg>
           <span>Fixed Rate: 1,000,000 $OKN per 1 BNB (~$0.00060 / $OKN)</span>
         </div>
-        <div style="font-size: 11px; opacity: 0.85;">Instant token custody upon confirmed payment</div>
+        <div class="buy-hero-footer" style="font-size: 11px; opacity: 0.85;">Instant token custody upon confirmed payment</div>
       </div>
     </div>
   </section>
@@ -306,17 +306,20 @@
   <div class="gateway-tabs" role="tablist" aria-label="Select Payment Gateway">
     <button type="button" class="gateway-tab active" data-gw="web3" onclick="switchPaymentGateway('web3')">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="#F3BA2F"><path d="M12 3.2L16.2 7.4L18.4 5.2L12 0L5.6 5.2L7.8 7.4L12 3.2ZM20.8 7.6L18.6 9.8L20.8 12L23 9.8L20.8 7.6ZM12 8.4L15.6 12L12 15.6L8.4 12L12 8.4ZM3.2 7.6L1 9.8L3.2 12L5.4 9.8L3.2 7.6ZM12 16.6L7.8 12.4L5.6 14.6L12 21L18.4 14.6L16.2 12.4L12 16.6ZM20.8 12L18.6 14.2L20.8 16.4L23 14.2L20.8 12ZM3.2 12L1 14.2L3.2 16.4L5.4 14.2L3.2 12Z"/></svg>
-      <span>Web3 (BNB)</span>
+      <span class="tab-label-full">Web3 (BNB)</span>
+      <span class="tab-label-short">Web3 BNB</span>
     </button>
     <button type="button" class="gateway-tab" data-gw="nowpayments" onclick="switchPaymentGateway('nowpayments')">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
-      <span>NOWPayments (Crypto)</span>
-      <span style="font-size: 10px; background: rgba(9,180,255,0.18); color: var(--cyan); padding: 2px 6px; border-radius: 6px; font-weight: 800;">300+ Coins</span>
+      <span class="tab-label-full">NOWPayments (Crypto)</span>
+      <span class="tab-label-short">Crypto (300+)</span>
+      <span class="gateway-tab-badge" style="font-size: 10px; background: rgba(9,180,255,0.18); color: var(--cyan); padding: 2px 6px; border-radius: 6px; font-weight: 800;">300+ Coins</span>
     </button>
     <button type="button" class="gateway-tab" data-gw="card" onclick="switchPaymentGateway('card')">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>
-      <span>Credit / Debit Card</span>
-      <span style="font-size: 10px; background: rgba(47,189,142,0.18); color: var(--ok); padding: 2px 6px; border-radius: 6px; font-weight: 800;">Visa / MC</span>
+      <span class="tab-label-full">Credit / Debit Card</span>
+      <span class="tab-label-short">Card / Pay</span>
+      <span class="gateway-tab-badge" style="font-size: 10px; background: rgba(47,189,142,0.18); color: var(--ok); padding: 2px 6px; border-radius: 6px; font-weight: 800;">Visa / MC</span>
     </button>
   </div>
 
@@ -541,77 +544,111 @@
 
     </div>
 
-    <!-- Right Column: Sale Parameters & Gateway Trust Badges -->
-    <div style="display: flex; flex-direction: column; gap: 20px;">
-      <div style="background: var(--s1); border: 1px solid var(--line); border-radius: 24px; padding: 26px;">
-        <div style="font-size: 16px; font-weight: 800; margin-bottom: 18px; color: var(--tx);">Presale Parameters</div>
-        <div style="display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid var(--line);">
-          <span style="color: var(--mut); font-size: 13.5px;">Active Gateway</span>
-          <span id="summary-active-gw" style="font-weight: 700; font-size: 13.5px; color: var(--tx);">Web3 (BNB Smart Chain)</span>
+    <!-- Right Column: Sale Parameters & Supported Gateways -->
+    <div class="buy-sidebar-info" style="display: flex; flex-direction: column; gap: 16px;">
+      
+      <!-- Presale Parameters Card -->
+      <div class="buy-sidebar-card" style="background: var(--s1); border: 1px solid var(--line); border-radius: 24px; padding: 22px;">
+        <div style="font-size: 14.5px; font-weight: 800; margin-bottom: 12px; color: var(--tx);">Presale Parameters</div>
+        
+        <!-- Desktop Detailed Rows -->
+        <div class="buy-stat-grid-desktop">
+          <div style="display: flex; justify-content: space-between; padding: 11px 0; border-bottom: 1px solid var(--line);">
+            <span style="color: var(--mut); font-size: 13px;">Active Gateway</span>
+            <span id="summary-active-gw" style="font-weight: 800; font-size: 13.5px; color: var(--tx);">Web3 (BNB Smart Chain)</span>
+          </div>
+          <div style="display: flex; justify-content: space-between; padding: 11px 0; border-bottom: 1px solid var(--line);">
+            <span style="color: var(--mut); font-size: 13px;">Token Valuation</span>
+            <span class="num" style="font-weight: 800; font-size: 13.5px; color: var(--vio-l);">1 $OKN = $0.00060 USD</span>
+          </div>
+          <div style="display: flex; justify-content: space-between; padding: 11px 0; border-bottom: 1px solid var(--line);">
+            <span style="color: var(--mut); font-size: 13px;">Wallet Presale Cap</span>
+            <span class="num" style="font-weight: 800; font-size: 13.5px;">10 BNB (~$6,000 USD)</span>
+          </div>
+          <div style="display: flex; justify-content: space-between; padding: 11px 0; border-bottom: 1px solid var(--line);">
+            <span style="color: var(--mut); font-size: 13px;">Total Raised</span>
+            <span class="num" style="font-weight: 800; font-size: 13.5px; color: var(--ok);">$428,950 USD</span>
+          </div>
+          <div style="display: flex; justify-content: space-between; padding: 11px 0;">
+            <span style="color: var(--mut); font-size: 13px;">Tokens Remaining</span>
+            <span class="num" style="font-weight: 800; font-size: 13.5px;">1,249,998,000 $OKN</span>
+          </div>
         </div>
-        <div style="display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid var(--line);">
-          <span style="color: var(--mut); font-size: 13.5px;">Token Valuation</span>
-          <span class="num" style="font-weight: 800; font-size: 14px;">1 $OKN = $0.00060 USD</span>
-        </div>
-        <div style="display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid var(--line);">
-          <span style="color: var(--mut); font-size: 13.5px;">Wallet Presale Cap</span>
-          <span class="num" style="font-weight: 800; font-size: 14px;">10 BNB (~$6,000 USD)</span>
-        </div>
-        <div style="display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid var(--line);">
-          <span style="color: var(--mut); font-size: 13.5px;">Total Raised</span>
-          <span class="num" style="font-weight: 800; font-size: 14px; color: var(--ok);">$428,950 USD</span>
-        </div>
-        <div style="display: flex; justify-content: space-between; padding: 12px 0;">
-          <span style="color: var(--mut); font-size: 13.5px;">Tokens Remaining</span>
-          <span class="num" style="font-weight: 800; font-size: 14px;">1,249,998,000 $OKN</span>
+
+        <!-- Mobile 2x2 Compact Stat Grid -->
+        <div class="buy-stat-grid-mobile">
+          <div class="buy-stat-item">
+            <div class="buy-stat-label">Token Price</div>
+            <div class="buy-stat-value" style="color: var(--vio-l);">$0.00060</div>
+          </div>
+          <div class="buy-stat-item">
+            <div class="buy-stat-label">Presale Rate</div>
+            <div class="buy-stat-value">1M / 1 BNB</div>
+          </div>
+          <div class="buy-stat-item">
+            <div class="buy-stat-label">Total Raised</div>
+            <div class="buy-stat-value" style="color: var(--ok);">$428,950</div>
+          </div>
+          <div class="buy-stat-item">
+            <div class="buy-stat-label">Wallet Cap</div>
+            <div class="buy-stat-value">10 BNB</div>
+          </div>
         </div>
       </div>
 
       <!-- Gateway Features Card -->
-      <div style="background: var(--s1); border: 1px solid var(--line); border-radius: 24px; padding: 24px;">
-        <div style="font-size: 15px; font-weight: 800; margin-bottom: 14px; color: var(--tx);">Supported Payment Infrastructure</div>
+      <div class="buy-sidebar-card" style="background: var(--s1); border: 1px solid var(--line); border-radius: 24px; padding: 22px;">
+        <div style="font-size: 14.5px; font-weight: 800; margin-bottom: 12px; color: var(--tx);">Supported Payment Infrastructure</div>
         
-        <div style="display: flex; flex-direction: column; gap: 14px;">
+        <!-- Desktop Detailed List -->
+        <div class="infra-desktop-list" style="display: flex; flex-direction: column; gap: 12px;">
           <div style="display: flex; align-items: center; gap: 12px;">
-            <div style="width: 34px; height: 34px; border-radius: 10px; background: rgba(9,180,255,0.14); color: var(--cyan); display: flex; align-items: center; justify-content: center; flex: 0 0 auto;">
+            <div style="width: 32px; height: 32px; border-radius: 10px; background: rgba(9,180,255,0.14); color: var(--cyan); display: flex; align-items: center; justify-content: center; flex: 0 0 auto;">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
             </div>
             <div>
               <div style="font-weight: 700; font-size: 13px;">NOWPayments Gateway</div>
-              <div style="font-size: 11.5px; color: var(--mut);">Automated multi-crypto settlement across 300+ coins.</div>
+              <div style="font-size: 11px; color: var(--mut);">Automated multi-crypto settlement across 300+ coins.</div>
             </div>
           </div>
 
           <div style="display: flex; align-items: center; gap: 12px;">
-            <div style="width: 34px; height: 34px; border-radius: 10px; background: rgba(47,189,142,0.14); color: var(--ok); display: flex; align-items: center; justify-content: center; flex: 0 0 auto;">
+            <div style="width: 32px; height: 32px; border-radius: 10px; background: rgba(47,189,142,0.14); color: var(--ok); display: flex; align-items: center; justify-content: center; flex: 0 0 auto;">
               <svg class="i" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><path d="m9 12 2 2 4-4"></path></svg>
             </div>
             <div>
               <div style="font-weight: 700; font-size: 13px;">Visa & Mastercard 3DS</div>
-              <div style="font-size: 11.5px; color: var(--mut);">Direct card processing with zero crypto wallet required.</div>
+              <div style="font-size: 11px; color: var(--mut);">Direct card processing with zero crypto wallet required.</div>
             </div>
           </div>
 
           <div style="display: flex; align-items: center; gap: 12px;">
-            <div style="width: 34px; height: 34px; border-radius: 10px; background: rgba(243,186,47,0.14); color: #F3BA2F; display: flex; align-items: center; justify-content: center; flex: 0 0 auto;">
+            <div style="width: 32px; height: 32px; border-radius: 10px; background: rgba(243,186,47,0.14); color: #F3BA2F; display: flex; align-items: center; justify-content: center; flex: 0 0 auto;">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="#F3BA2F"><path d="M12 3.2L16.2 7.4L18.4 5.2L12 0L5.6 5.2L7.8 7.4L12 3.2ZM20.8 7.6L18.6 9.8L20.8 12L23 9.8L20.8 7.6ZM12 8.4L15.6 12L12 15.6L8.4 12L12 8.4ZM3.2 7.6L1 9.8L3.2 12L5.4 9.8L3.2 7.6ZM12 16.6L7.8 12.4L5.6 14.6L12 21L18.4 14.6L16.2 12.4L12 16.6ZM20.8 12L18.6 14.2L20.8 16.4L23 14.2L20.8 12ZM3.2 12L1 14.2L3.2 16.4L5.4 14.2L3.2 12Z"/></svg>
             </div>
             <div>
               <div style="font-weight: 700; font-size: 13px;">BNB Smart Chain EVM</div>
-              <div style="font-size: 11.5px; color: var(--mut);">Direct Web3 smart contract calls via Wagmi / Viem.</div>
+              <div style="font-size: 11px; color: var(--mut);">Direct Web3 smart contract calls via Wagmi / Viem.</div>
             </div>
           </div>
+        </div>
+
+        <!-- Mobile Compact Trust Pills -->
+        <div class="infra-mobile-pills">
+          <div class="infra-pill"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg> <span>NOWPayments (300+ Crypto)</span></div>
+          <div class="infra-pill"><svg class="i" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><path d="m9 12 2 2 4-4"></path></svg> <span>Visa & MC 3DS</span></div>
+          <div class="infra-pill"><svg width="20" height="20" viewBox="0 0 24 24" fill="#F3BA2F"><path d="M12 3.2L16.2 7.4L18.4 5.2L12 0L5.6 5.2L7.8 7.4L12 3.2ZM20.8 7.6L18.6 9.8L20.8 12L23 9.8L20.8 7.6ZM12 8.4L15.6 12L12 15.6L8.4 12L12 8.4ZM3.2 7.6L1 9.8L3.2 12L5.4 9.8L3.2 7.6ZM12 16.6L7.8 12.4L5.6 14.6L12 21L18.4 14.6L16.2 12.4L12 16.6ZM20.8 12L18.6 14.2L20.8 16.4L23 14.2L20.8 12ZM3.2 12L1 14.2L3.2 16.4L5.4 14.2L3.2 12Z"/></svg> <span>BNB Smart Chain</span></div>
         </div>
       </div>
     </div>
   </div>
 
-  <div style="background: rgba(255,170,0,0.12); border: 1px solid rgba(255,170,0,0.3); border-radius: 20px; padding: 18px 24px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;">
-    <div style="font-size: 13.5px; font-weight: 700; color: var(--org-t); display: flex; align-items: center; gap: 8px;">
+  <div class="buy-alert-strip" style="background: rgba(255,170,0,0.12); border: 1px solid rgba(255,170,0,0.3); border-radius: 18px; padding: 14px 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;">
+    <div class="buy-alert-strip-text" style="font-size: 13px; font-weight: 700; color: var(--org-t); display: flex; align-items: center; gap: 8px;">
       <svg class="i" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
       <span>Multi-gateway testing mode: Presale is live with verified instant delivery.</span>
     </div>
-    <a href="https://testnet.bnbchain.org/faucet-smart" target="_blank" style="padding: 8px 18px; border-radius: 12px; background: var(--s1); border: 1px solid var(--line); color: var(--tx); font-weight: 700; font-size: 13px; text-decoration: none; display: flex; align-items: center; gap: 6px;">
+    <a href="https://testnet.bnbchain.org/faucet-smart" target="_blank" style="padding: 7px 16px; border-radius: 10px; background: var(--s1); border: 1px solid var(--line); color: var(--tx); font-weight: 700; font-size: 12.5px; text-decoration: none; display: flex; align-items: center; gap: 6px;">
       <span>Get testnet BNB</span>
       <svg class="i" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
     </a>
@@ -624,19 +661,19 @@
         
     <div class="mobile-page-wrap" style="padding: 16px 16px 96px; width: 100%; max-width: 540px; margin: 0 auto; box-sizing: border-box;">
       
-  <section style="background: var(--vio); color: #fff; border-radius: 28px; padding: 30px 32px; margin-bottom: 24px; box-shadow: 0 4px 20px rgba(122,18,245,0.25);">
-    <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 16px;">
+  <section class="buy-hero" style="background: var(--vio); color: #fff; border-radius: 28px; padding: 26px 30px; margin-bottom: 20px; box-shadow: 0 4px 20px rgba(122,18,245,0.22);">
+    <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 14px;">
       <div>
-        <div style="font-size: 12.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.85; margin-bottom: 6px;">Multi-Gateway Presale Allocation</div>
-        <div class="num" style="font-size: 34px; font-weight: 800; line-height: 1.15;">Buy $OKN Tokens</div>
-        <div style="font-size: 13.5px; opacity: 0.9; margin-top: 6px;">Select your preferred payment gateway: Web3 Wallet (BNB), NOWPayments Crypto Gateway (300+ coins), or Credit/Debit Card.</div>
+        <div class="buy-hero-sub" style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.85; margin-bottom: 4px;">Presale Allocation</div>
+        <div class="num buy-hero-title" style="font-size: 32px; font-weight: 800; line-height: 1.15; margin: 0 0 4px;">Buy $OKN Tokens</div>
+        <div class="buy-hero-desc" style="font-size: 13.5px; opacity: 0.9; max-width: 540px;">Select your preferred payment gateway: Web3 Wallet (BNB), NOWPayments Crypto Gateway (300+ coins), or Credit/Debit Card.</div>
       </div>
       <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 6px;">
-        <div style="font-size: 12px; font-weight: 800; padding: 6px 14px; border-radius: 12px; background: rgba(0,0,0,0.25); color: #fff; display: flex; align-items: center; gap: 8px;">
+        <div class="buy-hero-badge" style="font-size: 12px; font-weight: 800; padding: 6px 14px; border-radius: 12px; background: rgba(0,0,0,0.25); color: #fff; display: flex; align-items: center; gap: 8px;">
           <svg class="i" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><path d="m9 12 2 2 4-4"></path></svg>
           <span>Fixed Rate: 1,000,000 $OKN per 1 BNB (~$0.00060 / $OKN)</span>
         </div>
-        <div style="font-size: 11px; opacity: 0.85;">Instant token custody upon confirmed payment</div>
+        <div class="buy-hero-footer" style="font-size: 11px; opacity: 0.85;">Instant token custody upon confirmed payment</div>
       </div>
     </div>
   </section>
@@ -645,17 +682,20 @@
   <div class="gateway-tabs" role="tablist" aria-label="Select Payment Gateway">
     <button type="button" class="gateway-tab active" data-gw="web3" onclick="switchPaymentGateway('web3')">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="#F3BA2F"><path d="M12 3.2L16.2 7.4L18.4 5.2L12 0L5.6 5.2L7.8 7.4L12 3.2ZM20.8 7.6L18.6 9.8L20.8 12L23 9.8L20.8 7.6ZM12 8.4L15.6 12L12 15.6L8.4 12L12 8.4ZM3.2 7.6L1 9.8L3.2 12L5.4 9.8L3.2 7.6ZM12 16.6L7.8 12.4L5.6 14.6L12 21L18.4 14.6L16.2 12.4L12 16.6ZM20.8 12L18.6 14.2L20.8 16.4L23 14.2L20.8 12ZM3.2 12L1 14.2L3.2 16.4L5.4 14.2L3.2 12Z"/></svg>
-      <span>Web3 (BNB)</span>
+      <span class="tab-label-full">Web3 (BNB)</span>
+      <span class="tab-label-short">Web3 BNB</span>
     </button>
     <button type="button" class="gateway-tab" data-gw="nowpayments" onclick="switchPaymentGateway('nowpayments')">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
-      <span>NOWPayments (Crypto)</span>
-      <span style="font-size: 10px; background: rgba(9,180,255,0.18); color: var(--cyan); padding: 2px 6px; border-radius: 6px; font-weight: 800;">300+ Coins</span>
+      <span class="tab-label-full">NOWPayments (Crypto)</span>
+      <span class="tab-label-short">Crypto (300+)</span>
+      <span class="gateway-tab-badge" style="font-size: 10px; background: rgba(9,180,255,0.18); color: var(--cyan); padding: 2px 6px; border-radius: 6px; font-weight: 800;">300+ Coins</span>
     </button>
     <button type="button" class="gateway-tab" data-gw="card" onclick="switchPaymentGateway('card')">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>
-      <span>Credit / Debit Card</span>
-      <span style="font-size: 10px; background: rgba(47,189,142,0.18); color: var(--ok); padding: 2px 6px; border-radius: 6px; font-weight: 800;">Visa / MC</span>
+      <span class="tab-label-full">Credit / Debit Card</span>
+      <span class="tab-label-short">Card / Pay</span>
+      <span class="gateway-tab-badge" style="font-size: 10px; background: rgba(47,189,142,0.18); color: var(--ok); padding: 2px 6px; border-radius: 6px; font-weight: 800;">Visa / MC</span>
     </button>
   </div>
 
@@ -880,77 +920,111 @@
 
     </div>
 
-    <!-- Right Column: Sale Parameters & Gateway Trust Badges -->
-    <div style="display: flex; flex-direction: column; gap: 20px;">
-      <div style="background: var(--s1); border: 1px solid var(--line); border-radius: 24px; padding: 26px;">
-        <div style="font-size: 16px; font-weight: 800; margin-bottom: 18px; color: var(--tx);">Presale Parameters</div>
-        <div style="display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid var(--line);">
-          <span style="color: var(--mut); font-size: 13.5px;">Active Gateway</span>
-          <span id="summary-active-gw" style="font-weight: 700; font-size: 13.5px; color: var(--tx);">Web3 (BNB Smart Chain)</span>
+    <!-- Right Column: Sale Parameters & Supported Gateways -->
+    <div class="buy-sidebar-info" style="display: flex; flex-direction: column; gap: 16px;">
+      
+      <!-- Presale Parameters Card -->
+      <div class="buy-sidebar-card" style="background: var(--s1); border: 1px solid var(--line); border-radius: 24px; padding: 22px;">
+        <div style="font-size: 14.5px; font-weight: 800; margin-bottom: 12px; color: var(--tx);">Presale Parameters</div>
+        
+        <!-- Desktop Detailed Rows -->
+        <div class="buy-stat-grid-desktop">
+          <div style="display: flex; justify-content: space-between; padding: 11px 0; border-bottom: 1px solid var(--line);">
+            <span style="color: var(--mut); font-size: 13px;">Active Gateway</span>
+            <span id="summary-active-gw" style="font-weight: 800; font-size: 13.5px; color: var(--tx);">Web3 (BNB Smart Chain)</span>
+          </div>
+          <div style="display: flex; justify-content: space-between; padding: 11px 0; border-bottom: 1px solid var(--line);">
+            <span style="color: var(--mut); font-size: 13px;">Token Valuation</span>
+            <span class="num" style="font-weight: 800; font-size: 13.5px; color: var(--vio-l);">1 $OKN = $0.00060 USD</span>
+          </div>
+          <div style="display: flex; justify-content: space-between; padding: 11px 0; border-bottom: 1px solid var(--line);">
+            <span style="color: var(--mut); font-size: 13px;">Wallet Presale Cap</span>
+            <span class="num" style="font-weight: 800; font-size: 13.5px;">10 BNB (~$6,000 USD)</span>
+          </div>
+          <div style="display: flex; justify-content: space-between; padding: 11px 0; border-bottom: 1px solid var(--line);">
+            <span style="color: var(--mut); font-size: 13px;">Total Raised</span>
+            <span class="num" style="font-weight: 800; font-size: 13.5px; color: var(--ok);">$428,950 USD</span>
+          </div>
+          <div style="display: flex; justify-content: space-between; padding: 11px 0;">
+            <span style="color: var(--mut); font-size: 13px;">Tokens Remaining</span>
+            <span class="num" style="font-weight: 800; font-size: 13.5px;">1,249,998,000 $OKN</span>
+          </div>
         </div>
-        <div style="display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid var(--line);">
-          <span style="color: var(--mut); font-size: 13.5px;">Token Valuation</span>
-          <span class="num" style="font-weight: 800; font-size: 14px;">1 $OKN = $0.00060 USD</span>
-        </div>
-        <div style="display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid var(--line);">
-          <span style="color: var(--mut); font-size: 13.5px;">Wallet Presale Cap</span>
-          <span class="num" style="font-weight: 800; font-size: 14px;">10 BNB (~$6,000 USD)</span>
-        </div>
-        <div style="display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid var(--line);">
-          <span style="color: var(--mut); font-size: 13.5px;">Total Raised</span>
-          <span class="num" style="font-weight: 800; font-size: 14px; color: var(--ok);">$428,950 USD</span>
-        </div>
-        <div style="display: flex; justify-content: space-between; padding: 12px 0;">
-          <span style="color: var(--mut); font-size: 13.5px;">Tokens Remaining</span>
-          <span class="num" style="font-weight: 800; font-size: 14px;">1,249,998,000 $OKN</span>
+
+        <!-- Mobile 2x2 Compact Stat Grid -->
+        <div class="buy-stat-grid-mobile">
+          <div class="buy-stat-item">
+            <div class="buy-stat-label">Token Price</div>
+            <div class="buy-stat-value" style="color: var(--vio-l);">$0.00060</div>
+          </div>
+          <div class="buy-stat-item">
+            <div class="buy-stat-label">Presale Rate</div>
+            <div class="buy-stat-value">1M / 1 BNB</div>
+          </div>
+          <div class="buy-stat-item">
+            <div class="buy-stat-label">Total Raised</div>
+            <div class="buy-stat-value" style="color: var(--ok);">$428,950</div>
+          </div>
+          <div class="buy-stat-item">
+            <div class="buy-stat-label">Wallet Cap</div>
+            <div class="buy-stat-value">10 BNB</div>
+          </div>
         </div>
       </div>
 
       <!-- Gateway Features Card -->
-      <div style="background: var(--s1); border: 1px solid var(--line); border-radius: 24px; padding: 24px;">
-        <div style="font-size: 15px; font-weight: 800; margin-bottom: 14px; color: var(--tx);">Supported Payment Infrastructure</div>
+      <div class="buy-sidebar-card" style="background: var(--s1); border: 1px solid var(--line); border-radius: 24px; padding: 22px;">
+        <div style="font-size: 14.5px; font-weight: 800; margin-bottom: 12px; color: var(--tx);">Supported Payment Infrastructure</div>
         
-        <div style="display: flex; flex-direction: column; gap: 14px;">
+        <!-- Desktop Detailed List -->
+        <div class="infra-desktop-list" style="display: flex; flex-direction: column; gap: 12px;">
           <div style="display: flex; align-items: center; gap: 12px;">
-            <div style="width: 34px; height: 34px; border-radius: 10px; background: rgba(9,180,255,0.14); color: var(--cyan); display: flex; align-items: center; justify-content: center; flex: 0 0 auto;">
+            <div style="width: 32px; height: 32px; border-radius: 10px; background: rgba(9,180,255,0.14); color: var(--cyan); display: flex; align-items: center; justify-content: center; flex: 0 0 auto;">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
             </div>
             <div>
               <div style="font-weight: 700; font-size: 13px;">NOWPayments Gateway</div>
-              <div style="font-size: 11.5px; color: var(--mut);">Automated multi-crypto settlement across 300+ coins.</div>
+              <div style="font-size: 11px; color: var(--mut);">Automated multi-crypto settlement across 300+ coins.</div>
             </div>
           </div>
 
           <div style="display: flex; align-items: center; gap: 12px;">
-            <div style="width: 34px; height: 34px; border-radius: 10px; background: rgba(47,189,142,0.14); color: var(--ok); display: flex; align-items: center; justify-content: center; flex: 0 0 auto;">
+            <div style="width: 32px; height: 32px; border-radius: 10px; background: rgba(47,189,142,0.14); color: var(--ok); display: flex; align-items: center; justify-content: center; flex: 0 0 auto;">
               <svg class="i" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><path d="m9 12 2 2 4-4"></path></svg>
             </div>
             <div>
               <div style="font-weight: 700; font-size: 13px;">Visa & Mastercard 3DS</div>
-              <div style="font-size: 11.5px; color: var(--mut);">Direct card processing with zero crypto wallet required.</div>
+              <div style="font-size: 11px; color: var(--mut);">Direct card processing with zero crypto wallet required.</div>
             </div>
           </div>
 
           <div style="display: flex; align-items: center; gap: 12px;">
-            <div style="width: 34px; height: 34px; border-radius: 10px; background: rgba(243,186,47,0.14); color: #F3BA2F; display: flex; align-items: center; justify-content: center; flex: 0 0 auto;">
+            <div style="width: 32px; height: 32px; border-radius: 10px; background: rgba(243,186,47,0.14); color: #F3BA2F; display: flex; align-items: center; justify-content: center; flex: 0 0 auto;">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="#F3BA2F"><path d="M12 3.2L16.2 7.4L18.4 5.2L12 0L5.6 5.2L7.8 7.4L12 3.2ZM20.8 7.6L18.6 9.8L20.8 12L23 9.8L20.8 7.6ZM12 8.4L15.6 12L12 15.6L8.4 12L12 8.4ZM3.2 7.6L1 9.8L3.2 12L5.4 9.8L3.2 7.6ZM12 16.6L7.8 12.4L5.6 14.6L12 21L18.4 14.6L16.2 12.4L12 16.6ZM20.8 12L18.6 14.2L20.8 16.4L23 14.2L20.8 12ZM3.2 12L1 14.2L3.2 16.4L5.4 14.2L3.2 12Z"/></svg>
             </div>
             <div>
               <div style="font-weight: 700; font-size: 13px;">BNB Smart Chain EVM</div>
-              <div style="font-size: 11.5px; color: var(--mut);">Direct Web3 smart contract calls via Wagmi / Viem.</div>
+              <div style="font-size: 11px; color: var(--mut);">Direct Web3 smart contract calls via Wagmi / Viem.</div>
             </div>
           </div>
+        </div>
+
+        <!-- Mobile Compact Trust Pills -->
+        <div class="infra-mobile-pills">
+          <div class="infra-pill"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg> <span>NOWPayments (300+ Crypto)</span></div>
+          <div class="infra-pill"><svg class="i" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><path d="m9 12 2 2 4-4"></path></svg> <span>Visa & MC 3DS</span></div>
+          <div class="infra-pill"><svg width="20" height="20" viewBox="0 0 24 24" fill="#F3BA2F"><path d="M12 3.2L16.2 7.4L18.4 5.2L12 0L5.6 5.2L7.8 7.4L12 3.2ZM20.8 7.6L18.6 9.8L20.8 12L23 9.8L20.8 7.6ZM12 8.4L15.6 12L12 15.6L8.4 12L12 8.4ZM3.2 7.6L1 9.8L3.2 12L5.4 9.8L3.2 7.6ZM12 16.6L7.8 12.4L5.6 14.6L12 21L18.4 14.6L16.2 12.4L12 16.6ZM20.8 12L18.6 14.2L20.8 16.4L23 14.2L20.8 12ZM3.2 12L1 14.2L3.2 16.4L5.4 14.2L3.2 12Z"/></svg> <span>BNB Smart Chain</span></div>
         </div>
       </div>
     </div>
   </div>
 
-  <div style="background: rgba(255,170,0,0.12); border: 1px solid rgba(255,170,0,0.3); border-radius: 20px; padding: 18px 24px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;">
-    <div style="font-size: 13.5px; font-weight: 700; color: var(--org-t); display: flex; align-items: center; gap: 8px;">
+  <div class="buy-alert-strip" style="background: rgba(255,170,0,0.12); border: 1px solid rgba(255,170,0,0.3); border-radius: 18px; padding: 14px 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;">
+    <div class="buy-alert-strip-text" style="font-size: 13px; font-weight: 700; color: var(--org-t); display: flex; align-items: center; gap: 8px;">
       <svg class="i" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
       <span>Multi-gateway testing mode: Presale is live with verified instant delivery.</span>
     </div>
-    <a href="https://testnet.bnbchain.org/faucet-smart" target="_blank" style="padding: 8px 18px; border-radius: 12px; background: var(--s1); border: 1px solid var(--line); color: var(--tx); font-weight: 700; font-size: 13px; text-decoration: none; display: flex; align-items: center; gap: 6px;">
+    <a href="https://testnet.bnbchain.org/faucet-smart" target="_blank" style="padding: 7px 16px; border-radius: 10px; background: var(--s1); border: 1px solid var(--line); color: var(--tx); font-weight: 700; font-size: 12.5px; text-decoration: none; display: flex; align-items: center; gap: 6px;">
       <span>Get testnet BNB</span>
       <svg class="i" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
     </a>
@@ -1035,6 +1109,39 @@
           document.addEventListener('DOMContentLoaded', () => updateThemeIcons(saved));
         } else {
           updateThemeIcons(saved);
+        }
+      })();
+
+      // Balance Visibility (Hide / Unhide with persistence)
+      const EYE_OPEN_ICON = '<svg class="i" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>';
+      const EYE_CLOSED_ICON = '<svg class="i" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path><line x1="1" y1="1" x2="23" y2="23"></line></svg>';
+
+      function applyBalanceVisibility(hidden) {
+        document.querySelectorAll('.balance-display').forEach(el => {
+          const raw = el.getAttribute('data-value') || '$1,428.50';
+          el.textContent = hidden ? '••••••••' : raw;
+        });
+        document.querySelectorAll('.balance-eye-btn').forEach(btn => {
+          btn.setAttribute('aria-label', hidden ? 'Show balance' : 'Hide balance');
+          btn.innerHTML = hidden ? EYE_CLOSED_ICON : EYE_OPEN_ICON;
+        });
+      }
+
+      function toggleBalanceVisibility() {
+        const isCurrentlyHidden = localStorage.getItem('okn_hide_balance') === 'true';
+        const next = !isCurrentlyHidden;
+        try { localStorage.setItem('okn_hide_balance', next ? 'true' : 'false'); } catch (e) {}
+        applyBalanceVisibility(next);
+        showToast(next ? 'Balance hidden' : 'Balance visible');
+      }
+
+      (function() {
+        let isHidden = false;
+        try { isHidden = localStorage.getItem('okn_hide_balance') === 'true'; } catch (e) {}
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', () => applyBalanceVisibility(isHidden));
+        } else {
+          applyBalanceVisibility(isHidden);
         }
       })();
 
