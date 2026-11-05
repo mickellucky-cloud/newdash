@@ -1298,3 +1298,316 @@ tbody tr:hover {
     height: 40px !important;
   }
 }
+
+/* --------------------------------------------------------------------------
+   8. Top Left Menu Button, Language & Profile Initials Dropdowns, Mobile Drawer
+   -------------------------------------------------------------------------- */
+.top-menu-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: var(--s2);
+  border: 1px solid var(--line);
+  color: var(--tx);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  flex: 0 0 auto;
+}
+.top-menu-btn:hover {
+  background: var(--s1);
+  transform: translateY(-1px);
+}
+
+.mobile-header-title {
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--tx);
+  line-height: 1;
+}
+
+/* Header Icon Buttons */
+.header-icon-btn {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--s2);
+  border: 1px solid var(--line);
+  color: var(--tx);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  flex: 0 0 auto;
+}
+.header-icon-btn:hover {
+  background: var(--s1);
+}
+
+/* Header Pill Button (Language) */
+.header-pill-btn {
+  height: 34px;
+  padding: 0 10px;
+  border-radius: 17px;
+  background: var(--s2);
+  border: 1px solid var(--line);
+  color: var(--tx);
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  flex: 0 0 auto;
+}
+.header-pill-btn:hover,
+.header-pill-btn.open {
+  background: var(--s1);
+  border-color: var(--vio);
+}
+.header-pill-btn.open .chevron-icon {
+  transform: rotate(180deg);
+}
+
+/* Header Profile Button (Initials DE) */
+.header-profile-btn {
+  height: 34px;
+  padding: 0 8px 0 3px;
+  border-radius: 17px;
+  background: var(--s2);
+  border: 1px solid var(--line);
+  color: var(--tx);
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  flex: 0 0 auto;
+}
+.header-profile-btn:hover,
+.header-profile-btn.open {
+  background: var(--s1);
+  border-color: var(--vio);
+}
+.header-profile-btn.open .chevron-icon {
+  transform: rotate(180deg);
+}
+.profile-badge-initials {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--vio);
+  color: #FFFFFF;
+  font-weight: 800;
+  font-size: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Dropdown Menus */
+.header-dropdown-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  background: var(--s1);
+  border: 1px solid var(--line);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.28), 0 2px 10px rgba(0, 0, 0, 0.08);
+  z-index: 3000;
+  display: none;
+  flex-direction: column;
+  box-sizing: border-box;
+  animation: dropdownFadeIn 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.lang-dropdown-menu {
+  right: -36px;
+  width: 195px;
+  border-radius: 18px;
+  padding: 8px 6px;
+  flex-direction: column;
+}
+.profile-dropdown-menu {
+  right: 0;
+  width: 275px;
+  border-radius: 20px;
+  padding: 0;
+  overflow: hidden;
+  flex-direction: column;
+}
+.dropdown-divider {
+  height: 1px;
+  background: var(--line);
+}
+
+@keyframes dropdownFadeIn {
+  from { opacity: 0; transform: translateY(-6px) scale(0.97); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Language items */
+.lang-opt-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 8px 12px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  border-radius: 10px;
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--tx);
+  transition: background 0.12s ease;
+}
+.lang-opt-item:hover {
+  background: var(--s2);
+}
+.lang-opt-item.active-lang {
+  color: #0A84FF;
+}
+.lang-code-tag {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--mut);
+  text-transform: uppercase;
+  font-family: Sora, monospace;
+}
+
+/* Profile menu rows */
+.profile-menu-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 16px;
+  text-decoration: none;
+  color: var(--tx);
+  font-size: 14px;
+  font-weight: 700;
+  transition: background 0.12s ease;
+}
+.profile-menu-link:hover {
+  background: var(--s2);
+}
+.profile-social-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 10px;
+  background: var(--s2);
+  border: 1px solid var(--line);
+  color: var(--tx);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition: all 0.15s ease;
+}
+.profile-social-btn:hover {
+  background: var(--s1);
+  color: var(--vio-l);
+  transform: translateY(-1px);
+}
+
+/* Appearance pill in profile menu */
+.appearance-toggle-pill {
+  display: inline-flex;
+  background: var(--s2);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 3px;
+  gap: 2px;
+}
+.app-theme-opt {
+  width: 30px;
+  height: 26px;
+  border-radius: 12px;
+  border: none;
+  background: transparent;
+  color: var(--mut);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.app-theme-opt.active {
+  background: var(--s1);
+  color: var(--tx);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+}
+
+/* Sign out button */
+.profile-signout-btn {
+  width: 100%;
+  padding: 12px 16px 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #FF453A;
+  background: transparent;
+  border: none;
+  font-size: 14px;
+  font-weight: 800;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.12s ease;
+}
+.profile-signout-btn:hover {
+  background: rgba(255, 69, 58, 0.08);
+}
+
+/* Off-canvas Mobile Sidebar Drawer */
+.mobile-sidebar-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  z-index: 2000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.mobile-sidebar-backdrop.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+.mobile-sidebar-drawer {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 290px;
+  max-width: 86vw;
+  background: var(--bg);
+  border-right: 1px solid var(--line);
+  z-index: 2001;
+  transform: translateX(-100%);
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  box-shadow: 12px 0 36px rgba(0, 0, 0, 0.35);
+}
+.mobile-sidebar-drawer.open {
+  transform: translateX(0);
+}
+.drawer-close-btn {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  background: var(--s2);
+  border: 1px solid var(--line);
+  color: var(--tx);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+.drawer-close-btn:hover {
+  background: var(--s1);
+}
+

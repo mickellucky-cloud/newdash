@@ -25,6 +25,28 @@ test('assemblePage generates complete HTML with active navigation and scripts', 
   assert.match(html, /aria-label="Search navigation"/);
   assert.match(html, /function openWalletModal\(\)/);
   assert.match(html, /function copyReferralLink\(\)/);
+  assert.match(html, /id="mobile-sidebar-drawer"/);
+  assert.match(html, /function toggleMobileSidebar\(\)/);
+  assert.match(html, /function selectLanguage\(/);
+  assert.match(html, /function toggleProfileDropdown\(/);
+  assert.match(html, /top-menu-btn/);
+  assert.match(html, /profile-dropdown-menu/);
+  assert.match(html, /lang-dropdown-menu/);
+  // Verify reference image elements
+  assert.match(html, /profile-badge-initials">DE<\/span>/);
+  assert.match(html, /Dev User/);
+  assert.match(html, /@dev_user/);
+  assert.match(html, /data-code="EN"/);
+  assert.match(html, /data-code="ZH"/);
+  assert.match(html, /data-code="ES"/);
+  assert.match(html, /data-code="PT"/);
+  assert.match(html, /data-code="RU"/);
+  assert.match(html, /data-code="VI"/);
+  assert.match(html, /data-code="ID"/);
+  assert.match(html, /data-code="TR"/);
+  assert.match(html, /data-code="FR"/);
+  assert.match(html, /Sign out/);
+  assert.match(html, /app-theme-opt/);
 });
 
 test('responsive CSS stacks 2-column and 3-column grids on mobile (<768px)', () => {
