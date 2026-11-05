@@ -1104,7 +1104,8 @@ tbody tr:hover {
     border-radius: 8px !important;
     gap: 3px !important;
   }
-  .coin-badge svg {
+  .coin-badge svg,
+  .coin-badge img {
     width: 13px !important;
     height: 13px !important;
   }
@@ -1177,104 +1178,297 @@ tbody tr:hover {
 }
 
 /* --------------------------------------------------------------------------
-   Polymarket Copy Agent Animated Live Banner
+   Spectacular Mobile-Only Polymarket Copy Agent Live Announcement Banner
    -------------------------------------------------------------------------- */
-.polymarket-live-banner {
-  position: relative;
-  border-radius: 22px;
-  padding: 1.5px;
-  background: linear-gradient(135deg, #09B4FF, #7A12F5, #00E5FF, #7A12F5);
-  background-size: 300% 300%;
-  animation: polyGlow 6s ease infinite;
-  box-shadow: 0 8px 28px rgba(9, 180, 255, 0.22), 0 2px 10px rgba(122, 18, 245, 0.18);
-  margin-bottom: 20px;
-  overflow: hidden;
+@media (min-width: 768px) {
+  .polymarket-live-banner {
+    display: none !important;
+  }
 }
 
-@keyframes polyGlow {
+.polymarket-live-banner {
+  position: relative;
+  display: block;
+  text-decoration: none !important;
+  border-radius: 22px;
+  padding: 1.5px;
+  background: linear-gradient(125deg, #38BDF8 0%, #1652F0 35%, #00F0FF 70%, #1652F0 100%);
+  background-size: 260% 260%;
+  animation: polySpectacularBorder 5s ease infinite;
+  box-shadow:
+    0 14px 36px -6px rgba(22, 82, 240, 0.52),
+    0 4px 16px rgba(9, 180, 255, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.35);
+  margin-bottom: 18px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.22s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.22s ease;
+}
+
+.polymarket-live-banner:active {
+  transform: scale(0.985);
+}
+
+@keyframes polySpectacularBorder {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
 }
 
 .poly-banner-inner {
-  background: var(--s1);
+  position: relative;
+  z-index: 2;
   border-radius: 20.5px;
-  padding: 16px 20px;
+  padding: 15px 16px;
+  background:
+    radial-gradient(120% 130% at 100% 0%, rgba(22, 82, 240, 0.55) 0%, rgba(10, 25, 78, 0.92) 55%, #060D24 100%);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  overflow: hidden;
+}
+
+.poly-banner-glow-orb {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 1;
+  filter: blur(28px);
+}
+
+.poly-orb-1 {
+  width: 150px;
+  height: 150px;
+  top: -55px;
+  right: -35px;
+  background: rgba(56, 189, 248, 0.42);
+}
+
+.poly-orb-2 {
+  width: 130px;
+  height: 130px;
+  bottom: -55px;
+  left: -30px;
+  background: rgba(22, 82, 240, 0.55);
+}
+
+.poly-topo-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.85;
+}
+
+.poly-banner-top-row {
+  position: relative;
+  z-index: 2;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 16px;
-  position: relative;
-  z-index: 1;
-}
-
-.poly-banner-left {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  min-width: 0;
-}
-
-.poly-banner-logo {
-  width: 52px;
-  height: 52px;
-  border-radius: 14px;
-  object-fit: cover;
-  flex: 0 0 auto;
-  box-shadow: 0 4px 14px rgba(9, 180, 255, 0.35);
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  gap: 6px;
+  flex-wrap: wrap;
 }
 
 .poly-live-badge {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 3px 8px;
-  border-radius: 8px;
-  background: rgba(47, 189, 142, 0.15);
-  border: 1px solid rgba(47, 189, 142, 0.3);
-  color: var(--ok);
-  font-size: 10.5px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(16, 185, 129, 0.18);
+  border: 1px solid rgba(52, 211, 153, 0.45);
+  color: #34D399;
+  font-size: 10px;
   font-weight: 800;
-  letter-spacing: 0.05em;
-  margin-bottom: 3px;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  box-shadow: 0 0 16px rgba(16, 185, 129, 0.25);
 }
 
 .poly-live-dot {
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: var(--ok);
-  animation: liveDotPulse 1.8s infinite;
+  background: #34D399;
+  animation: liveDotPulse 1.6s infinite;
 }
 
 @keyframes liveDotPulse {
-  0% { transform: scale(0.9); box-shadow: 0 0 0 0 rgba(47, 189, 142, 0.7); }
-  70% { transform: scale(1.15); box-shadow: 0 0 0 6px rgba(47, 189, 142, 0); }
-  100% { transform: scale(0.9); box-shadow: 0 0 0 0 rgba(47, 189, 142, 0); }
+  0% { transform: scale(0.9); box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.85); }
+  70% { transform: scale(1.2); box-shadow: 0 0 0 7px rgba(52, 211, 153, 0); }
+  100% { transform: scale(0.9); box-shadow: 0 0 0 0 rgba(52, 211, 153, 0); }
 }
 
-.poly-banner-btn {
-  height: 42px;
-  padding: 0 20px;
-  border-radius: 12px;
-  background: linear-gradient(135deg, #09B4FF 0%, #0077FE 100%);
-  color: #FFFFFF !important;
-  font-weight: 800;
-  font-size: 13px;
+.poly-roi-pill {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  text-decoration: none;
-  white-space: nowrap;
-  box-shadow: 0 4px 14px rgba(9, 180, 255, 0.35);
-  transition: transform 0.18s ease, box-shadow 0.18s ease;
+  gap: 4px;
+  padding: 4px 9px;
+  border-radius: 999px;
+  background: rgba(56, 189, 248, 0.16);
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  color: #7DD3FC;
+  font-size: 10.5px;
+  font-weight: 800;
+  letter-spacing: 0.01em;
+}
+
+.poly-network-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: rgba(243, 186, 47, 0.14);
+  border: 1px solid rgba(243, 186, 47, 0.35);
+  color: #FDE68A;
+  font-size: 10px;
+  font-weight: 800;
+}
+
+.poly-banner-main-row {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.poly-logo-frame {
+  position: relative;
+  width: 58px;
+  height: 58px;
+  border-radius: 16px;
+  padding: 2px;
+  background: linear-gradient(135deg, #FFFFFF 0%, #38BDF8 50%, #1652F0 100%);
+  box-shadow:
+    0 8px 22px rgba(22, 82, 240, 0.65),
+    0 0 0 1px rgba(255, 255, 255, 0.22);
   flex: 0 0 auto;
 }
-.poly-banner-btn:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 6px 20px rgba(9, 180, 255, 0.5);
+
+.poly-banner-logo {
+  width: 100%;
+  height: 100%;
+  border-radius: 14px;
+  object-fit: cover;
+  display: block;
+}
+
+.poly-logo-ring {
+  position: absolute;
+  inset: -4px;
+  border-radius: 20px;
+  border: 1.5px solid rgba(56, 189, 248, 0.55);
+  animation: polyRingPulse 2.4s ease-out infinite;
+  pointer-events: none;
+}
+
+@keyframes polyRingPulse {
+  0% { transform: scale(0.96); opacity: 0.85; }
+  100% { transform: scale(1.14); opacity: 0; }
+}
+
+.poly-banner-copy {
+  min-width: 0;
+  flex: 1;
+}
+
+.poly-banner-title {
+  font-size: 16px;
+  font-weight: 800;
+  color: #FFFFFF;
+  line-height: 1.22;
+  letter-spacing: -0.02em;
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.poly-title-highlight {
+  background: linear-gradient(90deg, #38BDF8 0%, #A5F3FC 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 800;
+}
+
+.poly-banner-sub {
+  font-size: 12px;
+  color: rgba(226, 232, 240, 0.88);
+  line-height: 1.4;
+  font-weight: 600;
+}
+
+.poly-banner-action-row {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(148, 163, 184, 0.18);
+}
+
+.poly-whale-ticker {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.poly-whale-avatars {
+  display: flex;
+  align-items: center;
+}
+
+.poly-whale-av {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  font-size: 9px;
+  font-weight: 800;
+  color: #FFFFFF;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1.5px solid #08122E;
+  margin-left: -6px;
+}
+
+.poly-whale-av:first-child {
+  margin-left: 0;
+}
+
+.poly-whale-text {
+  font-size: 11px;
+  font-weight: 700;
+  color: #CBD5E1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.poly-banner-cta {
+  height: 36px;
+  padding: 0 14px;
+  border-radius: 11px;
+  background: linear-gradient(135deg, #1652F0 0%, #09B4FF 100%);
+  color: #FFFFFF !important;
+  font-size: 12px;
+  font-weight: 800;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+  flex: 0 0 auto;
+  box-shadow: 0 4px 14px rgba(9, 180, 255, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.25);
 }
 
 .balance-eye-btn {
@@ -1283,20 +1477,6 @@ tbody tr:hover {
 .balance-eye-btn:hover {
   opacity: 0.8;
   transform: scale(1.1);
-}
-
-@media (max-width: 767px) {
-  .poly-banner-inner {
-    flex-direction: column !important;
-    align-items: flex-start !important;
-    padding: 14px 16px !important;
-    gap: 12px !important;
-  }
-  .poly-banner-btn {
-    width: 100% !important;
-    justify-content: center !important;
-    height: 40px !important;
-  }
 }
 
 /* --------------------------------------------------------------------------

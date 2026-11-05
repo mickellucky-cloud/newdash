@@ -77,3 +77,25 @@ test('build output populates public/ directory and referral.html has full Partne
   assert.match(referralHtml, /What We Provide You/);
   assert.match(referralHtml, /DE-71C49/);
 });
+
+test('BNB logo, BSC logo, and Polymarket logo assets are deployed and mobile-only Polymarket banner opens agent directly', () => {
+  const publicDir = path.join(rootDir, 'public');
+  assert.equal(fs.existsSync(path.join(publicDir, 'assets', 'bnb-logo.png')), true);
+  assert.equal(fs.existsSync(path.join(publicDir, 'assets', 'bsc-logo.svg')), true);
+  assert.equal(fs.existsSync(path.join(publicDir, 'assets', 'polymarket.png')), true);
+
+  const indexHtml = fs.readFileSync(path.join(publicDir, 'index.html'), 'utf8');
+  assert.match(indexHtml, /assets\/bnb-logo\.png/);
+  assert.match(indexHtml, /assets\/bsc-logo\.svg/);
+  assert.match(indexHtml, /class="polymarket-live-banner"/);
+  assert.match(indexHtml, /onclick="openPolymarketAgent\(event\)"/);
+  assert.match(indexHtml, /function openPolymarketAgent\(e\)/);
+
+  // Ensure polymarket-live-banner only appears once (inside mobile-only, not in desktopMainContent)
+  const bannerMatches = indexHtml.match(/class="polymarket-live-banner"/g) || [];
+  assert.equal(bannerMatches.length, 1);
+
+  const css = fs.readFileSync(path.join(rootDir, 'css', 'responsive.css'), 'utf8');
+  assert.match(css, /@media\s*\(min-width:\s*768px\)\s*\{\s*\.polymarket-live-banner\s*\{\s*display:\s*none\s*!important;/);
+});
+

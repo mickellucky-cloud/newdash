@@ -37,7 +37,8 @@ const ICONS = {
   lock: '<svg class="i" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>',
   shield: '<svg class="i" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><path d="m9 12 2 2 4-4"></path></svg>',
   timer: '<svg class="i" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>',
-  bnb: '<svg width="20" height="20" viewBox="0 0 24 24" fill="#F3BA2F"><path d="M12 3.2L16.2 7.4L18.4 5.2L12 0L5.6 5.2L7.8 7.4L12 3.2ZM20.8 7.6L18.6 9.8L20.8 12L23 9.8L20.8 7.6ZM12 8.4L15.6 12L12 15.6L8.4 12L12 8.4ZM3.2 7.6L1 9.8L3.2 12L5.4 9.8L3.2 7.6ZM12 16.6L7.8 12.4L5.6 14.6L12 21L18.4 14.6L16.2 12.4L12 16.6ZM20.8 12L18.6 14.2L20.8 16.4L23 14.2L20.8 12ZM3.2 12L1 14.2L3.2 16.4L5.4 14.2L3.2 12Z"/></svg>',
+  bnb: '<img src="assets/bnb-logo.png" alt="BNB" class="bnb-logo-icon" width="20" height="20" style="width: 20px; height: 20px; object-fit: contain; display: inline-block; vertical-align: middle; flex: 0 0 auto;">',
+  bsc: '<img src="assets/bsc-logo.svg" alt="BNB Smart Chain" class="bsc-logo-icon" width="20" height="20" style="width: 20px; height: 20px; object-fit: contain; display: inline-block; vertical-align: middle; flex: 0 0 auto;">',
   alert: '<svg class="i" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>',
   trending: '<svg class="i" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>',
   target: '<svg class="i" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="6"></circle><circle cx="12" cy="12" r="2"></circle></svg>',
@@ -95,27 +96,6 @@ const desktopPortfolioMain = `
     <!-- Top Header & Tabs -->
     ${getPortfolioHeader('overview')}
 
-    <!-- Animated Polymarket Copy Agent Live Banner -->
-    <aside class="polymarket-live-banner" aria-label="Polymarket Announcement">
-      <div class="poly-banner-inner">
-        <div class="poly-banner-left">
-          <img src="assets/polymarket-banner.jpeg" alt="Polymarket" class="poly-banner-logo">
-          <div>
-            <div style="display: flex; align-items: center; gap: 8px;">
-              <span class="poly-live-badge"><span class="poly-live-dot"></span> LIVE NOW</span>
-              <span style="font-size: 11px; font-weight: 800; color: var(--cyan); background: rgba(9, 180, 255, 0.12); padding: 2px 8px; border-radius: 6px;">AI Prediction Copy</span>
-            </div>
-            <div style="font-size: 17px; font-weight: 800; color: var(--tx); margin-top: 3px;">Polymarket Copy Agent is Live!</div>
-            <div style="font-size: 12.5px; color: var(--mut); margin-top: 2px;">Automated prediction trading active · Mirror top prediction traders with 1-click execution.</div>
-          </div>
-        </div>
-        <a href="agents.html" class="poly-banner-btn">
-          <span>Open Copy Agent</span>
-          <svg class="i" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
-        </a>
-      </div>
-    </aside>
-
     <!-- Account Total Asset Valuation Hero Card with Hide/Unhide Toggle -->
     <div style="background: linear-gradient(135deg, rgba(122, 18, 245, 0.22) 0%, rgba(9, 180, 255, 0.12) 100%), var(--s1); border: 1px solid var(--line); border-radius: 24px; padding: 24px 28px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 18px; box-shadow: 0 4px 24px rgba(0,0,0,0.12);">
       <div style="display: flex; align-items: center; gap: 20px;">
@@ -145,7 +125,7 @@ const desktopPortfolioMain = `
           <div style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--mut);">Referral Earnings</div>
           <div style="display: flex; align-items: center; gap: 8px; margin-top: 2px;">
             <span class="num balance-display" data-value="$142.50 USD" style="font-size: 18px; font-weight: 800; color: var(--tx);">$142.50 USD</span>
-            <span style="font-size: 11px; font-weight: 700; color: #F3BA2F;">(0.238 BNB)</span>
+            <span style="font-size: 11px; font-weight: 700; color: #F0B90B; display: inline-flex; align-items: center; gap: 4px;"><img src="assets/bnb-logo.png" alt="BNB" style="width: 13px; height: 13px; object-fit: contain;">0.238 BNB</span>
           </div>
         </div>
         <div style="font-size: 12px; font-weight: 700; color: var(--vio-l); margin-left: 6px;">14 invites →</div>
@@ -521,25 +501,47 @@ mobileHome = mobileHome.replace(/100 pts/g, '135 pts');
 mobileHome = mobileHome.replace(/5-day streak/g, '6-day streak');
 mobileHome = mobileHome.replace(/5 days\. Longest: 5/g, '6 days. Longest: 6');
 const mobilePolymarketBanner = `
-  <aside class="polymarket-live-banner" aria-label="Polymarket Announcement" style="margin-bottom: 14px;">
+  <a href="agents.html#polymarket-agent-card" onclick="openPolymarketAgent(event)" class="polymarket-live-banner" aria-label="Open Polymarket Copy Agent">
+    <div class="poly-banner-glow-orb poly-orb-1"></div>
+    <div class="poly-banner-glow-orb poly-orb-2"></div>
+    <svg class="poly-topo-bg" viewBox="0 0 400 180" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M-40 30C40 10 90 85 180 65C270 45 320 -10 430 35" stroke="rgba(255,255,255,0.14)" stroke-width="1.2"/>
+      <path d="M-30 75C55 45 120 120 210 95C300 70 345 25 440 70" stroke="rgba(255,255,255,0.10)" stroke-width="1.2"/>
+      <path d="M-20 120C70 95 140 165 240 130C340 95 370 65 450 115" stroke="rgba(255,255,255,0.08)" stroke-width="1.2"/>
+      <circle cx="330" cy="42" r="58" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>
+      <circle cx="330" cy="42" r="32" stroke="rgba(255,255,255,0.13)" stroke-width="1" stroke-dasharray="3 3"/>
+    </svg>
     <div class="poly-banner-inner">
-      <div class="poly-banner-left">
-        <img src="assets/polymarket-banner.jpeg" alt="Polymarket" class="poly-banner-logo">
-        <div>
-          <div style="display: flex; align-items: center; gap: 6px;">
-            <span class="poly-live-badge"><span class="poly-live-dot"></span> LIVE</span>
-            <span style="font-size: 10.5px; font-weight: 800; color: var(--cyan);">AI Copy Agent</span>
-          </div>
-          <div style="font-size: 15px; font-weight: 800; color: var(--tx); margin-top: 2px;">Polymarket Copy Agent is Live!</div>
-          <div style="font-size: 11.5px; color: var(--mut); margin-top: 1px;">Copy winning prediction trades automatically.</div>
+      <div class="poly-banner-top-row">
+        <span class="poly-live-badge"><span class="poly-live-dot"></span> LIVE COPY AGENT</span>
+        <span class="poly-roi-pill">+38.4% 7D ROI · 78% Win</span>
+      </div>
+      <div class="poly-banner-main-row">
+        <div class="poly-logo-frame">
+          <img src="assets/polymarket.png" alt="Polymarket" class="poly-banner-logo">
+          <span class="poly-logo-ring"></span>
+        </div>
+        <div class="poly-banner-copy">
+          <div class="poly-banner-title">Polymarket <span class="poly-title-highlight">Copy Agent</span> is Live!</div>
+          <div class="poly-banner-sub">Auto-mirror top 1% prediction whales in real time with 1-click execution.</div>
         </div>
       </div>
-      <a href="agents.html" class="poly-banner-btn">
-        <span>Open Agent</span>
-        <svg class="i" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
-      </a>
+      <div class="poly-banner-action-row">
+        <div class="poly-whale-ticker">
+          <div class="poly-whale-avatars">
+            <span class="poly-whale-av" style="background:linear-gradient(135deg,#1652F0,#38BDF8);">0x</span>
+            <span class="poly-whale-av" style="background:linear-gradient(135deg,#10B981,#059669);">W1</span>
+            <span class="poly-whale-av" style="background:linear-gradient(135deg,#8B5CF6,#6D28D9);">+9</span>
+          </div>
+          <span class="poly-whale-text">142 whales mirrored</span>
+        </div>
+        <span class="poly-banner-cta">
+          <span>Open Agent</span>
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+        </span>
+      </div>
     </div>
-  </aside>
+  </a>
 `;
 
 const mobileHomeHeroTotalCard = `
@@ -569,7 +571,7 @@ const mobileHomeHeroTotalCard = `
           <div style="font-size: 11px; font-weight: 600; color: rgba(240, 230, 255, 0.85);">Referral Earnings</div>
           <div style="display: flex; align-items: center; gap: 6px;">
             <span class="num balance-display" data-value="$142.50 USD" style="font-size: 14px; font-weight: 800; color: #FFFFFF;">$142.50 USD</span>
-            <span style="font-size: 10.5px; font-weight: 700; color: #FFD60A;">(0.238 BNB)</span>
+            <span style="font-size: 10.5px; font-weight: 700; color: #FFD60A; display: inline-flex; align-items: center; gap: 3px;"><img src="assets/bnb-logo.png" alt="BNB" style="width: 12px; height: 12px; object-fit: contain;">(0.238 BNB)</span>
           </div>
         </div>
       </div>
@@ -586,7 +588,7 @@ mobileHome = mobileHome.replace(
   /<div data-dc-tpl="31"[\s\S]*?<\/button>\s*<\/div>/i,
   mobileHomeHeroTotalCard
 );
-// Insert Animated Polymarket live announcement banner at the top of Home main
+// Insert Animated Polymarket live announcement banner at the top of Home main (mobile only)
 mobileHome = mobileHome.replace(
   /<main[^>]*>/i,
   m => m + mobilePolymarketBanner
@@ -633,12 +635,36 @@ const mobileClaim = getMobileBoard('Claim.html')
   );
 
 const mobileBuy = getMobileBoard('Buy.html')
+  .replace(/<span data-dc-tpl="39"[^>]*><\/span>BNB/i, `<img src="assets/bnb-logo.png" alt="BNB" style="width: 22px; height: 22px; object-fit: contain;">BNB`)
+  .replace(/BSC Testnet \(Chain 97\)/i, `<span style="display:inline-flex;align-items:center;gap:6px;"><img src="assets/bsc-logo.svg" alt="BSC" style="width:16px;height:16px;object-fit:contain;">BSC Testnet (Chain 97)</span>`)
   .replace(/<button data-dc-tpl="61"/i, '<button data-dc-tpl="61" onclick="openWalletModal()"')
   .replace(/<a data-dc-tpl="75" href="#"/i, '<a data-dc-tpl="75" href="https://testnet.bnbchain.org/faucet-smart" target="_blank" rel="noopener noreferrer"');
 
 const mobileAgents = getMobileBoard('Agents.html')
-  .replace(/<main[^>]*>/i, m => m + mobilePolymarketBanner)
-  .replace(/<span data-dc-tpl="56"[^>]*>.*?<\/span><div data-dc-tpl="60"/s, '<img src="assets/polymarket.png" alt="Polymarket" style="width: 44px; height: 44px; border-radius: 14px; object-fit: contain; box-shadow: 0 4px 14px rgba(9, 180, 255, 0.25); flex: 0 0 auto;"><div data-dc-tpl="60"')
+  .replace(
+    /<section data-dc-tpl="54"[\s\S]*?<\/section>/i,
+    `<section id="polymarket-agent-card-mobile" data-dc-tpl="54" onclick="openPolymarketAgent(event)" style="padding: 18px; border-radius: 24px; background: linear-gradient(145deg, rgba(22, 82, 240, 0.18) 0%, var(--s1) 100%); border: 1.5px solid rgba(22, 82, 240, 0.55); box-shadow: 0 10px 28px rgba(22, 82, 240, 0.16); cursor: pointer; position: relative; overflow: hidden;">
+      <div data-dc-tpl="55" style="display: flex; align-items: center; gap: 12px;">
+        <img src="assets/polymarket.png" alt="Polymarket" style="width: 46px; height: 46px; border-radius: 14px; object-fit: cover; box-shadow: 0 6px 16px rgba(22, 82, 240, 0.45); flex: 0 0 auto; border: 1px solid rgba(255,255,255,0.22);">
+        <div data-dc-tpl="60" style="flex: 1 1 0%; min-width: 0px;">
+          <div data-dc-tpl="61" style="font-size: 16px; font-weight: 800; color: var(--tx);">Polymarket Copy Agent</div>
+          <div data-dc-tpl="62" style="font-size: 12px; color: var(--mut); margin-top: 2px; font-weight: 600;">Automated whale prediction mirroring</div>
+        </div>
+        <span data-dc-tpl="63" style="height: 26px; padding: 0px 10px; border-radius: 13px; background: rgba(16, 185, 129, 0.18); color: #34D399; border: 1px solid rgba(16, 185, 129, 0.4); font-size: 10.5px; font-weight: 800; display: inline-flex; align-items: center; gap: 5px; white-space: nowrap;"><span style="width:6px;height:6px;border-radius:50%;background:#10B981;display:inline-block;"></span>LIVE NOW</span>
+      </div>
+      <div data-dc-tpl="64" style="font-size: 12.5px; line-height: 1.55; color: var(--mut); margin-top: 10px; font-weight: 600;">24/7 whale wallet tracking, probability edge scoring, and 1-click automated copy execution on Polymarket outcome shares.</div>
+      <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--line); gap: 10px;">
+        <div style="display: flex; gap: 12px; font-size: 11.5px; font-weight: 800;">
+          <span style="color: #34D399;">+38.4% 7D ROI</span>
+          <span style="color: var(--cyan);">78.4% Win Rate</span>
+        </div>
+        <button type="button" onclick="openPolymarketAgent(event)" style="height: 34px; padding: 0 14px; border-radius: 10px; background: #1652F0; color: #FFFFFF; font-size: 12px; font-weight: 800; border: none; display: inline-flex; align-items: center; gap: 6px; cursor: pointer; box-shadow: 0 4px 12px rgba(22, 82, 240, 0.4);">
+          <span>Open Agent</span>
+          ${ICONS.arrowRight}
+        </button>
+      </div>
+    </section>`
+  )
   .replace(/<a data-dc-tpl="65" href="#"/i, '<a data-dc-tpl="65" href="missions.html"')
   .replace(/<a data-dc-tpl="76" href="#"/i, '<a data-dc-tpl="76" href="leaderboard.html"')
   .replace(/<a data-dc-tpl="79" href="#"/i, '<a data-dc-tpl="79" href="missions.html"')
@@ -987,7 +1013,7 @@ const desktopBuyMain = `
             <div style="font-size: 17px; font-weight: 800; color: var(--tx);">Web3 BSC Native Checkout</div>
             <div style="font-size: 12.5px; color: var(--mut); margin-top: 2px;">Direct smart contract presale swap on BNB Smart Chain.</div>
           </div>
-          <span style="font-size: 11px; font-weight: 700; background: rgba(243,186,47,0.15); color: #F3BA2F; padding: 4px 10px; border-radius: 8px;">BSC Chain 97 / 56</span>
+          <span style="font-size: 11px; font-weight: 700; background: rgba(240,185,11,0.14); color: #F0B90B; padding: 5px 10px; border-radius: 8px; display: inline-flex; align-items: center; gap: 6px; border: 1px solid rgba(240,185,11,0.28);">${ICONS.bsc} <span>BSC Chain 97 / 56</span></span>
         </div>
 
         <div style="background: var(--s2); border: 1px solid var(--line); border-radius: 18px; padding: 16px; margin-bottom: 12px;">
@@ -1276,8 +1302,8 @@ const desktopBuyMain = `
           </div>
 
           <div style="display: flex; align-items: center; gap: 12px;">
-            <div style="width: 32px; height: 32px; border-radius: 10px; background: rgba(243,186,47,0.14); color: #F3BA2F; display: flex; align-items: center; justify-content: center; flex: 0 0 auto;">
-              ${ICONS.bnb}
+            <div style="width: 32px; height: 32px; border-radius: 10px; background: rgba(240,185,11,0.14); color: #F0B90B; display: flex; align-items: center; justify-content: center; flex: 0 0 auto;">
+              ${ICONS.bsc}
             </div>
             <div>
               <div style="font-weight: 700; font-size: 13px;">BNB Smart Chain EVM</div>
@@ -1290,7 +1316,7 @@ const desktopBuyMain = `
         <div class="infra-mobile-pills">
           <div class="infra-pill">${ICONS.nowpayments} <span>NOWPayments (300+ Crypto)</span></div>
           <div class="infra-pill">${ICONS.shield} <span>Visa & MC 3DS</span></div>
-          <div class="infra-pill">${ICONS.bnb} <span>BNB Smart Chain</span></div>
+          <div class="infra-pill">${ICONS.bsc} <span>BNB Smart Chain</span></div>
         </div>
       </div>
     </div>
@@ -1310,31 +1336,10 @@ const desktopBuyMain = `
 
 // 4. Agents Desktop
 const desktopAgentsMain = `
-  <!-- Animated Polymarket Copy Agent Live Banner -->
-  <aside class="polymarket-live-banner" aria-label="Polymarket Announcement" style="margin-bottom: 24px;">
-    <div class="poly-banner-inner">
-      <div class="poly-banner-left">
-        <img src="assets/polymarket-banner.jpeg" alt="Polymarket" class="poly-banner-logo">
-        <div>
-          <div style="display: flex; align-items: center; gap: 8px;">
-            <span class="poly-live-badge"><span class="poly-live-dot"></span> LIVE NOW</span>
-            <span style="font-size: 11px; font-weight: 800; color: var(--cyan); background: rgba(9, 180, 255, 0.12); padding: 2px 8px; border-radius: 6px;">AI Prediction Copy</span>
-          </div>
-          <div style="font-size: 17px; font-weight: 800; color: var(--tx); margin-top: 3px;">Polymarket Copy Agent is Live!</div>
-          <div style="font-size: 12.5px; color: var(--mut); margin-top: 2px;">Automated prediction trading active · Mirror top prediction traders with 1-click execution.</div>
-        </div>
-      </div>
-      <a href="#polymarket-agent-card" class="poly-banner-btn">
-        <span>View Agent</span>
-        <svg class="i" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
-      </a>
-    </div>
-  </aside>
-
   <section style="background: var(--vio); color: #fff; border-radius: 28px; padding: 32px 36px; margin-bottom: 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.12);">
-    <div style="font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.8; margin-bottom: 6px;">Protocol Roadmap</div>
-    <h1 style="font-size: 32px; font-weight: 800; margin: 0 0 8px; letter-spacing: -0.02em;">Coming to OKN</h1>
-    <p style="font-size: 15px; opacity: 0.85; margin: 0; max-width: 650px;">Four flagship Web3 AI and staking features are currently being built. Nothing on this page trades or stakes yet.</p>
+    <div style="font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.8; margin-bottom: 6px;">Protocol Roadmap & Live Agents</div>
+    <h1 style="font-size: 32px; font-weight: 800; margin: 0 0 8px; letter-spacing: -0.02em;">OKN Autonomous Suite</h1>
+    <p style="font-size: 15px; opacity: 0.85; margin: 0; max-width: 650px;">Our Polymarket Copy Agent is live now. Additional Web3 AI trading and staking modules are actively rolling out.</p>
   </section>
 
   <div class="resp-grid-2" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin-bottom: 24px;">
@@ -1372,18 +1377,28 @@ const desktopAgentsMain = `
       <p style="font-size: 13px; color: var(--mut); line-height: 1.6; margin: 0;">24/7 autonomous market scanning, entry/target levels, and stop loss execution with risk-managed sizing.</p>
     </div>
 
-    <div style="background: var(--s1); border: 1px solid var(--line); border-radius: 24px; padding: 28px;">
+    <div id="polymarket-agent-card" onclick="openPolymarketAgent(event)" style="background: linear-gradient(145deg, rgba(22, 82, 240, 0.14) 0%, var(--s1) 100%); border: 1.5px solid rgba(22, 82, 240, 0.55); border-radius: 24px; padding: 28px; cursor: pointer; position: relative; box-shadow: 0 12px 32px rgba(22, 82, 240, 0.14); transition: transform 0.2s ease, box-shadow 0.2s ease;">
       <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px;">
         <div style="display: flex; align-items: center; gap: 12px;">
-          <img src="assets/polymarket.png" alt="Polymarket" style="width: 44px; height: 44px; border-radius: 14px; object-fit: contain; box-shadow: 0 4px 14px rgba(9, 180, 255, 0.25); flex-shrink: 0;">
+          <img src="assets/polymarket.png" alt="Polymarket" style="width: 46px; height: 46px; border-radius: 14px; object-fit: cover; box-shadow: 0 6px 16px rgba(22, 82, 240, 0.4); flex-shrink: 0; border: 1px solid rgba(255,255,255,0.2);">
           <div>
-            <div style="font-size: 18px; font-weight: 800;">Polymarket Agent</div>
-            <div style="font-size: 13px; color: var(--mut);">Automated prediction positioning</div>
+            <div style="font-size: 18px; font-weight: 800; color: var(--tx);">Polymarket Copy Agent</div>
+            <div style="font-size: 13px; color: var(--mut);">Automated whale prediction positioning</div>
           </div>
         </div>
-        <span style="font-size: 11px; font-weight: 800; padding: 4px 10px; border-radius: 20px; background: rgba(255,170,0,0.15); color: var(--org);">In development</span>
+        <span style="font-size: 11px; font-weight: 800; padding: 5px 11px; border-radius: 20px; background: rgba(16, 185, 129, 0.16); color: #34D399; border: 1px solid rgba(16, 185, 129, 0.35); display: inline-flex; align-items: center; gap: 6px;"><span style="width: 7px; height: 7px; border-radius: 50%; background: #10B981;"></span>LIVE NOW</span>
       </div>
-      <p style="font-size: 13px; color: var(--mut); line-height: 1.6; margin: 0;">Continuous probability tracking, news-velocity sentiment monitoring, and automated hedging.</p>
+      <p style="font-size: 13px; color: var(--mut); line-height: 1.6; margin: 0 0 18px;">Continuous probability tracking, whale wallet mirroring, news-velocity sentiment monitoring, and automated 1-click hedging.</p>
+      <div style="display: flex; align-items: center; justify-content: space-between; padding-top: 14px; border-top: 1px solid var(--line); gap: 12px;">
+        <div style="display: flex; gap: 14px; font-size: 12px; font-weight: 800;">
+          <span style="color: #34D399;">+38.4% 7D ROI</span>
+          <span style="color: var(--cyan);">78.4% Win Rate</span>
+        </div>
+        <button type="button" onclick="openPolymarketAgent(event)" style="height: 36px; padding: 0 16px; border-radius: 10px; background: #1652F0; color: #FFFFFF; font-size: 12.5px; font-weight: 800; border: none; display: inline-flex; align-items: center; gap: 6px; cursor: pointer; box-shadow: 0 4px 14px rgba(22, 82, 240, 0.4);">
+          <span>Launch Copy Agent</span>
+          ${ICONS.arrowRight}
+        </button>
+      </div>
     </div>
 
     <div style="background: var(--s1); border: 1px solid var(--line); border-radius: 24px; padding: 28px;">
@@ -1754,6 +1769,7 @@ const desktopWalletMain = `
           <div class="num" style="font-size: 28px; font-weight: 800; line-height: 1.15; margin-top: 2px;">0x71C...49A1</div>
         </div>
         <div style="background: rgba(255,255,255,0.16); backdrop-filter: blur(10px); padding: 8px 14px; border-radius: 12px; display: inline-flex; align-items: center; gap: 8px;">
+          ${ICONS.bsc}
           <span style="width: 8px; height: 8px; border-radius: 50%; background: var(--ok); flex-shrink: 0;"></span>
           <span style="font-size: 13px; font-weight: 700; white-space: nowrap;">BNB Smart Chain (Testnet)</span>
         </div>
