@@ -50,7 +50,17 @@ const ICONS = {
   coins: '<svg class="i" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="6"></circle><path d="M18.09 10.37A6 6 0 1 1 10.34 18"></path><path d="M7 6h1v4"></path><path d="m16.71 13.88.7.71-2.82 2.82"></path></svg>',
   listChecks: '<svg class="i" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 17 2 2 4-4"></path><path d="m3 7 2 2 4-4"></path><path d="M13 6h8"></path><path d="M13 12h8"></path><path d="M13 18h8"></path></svg>',
   users: '<svg class="i" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>',
-  cart: '<svg class="i" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="21" r="1"></circle><circle cx="19" cy="21" r="1"></circle><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"></path></svg>'
+  cart: '<svg class="i" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="21" r="1"></circle><circle cx="19" cy="21" r="1"></circle><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"></path></svg>',
+  nowpayments: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>',
+  creditCard: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>',
+  visa: '<svg width="32" height="20" viewBox="0 0 48 30" fill="none"><rect width="48" height="30" rx="4" fill="#1A1F71"/><text x="8" y="21" font-family="sans-serif" font-weight="900" font-size="16" fill="#FFFFFF" font-style="italic">VISA</text></svg>',
+  mastercard: '<svg width="32" height="20" viewBox="0 0 48 30" fill="none"><rect width="48" height="30" rx="4" fill="#222"/><circle cx="19" cy="15" r="9" fill="#EB001B"/><circle cx="29" cy="15" r="9" fill="#F79E1B" fill-opacity="0.85"/></svg>',
+  apple: '<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.84c.64-.78 1.08-1.87.96-2.96-.93.04-2.06.62-2.73 1.4-.58.67-1.09 1.77-.96 2.84 1.04.08 2.09-.5 2.73-1.28z"/></svg>',
+  google: '<svg width="18" height="18" viewBox="0 0 24 24"><path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.665-5.17 3.665-9.17Z"/><path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.25v3.15C3.26 21.36 7.33 24 12 24Z"/><path fill="#FBBC05" d="M5.28 14.27c-.25-.72-.38-1.49-.38-2.27s.13-1.55.38-2.27V6.58H1.25C.45 8.18 0 9.99 0 12s.45 3.82 1.25 5.42l4.03-3.15Z"/><path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.33 0 3.26 2.64 1.25 6.58l4.03 3.15c.95-2.83 3.6-4.98 6.72-4.98Z"/></svg>',
+  usdt: '<svg width="18" height="18" viewBox="0 0 24 24" fill="#26A17B"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm1.385 13.785v3.834h-2.77v-3.834c-3.105-.18-5.35-1.042-5.35-2.075 0-1.034 2.245-1.895 5.35-2.075V7.47h2.77v2.165c3.105.18 5.35 1.041 5.35 2.075 0 1.033-2.245 1.895-5.35 2.075zm0-2.002c2.45-.145 4.095-.694 4.095-1.143 0-.45-1.645-.998-4.095-1.143v2.286zm-2.77-2.286c-2.45.145-4.095.694-4.095 1.143 0 .45 1.645.998 4.095 1.143v-2.286z"/></svg>',
+  btc: '<svg width="18" height="18" viewBox="0 0 24 24" fill="#F7931A"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm3.87 9.42c-.22 1.48-1.13 2.15-2.38 2.37 1.58.46 2.17 1.5 1.84 3.16-.44 2.16-2.12 2.76-4.52 2.76v2.19h-1.42v-2.15H8v-1.43h1.39V7.67H8V6.24h1.39V4.1h1.42v2.12c1.78.04 3.75-.12 4.67 1.25.32.48.43 1.14.39 1.95zm-3.32-.44c0-1.17-.96-1.44-2.13-1.42v2.85c1.17.02 2.13-.26 2.13-1.43zm.32 4.88c0-1.32-1.08-1.6-2.45-1.58v3.17c1.37.01 2.45-.27 2.45-1.59z"/></svg>',
+  eth: '<svg width="18" height="18" viewBox="0 0 24 24" fill="#627EEA"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm.065 4.5l5.228 8.683-5.228 3.09-5.227-3.09 5.227-8.683zm0 12.87l5.233-3.1-5.233 7.23-5.233-7.23 5.233 3.1z"/></svg>',
+  sol: '<svg width="18" height="18" viewBox="0 0 24 24" fill="#9945FF"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zM6.5 15.8h8.8l2.2-2.3H8.7L6.5 15.8zm2.2-5.3h8.8l2.2-2.3H8.7L6.5 8.2h8.8l2.2 2.3zm0 2.8H17.5l-2.2-2.3H6.5l2.2 2.3z"/></svg>'
 };
 
 // Helper for Portfolio / Activity / Holdings segmented header
@@ -235,8 +245,8 @@ const desktopPortfolioMain = `
         <!-- Buy $OKN with BNB Card -->
         <div style="background: var(--s1); border: 1px solid var(--line); border-radius: 20px; padding: 24px; box-shadow: 0 1px 3px rgba(0,0,0,0.06);">
           <div style="margin-bottom: 18px;">
-            <h3 style="font-size: 18px; font-weight: 800; color: var(--tx); margin: 0 0 6px;">Buy $OKN with BNB</h3>
-            <p style="font-size: 13px; color: var(--mut); line-height: 1.5; margin: 0;">Fixed rate: 0 $OKN per BNB (sale paused)</p>
+            <h3 style="font-size: 18px; font-weight: 800; color: var(--tx); margin: 0 0 6px;">Buy $OKN Presale</h3>
+            <p style="font-size: 13px; color: var(--mut); line-height: 1.5; margin: 0;">Multi-Gateway: Web3 BNB, NOWPayments (300+ crypto), & Credit Card</p>
           </div>
           <a href="buy.html" style="display: inline-flex; align-items: center; gap: 10px; height: 42px; padding: 0 20px; border-radius: 12px; background: var(--s2); border: 1px solid var(--line); color: var(--tx); font-weight: 800; font-size: 13px; text-decoration: none; transition: background 0.2s ease;">
             ${ICONS.cart}
@@ -735,82 +745,373 @@ const desktopClaimMain = `
   </div>
 `;
 
-// 3. Buy Desktop
+// 3. Buy Desktop & Mobile Multi-Gateway Engine
 const desktopBuyMain = `
-  <section style="background: var(--vio); color: #fff; border-radius: 28px; padding: 32px 36px; margin-bottom: 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.12);">
-    <div style="font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.8; margin-bottom: 6px;">Presale Allocation</div>
-    <div style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 16px;">
+  <section class="buy-hero" style="background: var(--vio); color: #fff; border-radius: 28px; padding: 26px 30px; margin-bottom: 20px; box-shadow: 0 4px 20px rgba(122,18,245,0.22);">
+    <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 14px;">
       <div>
-        <div style="font-size: 14px; opacity: 0.85;">Fixed Sale Rate</div>
-        <div class="num" style="font-size: 38px; font-weight: 800; line-height: 1.1; margin-top: 4px;">1,000,000 <span style="font-size: 18px; font-weight: 700; opacity: 0.85;">$OKN per 1 BNB</span></div>
+        <div class="buy-hero-sub" style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.85; margin-bottom: 4px;">Presale Allocation</div>
+        <div class="num buy-hero-title" style="font-size: 32px; font-weight: 800; line-height: 1.15; margin: 0 0 4px;">Buy $OKN Tokens</div>
+        <div class="buy-hero-desc" style="font-size: 13.5px; opacity: 0.9; max-width: 540px;">Select your preferred payment gateway: Web3 Wallet (BNB), NOWPayments Crypto Gateway (300+ coins), or Credit/Debit Card.</div>
       </div>
-      <div style="font-size: 12px; font-weight: 800; padding: 6px 14px; border-radius: 12px; background: rgba(0,0,0,0.25); color: #fff; display: flex; align-items: center; gap: 8px;">
-        ${ICONS.lock}
-        <span>Private test: buying is open to admins only</span>
+      <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 6px;">
+        <div class="buy-hero-badge" style="font-size: 12px; font-weight: 800; padding: 6px 14px; border-radius: 12px; background: rgba(0,0,0,0.25); color: #fff; display: flex; align-items: center; gap: 8px;">
+          ${ICONS.shield}
+          <span>Fixed Rate: 1,000,000 $OKN per 1 BNB (~$0.00060 / $OKN)</span>
+        </div>
+        <div class="buy-hero-footer" style="font-size: 11px; opacity: 0.85;">Instant token custody upon confirmed payment</div>
       </div>
     </div>
   </section>
 
-  <div class="resp-grid-2" style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 24px;">
-    <div style="background: var(--s1); border: 1px solid var(--line); border-radius: 24px; padding: 28px;">
-      <div style="font-size: 16px; font-weight: 800; margin-bottom: 20px;">Buy $OKN</div>
+  <!-- Gateway Selector Tabs -->
+  <div class="gateway-tabs" role="tablist" aria-label="Select Payment Gateway">
+    <button type="button" class="gateway-tab active" data-gw="web3" onclick="switchPaymentGateway('web3')">
+      ${ICONS.bnb}
+      <span class="tab-label-full">Web3 (BNB)</span>
+      <span class="tab-label-short">Web3 BNB</span>
+    </button>
+    <button type="button" class="gateway-tab" data-gw="nowpayments" onclick="switchPaymentGateway('nowpayments')">
+      ${ICONS.nowpayments}
+      <span class="tab-label-full">NOWPayments (Crypto)</span>
+      <span class="tab-label-short">Crypto (300+)</span>
+      <span class="gateway-tab-badge" style="font-size: 10px; background: rgba(9,180,255,0.18); color: var(--cyan); padding: 2px 6px; border-radius: 6px; font-weight: 800;">300+ Coins</span>
+    </button>
+    <button type="button" class="gateway-tab" data-gw="card" onclick="switchPaymentGateway('card')">
+      ${ICONS.creditCard}
+      <span class="tab-label-full">Credit / Debit Card</span>
+      <span class="tab-label-short">Card / Pay</span>
+      <span class="gateway-tab-badge" style="font-size: 10px; background: rgba(47,189,142,0.18); color: var(--ok); padding: 2px 6px; border-radius: 6px; font-weight: 800;">Visa / MC</span>
+    </button>
+  </div>
+
+  <div class="resp-grid-2" style="display: grid; grid-template-columns: 1.25fr 0.75fr; gap: 20px; margin-bottom: 24px;">
+    <!-- Left Column: Active Gateway Form Panel -->
+    <div style="background: var(--s1); border: 1px solid var(--line); border-radius: 24px; padding: 26px; position: relative;">
       
-      <div style="background: var(--s2); border: 1px solid var(--line); border-radius: 18px; padding: 16px; margin-bottom: 12px;">
-        <div style="font-size: 12px; color: var(--mut); margin-bottom: 6px; font-weight: 600;">You pay</div>
-        <div style="display: flex; justify-content: space-between; align-items: center;">
-          <input type="text" aria-label="BNB amount to pay" value="0.1" style="background: transparent; border: none; color: var(--tx); font-size: 24px; font-weight: 800; width: 60%; outline: none;">
-          <span style="font-weight: 800; font-size: 14px; display: flex; align-items: center; gap: 8px;">${ICONS.bnb} BNB</span>
+      <!-- Panel 1: Web3 (BNB) -->
+      <div id="panel-web3" class="gateway-panel">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px;">
+          <div>
+            <div style="font-size: 17px; font-weight: 800; color: var(--tx);">Web3 BSC Native Checkout</div>
+            <div style="font-size: 12.5px; color: var(--mut); margin-top: 2px;">Direct smart contract presale swap on BNB Smart Chain.</div>
+          </div>
+          <span style="font-size: 11px; font-weight: 700; background: rgba(243,186,47,0.15); color: #F3BA2F; padding: 4px 10px; border-radius: 8px;">BSC Chain 97 / 56</span>
         </div>
-        <div style="display: flex; gap: 8px; margin-top: 12px;">
-          <button style="flex: 1; padding: 6px 0; border-radius: 8px; background: var(--s1); border: 1px solid var(--line); color: var(--tx); font-size: 11px; font-weight: 700; cursor: pointer;">0.1</button>
-          <button style="flex: 1; padding: 6px 0; border-radius: 8px; background: var(--s1); border: 1px solid var(--line); color: var(--tx); font-size: 11px; font-weight: 700; cursor: pointer;">0.5</button>
-          <button style="flex: 1; padding: 6px 0; border-radius: 8px; background: var(--s1); border: 1px solid var(--line); color: var(--tx); font-size: 11px; font-weight: 700; cursor: pointer;">1</button>
-          <button style="flex: 1; padding: 6px 0; border-radius: 8px; background: var(--s1); border: 1px solid var(--line); color: var(--tx); font-size: 11px; font-weight: 700; cursor: pointer;">Max 10</button>
+
+        <div style="background: var(--s2); border: 1px solid var(--line); border-radius: 18px; padding: 16px; margin-bottom: 12px;">
+          <div style="font-size: 12px; color: var(--mut); margin-bottom: 6px; font-weight: 600;">You pay</div>
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <input type="text" id="buy-bnb-amt" aria-label="BNB amount to pay" value="0.1" oninput="calcTokens(this.value, 'bnb')" style="background: transparent; border: none; color: var(--tx); font-size: 26px; font-weight: 800; width: 60%; outline: none; font-family: Sora, sans-serif;">
+            <span style="font-weight: 800; font-size: 15px; display: flex; align-items: center; gap: 8px;">${ICONS.bnb} BNB</span>
+          </div>
+          <div style="display: flex; gap: 8px; margin-top: 12px;">
+            <button type="button" onclick="setBnbPreset(0.1)" style="flex: 1; padding: 8px 0; border-radius: 10px; background: var(--s1); border: 1px solid var(--line); color: var(--tx); font-size: 12px; font-weight: 700; cursor: pointer;">0.1</button>
+            <button type="button" onclick="setBnbPreset(0.5)" style="flex: 1; padding: 8px 0; border-radius: 10px; background: var(--s1); border: 1px solid var(--line); color: var(--tx); font-size: 12px; font-weight: 700; cursor: pointer;">0.5</button>
+            <button type="button" onclick="setBnbPreset(1.0)" style="flex: 1; padding: 8px 0; border-radius: 10px; background: var(--s1); border: 1px solid var(--line); color: var(--tx); font-size: 12px; font-weight: 700; cursor: pointer;">1.0</button>
+            <button type="button" onclick="setBnbPreset(5.0)" style="flex: 1; padding: 8px 0; border-radius: 10px; background: var(--s1); border: 1px solid var(--line); color: var(--tx); font-size: 12px; font-weight: 700; cursor: pointer;">5.0</button>
+            <button type="button" onclick="setBnbPreset(10.0)" style="flex: 1; padding: 8px 0; border-radius: 10px; background: var(--s1); border: 1px solid var(--line); color: var(--vio-l); font-size: 12px; font-weight: 800; cursor: pointer;">Max 10</button>
+          </div>
         </div>
+
+        <div style="background: var(--s2); border: 1px solid var(--line); border-radius: 18px; padding: 16px; margin-bottom: 20px;">
+          <div style="font-size: 12px; color: var(--mut); margin-bottom: 6px; font-weight: 600;">You receive</div>
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <div id="buy-receive-bnb" class="num" style="font-size: 26px; font-weight: 800; color: var(--vio-l);">~100,000</div>
+            <span style="font-weight: 800; font-size: 14px; display: flex; align-items: center; gap: 6px;">${logoImgDesktop} $OKN</span>
+          </div>
+        </div>
+
+        <button type="button" onclick="executeWeb3Buy()" id="btn-web3-action" style="width: 100%; height: 50px; border-radius: 14px; background: var(--vio); color: #fff; font-weight: 800; font-size: 15px; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; transition: transform 0.15s ease;">
+          ${ICONS.wallet}
+          <span id="btn-web3-text">Connect wallet to buy</span>
+        </button>
       </div>
 
-      <div style="background: var(--s2); border: 1px solid var(--line); border-radius: 18px; padding: 16px; margin-bottom: 20px;">
-        <div style="font-size: 12px; color: var(--mut); margin-bottom: 6px; font-weight: 600;">You receive</div>
-        <div style="display: flex; justify-content: space-between; align-items: center;">
-          <div class="num" style="font-size: 24px; font-weight: 800; color: var(--vio-l);">~100,000</div>
-          <span style="font-weight: 800; font-size: 14px; display: flex; align-items: center; gap: 6px;">${logoImgDesktop} $OKN</span>
+      <!-- Panel 2: NOWPayments Crypto Gateway -->
+      <div id="panel-nowpayments" class="gateway-panel" style="display: none;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+          <div>
+            <div style="font-size: 17px; font-weight: 800; color: var(--tx);">NOWPayments Multi-Crypto Gateway</div>
+            <div style="font-size: 12.5px; color: var(--mut); margin-top: 2px;">Pay with USDT, BTC, ETH, SOL, USDC & 300+ cryptocurrencies.</div>
+          </div>
+          <span style="font-size: 11px; font-weight: 800; background: rgba(9,180,255,0.15); color: var(--cyan); padding: 4px 10px; border-radius: 8px;">Auto-Convert</span>
         </div>
+
+        <!-- Coin selector pills -->
+        <div style="font-size: 12px; font-weight: 700; color: var(--mut); margin-bottom: 8px;">Choose cryptocurrency:</div>
+        <div class="coin-badge-grid">
+          <button type="button" class="coin-badge active" data-coin="USDT_TRC20" onclick="selectNowCoin('USDT_TRC20', 'USDT', 'TRC-20', 'TRON', 1)">
+            ${ICONS.usdt} <span>USDT (TRC20)</span>
+          </button>
+          <button type="button" class="coin-badge" data-coin="USDT_BEP20" onclick="selectNowCoin('USDT_BEP20', 'USDT', 'BEP-20', 'BSC', 1)">
+            ${ICONS.usdt} <span>USDT (BEP20)</span>
+          </button>
+          <button type="button" class="coin-badge" data-coin="BTC" onclick="selectNowCoin('BTC', 'BTC', 'Bitcoin', 'BTC', 65000)">
+            ${ICONS.btc} <span>BTC</span>
+          </button>
+          <button type="button" class="coin-badge" data-coin="ETH" onclick="selectNowCoin('ETH', 'ETH', 'ERC-20', 'Ethereum', 3200)">
+            ${ICONS.eth} <span>ETH</span>
+          </button>
+          <button type="button" class="coin-badge" data-coin="SOL" onclick="selectNowCoin('SOL', 'SOL', 'Solana', 'SOL', 180)">
+            ${ICONS.sol} <span>SOL</span>
+          </button>
+          <button type="button" class="coin-badge" data-coin="USDC" onclick="selectNowCoin('USDC', 'USDC', 'Multi-chain', 'USDC', 1)">
+            <svg width="18" height="18" viewBox="0 0 32 32" fill="#2775CA"><circle cx="16" cy="16" r="16"/><path d="M16 6a10 10 0 100 20 10 10 0 000-20zm1.2 14.8c-1.8 0-2.8-.7-3.1-1.8l1.7-.7c.2.6.7 1 1.4 1 .8 0 1.3-.4 1.3-1 0-.6-.4-.9-1.5-1.2-1.8-.4-2.8-1.1-2.8-2.4 0-1.5 1.1-2.4 2.8-2.4 1.5 0 2.4.6 2.8 1.6l-1.6.7c-.2-.5-.6-.8-1.2-.8-.7 0-1.1.4-1.1.9s.4.8 1.4 1.1c1.9.5 2.9 1.1 2.9 2.5.1 1.7-1.1 2.6-3 2.6z" fill="#fff"/></svg>
+            <span>USDC</span>
+          </button>
+          <button type="button" class="coin-badge" data-coin="BNB_CRYPTO" onclick="selectNowCoin('BNB_CRYPTO', 'BNB', 'BEP-20', 'BSC', 600)">
+            ${ICONS.bnb} <span>BNB</span>
+          </button>
+          <button type="button" class="coin-badge" data-coin="LTC" onclick="selectNowCoin('LTC', 'LTC', 'Litecoin', 'LTC', 85)">
+            <svg width="18" height="18" viewBox="0 0 32 32" fill="#345D9D"><circle cx="16" cy="16" r="16"/><path d="M14.5 9h3l-2.1 7.5h3.6l-.7 2.5h-3.6l-1.5 5h7.2l-.7 2.5h-10l4.8-17.5z" fill="#fff"/></svg>
+            <span>LTC</span>
+          </button>
+        </div>
+
+        <div style="background: var(--s2); border: 1px solid var(--line); border-radius: 18px; padding: 16px; margin-bottom: 12px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+            <span style="font-size: 12px; color: var(--mut); font-weight: 600;">Amount in USD</span>
+            <span id="now-crypto-equiv" style="font-size: 12px; color: var(--cyan); font-weight: 700;">≈ 100.00 USDT</span>
+          </div>
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <div style="display: flex; align-items: center; gap: 4px; width: 60%;">
+              <span style="font-size: 24px; font-weight: 800; color: var(--tx);">$</span>
+              <input type="text" id="buy-now-amt" aria-label="USD amount to pay" value="100" oninput="calcTokens(this.value, 'nowpayments')" style="background: transparent; border: none; color: var(--tx); font-size: 26px; font-weight: 800; width: 100%; outline: none; font-family: Sora, sans-serif;">
+            </div>
+            <span id="now-selected-label" style="font-weight: 800; font-size: 14px; display: flex; align-items: center; gap: 6px;">
+              USDT (TRC-20)
+            </span>
+          </div>
+          <div style="display: flex; gap: 8px; margin-top: 12px;">
+            <button type="button" onclick="setNowPreset(50)" style="flex: 1; padding: 8px 0; border-radius: 10px; background: var(--s1); border: 1px solid var(--line); color: var(--tx); font-size: 12px; font-weight: 700; cursor: pointer;">$50</button>
+            <button type="button" onclick="setNowPreset(100)" style="flex: 1; padding: 8px 0; border-radius: 10px; background: var(--s1); border: 1px solid var(--line); color: var(--tx); font-size: 12px; font-weight: 700; cursor: pointer;">$100</button>
+            <button type="button" onclick="setNowPreset(250)" style="flex: 1; padding: 8px 0; border-radius: 10px; background: var(--s1); border: 1px solid var(--line); color: var(--tx); font-size: 12px; font-weight: 700; cursor: pointer;">$250</button>
+            <button type="button" onclick="setNowPreset(500)" style="flex: 1; padding: 8px 0; border-radius: 10px; background: var(--s1); border: 1px solid var(--line); color: var(--tx); font-size: 12px; font-weight: 700; cursor: pointer;">$500</button>
+            <button type="button" onclick="setNowPreset(1000)" style="flex: 1; padding: 8px 0; border-radius: 10px; background: var(--s1); border: 1px solid var(--line); color: var(--vio-l); font-size: 12px; font-weight: 800; cursor: pointer;">$1,000</button>
+          </div>
+        </div>
+
+        <div style="background: var(--s2); border: 1px solid var(--line); border-radius: 18px; padding: 16px; margin-bottom: 20px;">
+          <div style="font-size: 12px; color: var(--mut); margin-bottom: 6px; font-weight: 600;">You receive</div>
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <div id="buy-receive-now" class="num" style="font-size: 26px; font-weight: 800; color: var(--vio-l);">~166,667</div>
+            <span style="font-weight: 800; font-size: 14px; display: flex; align-items: center; gap: 6px;">${logoImgDesktop} $OKN</span>
+          </div>
+        </div>
+
+        <button type="button" onclick="openNowPaymentsModal()" style="width: 100%; height: 50px; border-radius: 14px; background: linear-gradient(135deg, #09B4FF 0%, #7A12F5 100%); color: #fff; font-weight: 800; font-size: 15px; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; box-shadow: 0 4px 14px rgba(9,180,255,0.3); transition: transform 0.15s ease;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="6" fill="#fff"/><path d="M7 16l4-8h2l-4 8H7zm6 0l4-8h2l-4 8h-2z" fill="#09B4FF"/></svg>
+          <span>Generate NOWPayments Invoice</span>
+        </button>
       </div>
 
-      <button onclick="openWalletModal()" style="width: 100%; height: 48px; border-radius: 14px; background: var(--vio); color: #fff; font-weight: 800; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px;">
-        ${ICONS.wallet}
-        <span>Connect wallet to buy</span>
-      </button>
+      <!-- Panel 3: Credit Card Gateway -->
+      <div id="panel-card" class="gateway-panel" style="display: none;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+          <div>
+            <div style="font-size: 17px; font-weight: 800; color: var(--tx);">Credit & Debit Card Checkout</div>
+            <div style="font-size: 12.5px; color: var(--mut); margin-top: 2px;">Visa, Mastercard, Apple Pay & Google Pay accepted worldwide.</div>
+          </div>
+          <div style="display: flex; gap: 6px; align-items: center;">
+            ${ICONS.visa}
+            ${ICONS.mastercard}
+          </div>
+        </div>
+
+        <!-- Express 1-Touch Options -->
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 16px;">
+          <button type="button" onclick="triggerApplePay()" class="express-btn express-apple">
+            ${ICONS.apple} <span>Pay</span>
+          </button>
+          <button type="button" onclick="triggerGooglePay()" class="express-btn express-google">
+            ${ICONS.google} <span>Pay</span>
+          </button>
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 14px;">
+          <div style="flex: 1; height: 1px; background: var(--line);"></div>
+          <span style="font-size: 11px; font-weight: 700; color: var(--mut); text-transform: uppercase;">Or pay with card details</span>
+          <div style="flex: 1; height: 1px; background: var(--line);"></div>
+        </div>
+
+        <div style="background: var(--s2); border: 1px solid var(--line); border-radius: 18px; padding: 14px 16px; margin-bottom: 12px;">
+          <div style="font-size: 12px; color: var(--mut); margin-bottom: 4px; font-weight: 600;">Amount in USD</div>
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <div style="display: flex; align-items: center; gap: 4px; width: 60%;">
+              <span style="font-size: 22px; font-weight: 800; color: var(--tx);">$</span>
+              <input type="text" id="buy-card-amt" aria-label="Card USD amount" value="100" oninput="calcTokens(this.value, 'card')" style="background: transparent; border: none; color: var(--tx); font-size: 24px; font-weight: 800; width: 100%; outline: none; font-family: Sora, sans-serif;">
+            </div>
+            <div style="text-align: right;">
+              <div id="buy-receive-card" class="num" style="font-size: 18px; font-weight: 800; color: var(--vio-l);">~166,667 $OKN</div>
+            </div>
+          </div>
+          <div style="display: flex; gap: 6px; margin-top: 10px;">
+            <button type="button" onclick="setCardPreset(50)" style="flex: 1; padding: 6px 0; border-radius: 8px; background: var(--s1); border: 1px solid var(--line); color: var(--tx); font-size: 11px; font-weight: 700; cursor: pointer;">$50</button>
+            <button type="button" onclick="setCardPreset(100)" style="flex: 1; padding: 6px 0; border-radius: 8px; background: var(--s1); border: 1px solid var(--line); color: var(--tx); font-size: 11px; font-weight: 700; cursor: pointer;">$100</button>
+            <button type="button" onclick="setCardPreset(250)" style="flex: 1; padding: 6px 0; border-radius: 8px; background: var(--s1); border: 1px solid var(--line); color: var(--tx); font-size: 11px; font-weight: 700; cursor: pointer;">$250</button>
+            <button type="button" onclick="setCardPreset(500)" style="flex: 1; padding: 6px 0; border-radius: 8px; background: var(--s1); border: 1px solid var(--line); color: var(--tx); font-size: 11px; font-weight: 700; cursor: pointer;">$500</button>
+          </div>
+        </div>
+
+        <!-- Form fields -->
+        <div class="card-input-group">
+          <label for="card-holder-name" style="font-size: 12px; font-weight: 700; color: var(--mut);">Cardholder Name</label>
+          <input type="text" id="card-holder-name" placeholder="Full name as printed on card" value="Alex Morgan" class="card-input-field">
+        </div>
+
+        <div class="card-input-group">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <label for="card-number-input" style="font-size: 12px; font-weight: 700; color: var(--mut);">Card Number</label>
+            <span id="card-brand-detected" style="font-size: 11px; font-weight: 800; color: var(--ok);">Visa / MC</span>
+          </div>
+          <div style="position: relative;">
+            <input type="text" id="card-number-input" maxlength="19" placeholder="4532 •••• •••• 8821" value="4532 8920 4120 8821" oninput="formatCardNumber(this)" class="card-input-field" style="padding-right: 42px; font-family: Sora, monospace;">
+            <span style="position: absolute; right: 12px; top: 11px;">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+            </span>
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px;">
+          <div class="card-input-group" style="margin-bottom: 0;">
+            <label for="card-exp-input" style="font-size: 12px; font-weight: 700; color: var(--mut);">Expiration Date</label>
+            <input type="text" id="card-exp-input" maxlength="5" placeholder="MM/YY" value="08/29" oninput="formatCardExp(this)" class="card-input-field" style="font-family: Sora, monospace;">
+          </div>
+          <div class="card-input-group" style="margin-bottom: 0;">
+            <div style="display: flex; justify-content: space-between;">
+              <label for="card-cvv-input" style="font-size: 12px; font-weight: 700; color: var(--mut);">CVV / CVC</label>
+              <span style="font-size: 10px; color: var(--mut);">3 digits</span>
+            </div>
+            <input type="password" id="card-cvv-input" maxlength="4" placeholder="•••" value="892" class="card-input-field" style="font-family: Sora, monospace;">
+          </div>
+        </div>
+
+        <div style="display: flex; align-items: center; justify-content: space-between; font-size: 11.5px; color: var(--mut); margin-bottom: 16px;">
+          <span style="display: flex; align-items: center; gap: 6px;">
+            ${ICONS.lock}
+            <span>256-bit TLS encrypted</span>
+          </span>
+          <span style="display: flex; align-items: center; gap: 6px;">
+            ${ICONS.shield}
+            <span>3D-Secure 2.0 Enabled</span>
+          </span>
+        </div>
+
+        <button type="button" onclick="processCardPayment()" id="btn-card-pay" style="width: 100%; height: 50px; border-radius: 14px; background: var(--ok); color: #fff; font-weight: 800; font-size: 15px; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; transition: transform 0.15s ease;">
+          <svg class="i" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          <span id="btn-card-text">Pay $100.00 with Card</span>
+        </button>
+      </div>
+
     </div>
 
-    <div style="background: var(--s1); border: 1px solid var(--line); border-radius: 24px; padding: 28px;">
-      <div style="font-size: 16px; font-weight: 800; margin-bottom: 20px;">Sale Parameters</div>
-      <div style="display: flex; justify-content: space-between; padding: 14px 0; border-bottom: 1px solid var(--line);">
-        <span style="color: var(--mut); font-size: 14px;">Network</span>
-        <span style="font-weight: 700; font-size: 14px;">BSC Testnet (Chain 97)</span>
+    <!-- Right Column: Sale Parameters & Supported Gateways -->
+    <div class="buy-sidebar-info" style="display: flex; flex-direction: column; gap: 16px;">
+      
+      <!-- Presale Parameters Card -->
+      <div class="buy-sidebar-card" style="background: var(--s1); border: 1px solid var(--line); border-radius: 24px; padding: 22px;">
+        <div style="font-size: 14.5px; font-weight: 800; margin-bottom: 12px; color: var(--tx);">Presale Parameters</div>
+        
+        <!-- Desktop Detailed Rows -->
+        <div class="buy-stat-grid-desktop">
+          <div style="display: flex; justify-content: space-between; padding: 11px 0; border-bottom: 1px solid var(--line);">
+            <span style="color: var(--mut); font-size: 13px;">Active Gateway</span>
+            <span id="summary-active-gw" style="font-weight: 800; font-size: 13.5px; color: var(--tx);">Web3 (BNB Smart Chain)</span>
+          </div>
+          <div style="display: flex; justify-content: space-between; padding: 11px 0; border-bottom: 1px solid var(--line);">
+            <span style="color: var(--mut); font-size: 13px;">Token Valuation</span>
+            <span class="num" style="font-weight: 800; font-size: 13.5px; color: var(--vio-l);">1 $OKN = $0.00060 USD</span>
+          </div>
+          <div style="display: flex; justify-content: space-between; padding: 11px 0; border-bottom: 1px solid var(--line);">
+            <span style="color: var(--mut); font-size: 13px;">Wallet Presale Cap</span>
+            <span class="num" style="font-weight: 800; font-size: 13.5px;">10 BNB (~$6,000 USD)</span>
+          </div>
+          <div style="display: flex; justify-content: space-between; padding: 11px 0; border-bottom: 1px solid var(--line);">
+            <span style="color: var(--mut); font-size: 13px;">Total Raised</span>
+            <span class="num" style="font-weight: 800; font-size: 13.5px; color: var(--ok);">$428,950 USD</span>
+          </div>
+          <div style="display: flex; justify-content: space-between; padding: 11px 0;">
+            <span style="color: var(--mut); font-size: 13px;">Tokens Remaining</span>
+            <span class="num" style="font-weight: 800; font-size: 13.5px;">1,249,998,000 $OKN</span>
+          </div>
+        </div>
+
+        <!-- Mobile 2x2 Compact Stat Grid -->
+        <div class="buy-stat-grid-mobile">
+          <div class="buy-stat-item">
+            <div class="buy-stat-label">Token Price</div>
+            <div class="buy-stat-value" style="color: var(--vio-l);">$0.00060</div>
+          </div>
+          <div class="buy-stat-item">
+            <div class="buy-stat-label">Presale Rate</div>
+            <div class="buy-stat-value">1M / 1 BNB</div>
+          </div>
+          <div class="buy-stat-item">
+            <div class="buy-stat-label">Total Raised</div>
+            <div class="buy-stat-value" style="color: var(--ok);">$428,950</div>
+          </div>
+          <div class="buy-stat-item">
+            <div class="buy-stat-label">Wallet Cap</div>
+            <div class="buy-stat-value">10 BNB</div>
+          </div>
+        </div>
       </div>
-      <div style="display: flex; justify-content: space-between; padding: 14px 0; border-bottom: 1px solid var(--line);">
-        <span style="color: var(--mut); font-size: 14px;">Wallet Cap</span>
-        <span class="num" style="font-weight: 800; font-size: 15px;">10 BNB</span>
-      </div>
-      <div style="display: flex; justify-content: space-between; padding: 14px 0; border-bottom: 1px solid var(--line);">
-        <span style="color: var(--mut); font-size: 14px;">Total Raised</span>
-        <span class="num" style="font-weight: 800; font-size: 15px; color: var(--ok);">0 BNB</span>
-      </div>
-      <div style="display: flex; justify-content: space-between; padding: 14px 0; border-bottom: 1px solid var(--line);">
-        <span style="color: var(--mut); font-size: 14px;">Allocation Remaining</span>
-        <span class="num" style="font-weight: 800; font-size: 15px;">1,249,998,000 $OKN</span>
+
+      <!-- Gateway Features Card -->
+      <div class="buy-sidebar-card" style="background: var(--s1); border: 1px solid var(--line); border-radius: 24px; padding: 22px;">
+        <div style="font-size: 14.5px; font-weight: 800; margin-bottom: 12px; color: var(--tx);">Supported Payment Infrastructure</div>
+        
+        <!-- Desktop Detailed List -->
+        <div class="infra-desktop-list" style="display: flex; flex-direction: column; gap: 12px;">
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <div style="width: 32px; height: 32px; border-radius: 10px; background: rgba(9,180,255,0.14); color: var(--cyan); display: flex; align-items: center; justify-content: center; flex: 0 0 auto;">
+              ${ICONS.nowpayments}
+            </div>
+            <div>
+              <div style="font-weight: 700; font-size: 13px;">NOWPayments Gateway</div>
+              <div style="font-size: 11px; color: var(--mut);">Automated multi-crypto settlement across 300+ coins.</div>
+            </div>
+          </div>
+
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <div style="width: 32px; height: 32px; border-radius: 10px; background: rgba(47,189,142,0.14); color: var(--ok); display: flex; align-items: center; justify-content: center; flex: 0 0 auto;">
+              ${ICONS.shield}
+            </div>
+            <div>
+              <div style="font-weight: 700; font-size: 13px;">Visa & Mastercard 3DS</div>
+              <div style="font-size: 11px; color: var(--mut);">Direct card processing with zero crypto wallet required.</div>
+            </div>
+          </div>
+
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <div style="width: 32px; height: 32px; border-radius: 10px; background: rgba(243,186,47,0.14); color: #F3BA2F; display: flex; align-items: center; justify-content: center; flex: 0 0 auto;">
+              ${ICONS.bnb}
+            </div>
+            <div>
+              <div style="font-weight: 700; font-size: 13px;">BNB Smart Chain EVM</div>
+              <div style="font-size: 11px; color: var(--mut);">Direct Web3 smart contract calls via Wagmi / Viem.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mobile Compact Trust Pills -->
+        <div class="infra-mobile-pills">
+          <div class="infra-pill">${ICONS.nowpayments} <span>NOWPayments (300+ Crypto)</span></div>
+          <div class="infra-pill">${ICONS.shield} <span>Visa & MC 3DS</span></div>
+          <div class="infra-pill">${ICONS.bnb} <span>BNB Smart Chain</span></div>
+        </div>
       </div>
     </div>
   </div>
 
-  <div style="background: rgba(255,170,0,0.12); border: 1px solid rgba(255,170,0,0.3); border-radius: 20px; padding: 20px 24px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;">
-    <div style="font-size: 14px; font-weight: 700; color: var(--org-t); display: flex; align-items: center; gap: 8px;">
+  <div class="buy-alert-strip" style="background: rgba(255,170,0,0.12); border: 1px solid rgba(255,170,0,0.3); border-radius: 18px; padding: 14px 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;">
+    <div class="buy-alert-strip-text" style="font-size: 13px; font-weight: 700; color: var(--org-t); display: flex; align-items: center; gap: 8px;">
       ${ICONS.alert}
-      <span>Testnet is active. Use test BNB only.</span>
+      <span>Multi-gateway testing mode: Presale is live with verified instant delivery.</span>
     </div>
-    <a href="https://testnet.bnbchain.org/faucet-smart" target="_blank" style="padding: 8px 18px; border-radius: 12px; background: var(--s1); border: 1px solid var(--line); color: var(--tx); font-weight: 700; font-size: 13px; text-decoration: none; display: flex; align-items: center; gap: 6px;">
-      <span>Get faucet BNB</span>
+    <a href="https://testnet.bnbchain.org/faucet-smart" target="_blank" style="padding: 7px 16px; border-radius: 10px; background: var(--s1); border: 1px solid var(--line); color: var(--tx); font-weight: 700; font-size: 12.5px; text-decoration: none; display: flex; align-items: center; gap: 6px;">
+      <span>Get testnet BNB</span>
       ${ICONS.arrowRight}
     </a>
   </div>
@@ -1415,7 +1716,7 @@ const pagesToBuild = [
     activeNav: 'Buy',
     activeBottomTab: 'Buy',
     desktopMain: desktopBuyMain,
-    mobile: mobileBuy,
+    mobile: makeSubpageMobile('Buy', desktopBuyMain),
     filenames: ['buy.html']
   },
   {
@@ -1544,4 +1845,5 @@ pagesToBuild.forEach(p => {
 });
 
 console.log('Finished rebuilding canonical routes in root, public/, and dist/!');
+process.exit(0);
 

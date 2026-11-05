@@ -452,8 +452,8 @@
         <!-- Buy $OKN with BNB Card -->
         <div style="background: var(--s1); border: 1px solid var(--line); border-radius: 20px; padding: 24px; box-shadow: 0 1px 3px rgba(0,0,0,0.06);">
           <div style="margin-bottom: 18px;">
-            <h3 style="font-size: 18px; font-weight: 800; color: var(--tx); margin: 0 0 6px;">Buy $OKN with BNB</h3>
-            <p style="font-size: 13px; color: var(--mut); line-height: 1.5; margin: 0;">Fixed rate: 0 $OKN per BNB (sale paused)</p>
+            <h3 style="font-size: 18px; font-weight: 800; color: var(--tx); margin: 0 0 6px;">Buy $OKN Presale</h3>
+            <p style="font-size: 13px; color: var(--mut); line-height: 1.5; margin: 0;">Multi-Gateway: Web3 BNB, NOWPayments (300+ crypto), & Credit Card</p>
           </div>
           <a href="buy.html" style="display: inline-flex; align-items: center; gap: 10px; height: 42px; padding: 0 20px; border-radius: 12px; background: var(--s2); border: 1px solid var(--line); color: var(--tx); font-weight: 800; font-size: 13px; text-decoration: none; transition: background 0.2s ease;">
             <svg class="i" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="21" r="1"></circle><circle cx="19" cy="21" r="1"></circle><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"></path></svg>
@@ -987,6 +987,7 @@
         const overlay = document.getElementById('wallet-modal-overlay');
         if (overlay) overlay.remove();
         const addr = '0x71C...49A1';
+        window.__userWalletConnected = true;
         document.querySelectorAll('button').forEach(b => {
           if ((b.innerText || '').toLowerCase().includes('connect wallet')) {
             b.innerHTML = '<svg class="i" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:6px;"><path d="M21 12V7H5a2 2 0 0 1 0-4h14v4"></path><path d="M3 5v14a2 2 0 0 0 2 2h16v-5"></path><path d="M18 12a2 2 0 0 0 0 4h4v-4Z"></path></svg> ' + addr;
@@ -996,6 +997,609 @@
         });
         showToast('Connected ' + name + ' (' + addr + ') on BNB Smart Chain!');
       }
+
+      // =========================================================================
+      // Multiple Payment Gateway Engine (Web3, NOWPayments, Credit Card)
+      // =========================================================================
+      let currentGateway = 'web3';
+      let currentNowCoin = {
+        id: 'USDT_TRC20',
+        symbol: 'USDT',
+        network: 'TRC-20',
+        chain: 'TRON',
+        rateUsd: 1.0,
+        address: 'TF3yK849QzLMnw729kLp10294VbN92K8xm'
+      };
+
+      function switchPaymentGateway(gw) {
+        currentGateway = gw;
+        document.querySelectorAll('.gateway-tab').forEach(tab => {
+          if (tab.getAttribute('data-gw') === gw) {
+            tab.classList.add('active');
+          } else {
+            tab.classList.remove('active');
+          }
+        });
+
+        ['web3', 'nowpayments', 'card'].forEach(p => {
+          const els = document.querySelectorAll('#panel-' + p);
+          els.forEach(el => {
+            el.style.display = (p === gw) ? 'block' : 'none';
+          });
+        });
+
+        const summaryLabels = document.querySelectorAll('#summary-active-gw');
+        summaryLabels.forEach(el => {
+          if (gw === 'web3') el.textContent = 'Web3 (BNB Smart Chain)';
+          else if (gw === 'nowpayments') el.textContent = 'NOWPayments (' + currentNowCoin.symbol + ' ' + currentNowCoin.network + ')';
+          else if (gw === 'card') el.textContent = 'Credit / Debit Card (Visa/MC/Apple Pay)';
+        });
+      }
+
+      function selectNowCoin(coinId, symbol, network, chainName, usdRate) {
+        currentNowCoin = {
+          id: coinId,
+          symbol: symbol,
+          network: network,
+          chain: chainName,
+          rateUsd: usdRate,
+          address: getCryptoAddress(coinId)
+        };
+
+        document.querySelectorAll('.coin-badge').forEach(b => {
+          if (b.getAttribute('data-coin') === coinId) {
+            b.classList.add('active');
+          } else {
+            b.classList.remove('active');
+          }
+        });
+
+        document.querySelectorAll('#now-selected-label').forEach(el => {
+          el.innerHTML = '<span style="color:var(--vio-l);">' + symbol + '</span> (' + network + ')';
+        });
+
+        const input = document.getElementById('buy-now-amt') || document.querySelector('.now-amt-input');
+        if (input) {
+          calcTokens(input.value, 'nowpayments');
+        }
+
+        document.querySelectorAll('#summary-active-gw').forEach(el => {
+          if (currentGateway === 'nowpayments') {
+            el.textContent = 'NOWPayments (' + symbol + ' ' + network + ')';
+          }
+        });
+      }
+
+      function getCryptoAddress(coinId) {
+        switch (coinId) {
+          case 'BTC': return 'bc1q9px43k8zqm902lskqew901ncmx49120skqp';
+          case 'ETH': return '0x71C2B89A94821890Bf829C10283bB81907A949A1';
+          case 'SOL': return '8xj2Kp9L10mNqW4vZbE81qR92mK810vQ28xMn9L8bX4';
+          case 'USDT_BEP20':
+          case 'BNB_CRYPTO':
+          case 'USDC': return '0x71C2B89A94821890Bf829C10283bB81907A949A1';
+          case 'LTC': return 'ltc1q98zkm029xlskq481029smckq90281lskq02';
+          default: return 'TF3yK849QzLMnw729kLp10294VbN92K8xm'; // USDT TRC20
+        }
+      }
+
+      function calcTokens(val, mode) {
+        const num = parseFloat(val);
+        const ratePerOkn = 0.0006; // ~$0.0006 per OKN
+        if (mode === 'bnb') {
+          const receiveEls = document.querySelectorAll('#buy-receive-bnb, .buy-receive-bnb');
+          if (!isNaN(num) && num > 0) {
+            const tokens = Math.round(num * 1000000);
+            receiveEls.forEach(el => el.textContent = '~' + tokens.toLocaleString('en-US'));
+          }
+        } else if (mode === 'nowpayments') {
+          const receiveEls = document.querySelectorAll('#buy-receive-now, .buy-receive-now');
+          const equivEls = document.querySelectorAll('#now-crypto-equiv, .now-crypto-equiv');
+          if (!isNaN(num) && num > 0) {
+            const tokens = Math.round(num / ratePerOkn);
+            receiveEls.forEach(el => el.textContent = '~' + tokens.toLocaleString('en-US'));
+            const cryptoAmt = (num / currentNowCoin.rateUsd);
+            const formattedCrypto = cryptoAmt < 0.01 ? cryptoAmt.toFixed(6) : (cryptoAmt < 1 ? cryptoAmt.toFixed(4) : cryptoAmt.toFixed(2));
+            equivEls.forEach(el => el.textContent = '≈ ' + formattedCrypto + ' ' + currentNowCoin.symbol);
+          }
+        } else if (mode === 'card') {
+          const receiveEls = document.querySelectorAll('#buy-receive-card, .buy-receive-card');
+          const btnTexts = document.querySelectorAll('#btn-card-text, .btn-card-text');
+          if (!isNaN(num) && num > 0) {
+            const tokens = Math.round(num / ratePerOkn);
+            receiveEls.forEach(el => el.textContent = '~' + tokens.toLocaleString('en-US') + ' $OKN');
+            btnTexts.forEach(el => el.textContent = 'Pay $' + num.toFixed(2) + ' with Card');
+          }
+        }
+      }
+
+      function setBnbPreset(amt) {
+        document.querySelectorAll('#buy-bnb-amt, #amt, .buy-bnb-amt').forEach(el => {
+          el.value = amt;
+        });
+        calcTokens(amt, 'bnb');
+      }
+
+      function setNowPreset(amt) {
+        document.querySelectorAll('#buy-now-amt, .now-amt-input').forEach(el => {
+          el.value = amt;
+        });
+        calcTokens(amt, 'nowpayments');
+      }
+
+      function setCardPreset(amt) {
+        document.querySelectorAll('#buy-card-amt, .card-amt-input').forEach(el => {
+          el.value = amt;
+        });
+        calcTokens(amt, 'card');
+      }
+
+      function formatCardNumber(input) {
+        let v = input.value.replace(/D/g, '').substring(0, 16);
+        let formatted = v.match(/.{1,4}/g)?.join(' ') || v;
+        input.value = formatted;
+        document.querySelectorAll('#card-brand-detected, .card-brand-label').forEach(brand => {
+          if (v.startsWith('4')) brand.textContent = 'Visa';
+          else if (v.startsWith('5')) brand.textContent = 'Mastercard';
+          else if (v.startsWith('3')) brand.textContent = 'Amex';
+          else brand.textContent = 'Card';
+        });
+      }
+
+      function formatCardExp(input) {
+        let v = input.value.replace(/D/g, '').substring(0, 4);
+        if (v.length > 2) {
+          v = v.substring(0, 2) + '/' + v.substring(2);
+        }
+        input.value = v;
+      }
+
+      // -------------------------------------------------------------------------
+      // NOWPayments Invoice Modal Flow
+      // -------------------------------------------------------------------------
+      function openNowPaymentsModal() {
+        const amtInput = document.getElementById('buy-now-amt') || document.querySelector('.now-amt-input');
+        const usdVal = parseFloat(amtInput?.value || '100') || 100;
+        const tokenVal = Math.round(usdVal / 0.0006);
+        const cryptoAmt = (usdVal / currentNowCoin.rateUsd);
+        const cryptoStr = (cryptoAmt < 0.01 ? cryptoAmt.toFixed(6) : (cryptoAmt < 1 ? cryptoAmt.toFixed(4) : cryptoAmt.toFixed(2))) + ' ' + currentNowCoin.symbol;
+        const invoiceId = 'NP-OKN-' + (Math.floor(100000 + Math.random() * 900000));
+
+        let overlay = document.getElementById('nowpayments-invoice-overlay');
+        if (overlay) overlay.remove();
+
+        overlay = document.createElement('div');
+        overlay.id = 'nowpayments-invoice-overlay';
+        overlay.setAttribute('role', 'dialog');
+        overlay.setAttribute('aria-modal', 'true');
+        overlay.setAttribute('aria-label', 'NOWPayments Crypto Invoice');
+        overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.85);backdrop-filter:blur(12px);z-index:999999;display:flex;align-items:center;justify-content:center;padding:16px;overflow-y:auto;';
+
+        overlay.innerHTML = `
+          <div style="background:var(--s1);border:1px solid var(--line);border-radius:24px;padding:26px;max-width:440px;width:100%;color:var(--tx);font-family:Manrope,sans-serif;box-shadow:0 30px 90px rgba(0,0,0,0.9);position:relative;">
+            
+            <!-- Header -->
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px;">
+              <div>
+                <div style="display:flex;align-items:center;gap:8px;">
+                  <span style="display:flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:8px;background:#09B4FF;color:#fff;">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="6" fill="#09B4FF"/><path d="M7 16l4-8h2l-4 8H7zm6 0l4-8h2l-4 8h-2z" fill="#fff"/></svg>
+                  </span>
+                  <span style="font-size:16px;font-weight:800;">NOWPayments Invoice</span>
+                </div>
+                <div style="font-size:12px;color:var(--mut);margin-top:4px;">ID: <strong style="color:var(--tx);font-family:Sora,monospace;">${invoiceId}</strong></div>
+              </div>
+              <button aria-label="Close invoice" onclick="document.getElementById('nowpayments-invoice-overlay').remove()" style="background:var(--s2);border:1px solid var(--line);border-radius:50%;width:32px;height:32px;color:var(--mut);display:flex;align-items:center;justify-content:center;cursor:pointer;">
+                <svg class="i" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+              </button>
+            </div>
+
+            <!-- Price Breakdown Box -->
+            <div style="background:var(--s2);border:1px solid var(--line);border-radius:18px;padding:14px 16px;margin-bottom:16px;">
+              <div style="display:flex;justify-content:space-between;margin-bottom:4px;">
+                <span style="font-size:12px;color:var(--mut);">Amount to transfer</span>
+                <span class="num" style="font-size:16px;font-weight:800;color:var(--cyan);">${cryptoStr}</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--mut);">
+                <span>Fiat Value</span>
+                <span style="font-weight:700;color:var(--tx);">$${usdVal.toFixed(2)} USD</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--mut);margin-top:4px;">
+                <span>You receive</span>
+                <span style="font-weight:800;color:var(--vio-l);">~${tokenVal.toLocaleString('en-US')} $OKN</span>
+              </div>
+            </div>
+
+            <!-- QR Code Box -->
+            <div style="text-align:center;margin-bottom:16px;background:var(--s2);border:1px solid var(--line);border-radius:18px;padding:16px;">
+              <div style="display:inline-block;padding:10px;background:#fff;border-radius:12px;box-shadow:0 4px 16px rgba(0,0,0,0.25);">
+                <svg width="150" height="150" viewBox="0 0 150 150">
+                  <rect width="150" height="150" fill="#ffffff"/>
+                  <!-- Position Markers -->
+                  <rect x="15" y="15" width="36" height="36" fill="#000000" rx="4"/>
+                  <rect x="22" y="22" width="22" height="22" fill="#ffffff" rx="2"/>
+                  <rect x="26" y="26" width="14" height="14" fill="#000000" rx="1"/>
+                  <rect x="99" y="15" width="36" height="36" fill="#000000" rx="4"/>
+                  <rect x="106" y="22" width="22" height="22" fill="#ffffff" rx="2"/>
+                  <rect x="110" y="26" width="14" height="14" fill="#000000" rx="1"/>
+                  <rect x="15" y="99" width="36" height="36" fill="#000000" rx="4"/>
+                  <rect x="22" y="106" width="22" height="22" fill="#ffffff" rx="2"/>
+                  <rect x="26" y="110" width="14" height="14" fill="#000000" rx="1"/>
+                  <!-- QR Data Mock Blocks -->
+                  <rect x="60" y="20" width="10" height="10" fill="#09B4FF"/>
+                  <rect x="75" y="20" width="10" height="10" fill="#7A12F5"/>
+                  <rect x="60" y="40" width="10" height="10" fill="#000000"/>
+                  <rect x="75" y="40" width="10" height="10" fill="#000000"/>
+                  <rect x="20" y="60" width="10" height="10" fill="#000000"/>
+                  <rect x="40" y="60" width="10" height="10" fill="#000000"/>
+                  <rect x="60" y="60" width="30" height="30" fill="#000000" rx="2"/>
+                  <rect x="100" y="60" width="10" height="10" fill="#000000"/>
+                  <rect x="120" y="60" width="10" height="10" fill="#000000"/>
+                  <rect x="60" y="100" width="10" height="10" fill="#000000"/>
+                  <rect x="75" y="100" width="10" height="10" fill="#09B4FF"/>
+                  <rect x="100" y="100" width="10" height="10" fill="#000000"/>
+                  <rect x="120" y="100" width="10" height="10" fill="#000000"/>
+                  <rect x="60" y="120" width="10" height="10" fill="#000000"/>
+                  <rect x="80" y="120" width="20" height="10" fill="#7A12F5"/>
+                  <rect x="110" y="120" width="10" height="10" fill="#000000"/>
+                </svg>
+              </div>
+              <div style="font-size:11.5px;color:var(--mut);margin-top:8px;">Scan with Binance, Trust Wallet, Phantom, or Exodus</div>
+            </div>
+
+            <!-- Deposit Address Box -->
+            <div style="margin-bottom:16px;">
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+                <span style="font-size:12px;font-weight:700;color:var(--mut);">Deposit Address (${currentNowCoin.network})</span>
+                <span style="font-size:10px;font-weight:800;background:rgba(255,170,0,0.18);color:var(--org);padding:2px 6px;border-radius:6px;">Send only ${currentNowCoin.symbol}</span>
+              </div>
+              <div style="display:flex;gap:8px;align-items:center;background:var(--s2);border:1px solid var(--line);border-radius:14px;padding:8px 12px;">
+                <input type="text" readonly value="${currentNowCoin.address}" style="background:transparent;border:none;color:var(--tx);font-size:12px;font-family:Sora,monospace;width:100%;outline:none;text-overflow:ellipsis;">
+                <button type="button" onclick="copyInlineText('${currentNowCoin.address}', this)" style="padding:6px 12px;border-radius:8px;background:var(--vio);color:#fff;border:none;font-weight:800;font-size:11px;cursor:pointer;white-space:nowrap;">Copy</button>
+              </div>
+            </div>
+
+            <!-- Status Indicator -->
+            <div id="now-status-box" style="display:flex;align-items:center;gap:10px;background:rgba(255,170,0,0.08);border:1px solid rgba(255,170,0,0.3);border-radius:14px;padding:12px;margin-bottom:18px;">
+              <div class="pulse-dot"></div>
+              <div style="font-size:12px;font-weight:700;color:var(--org-t);" id="now-status-text">
+                Waiting for transaction deposit on ${currentNowCoin.network}...
+              </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div style="display:flex;flex-direction:column;gap:8px;">
+              <button type="button" id="btn-verify-now" onclick="simulateNowBlockchainConfirmation('${invoiceId}', '${cryptoStr}', ${tokenVal}, '${usdVal}')" style="height:48px;border-radius:14px;background:var(--ok);color:#fff;font-weight:800;font-size:14px;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;box-shadow:0 4px 14px rgba(47,189,142,0.3);">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span>I Have Sent Payment (Verify Deposit)</span>
+              </button>
+              <button type="button" onclick="document.getElementById('nowpayments-invoice-overlay').remove()" style="height:38px;border-radius:12px;background:transparent;color:var(--mut);border:1px solid var(--line);font-weight:700;font-size:13px;cursor:pointer;">
+                Cancel Invoice
+              </button>
+            </div>
+          </div>
+        `;
+        document.body.appendChild(overlay);
+      }
+
+      function simulateNowBlockchainConfirmation(invoiceId, cryptoStr, tokenVal, usdVal) {
+        const btn = document.getElementById('btn-verify-now');
+        const statusBox = document.getElementById('now-status-box');
+        const statusText = document.getElementById('now-status-text');
+
+        if (btn) {
+          btn.disabled = true;
+          btn.style.opacity = '0.7';
+          btn.innerHTML = '<span style="display:inline-block;animation:spin 1s linear infinite;">⏳</span> <span>Scanning Blockchain...</span>';
+        }
+
+        if (statusText) statusText.textContent = 'Searching mempool for transaction hash...';
+
+        setTimeout(() => {
+          if (statusText) {
+            statusText.textContent = 'Transaction detected in mempool! Block confirmations: 1/2...';
+            statusBox.style.background = 'rgba(9,180,255,0.1)';
+            statusBox.style.borderColor = 'rgba(9,180,255,0.3)';
+            statusText.style.color = 'var(--cyan)';
+          }
+          setTimeout(() => {
+            if (statusText) {
+              statusText.textContent = 'Confirmed (2/2)! Crediting ' + tokenVal.toLocaleString('en-US') + ' $OKN...';
+              statusBox.style.background = 'rgba(47,189,142,0.12)';
+              statusBox.style.borderColor = 'rgba(47,189,142,0.3)';
+              statusText.style.color = 'var(--ok)';
+            }
+            setTimeout(() => {
+              const overlay = document.getElementById('nowpayments-invoice-overlay');
+              if (overlay) overlay.remove();
+              completePurchase({
+                gateway: 'NOWPayments',
+                method: currentNowCoin.symbol + ' (' + currentNowCoin.network + ')',
+                amountPaid: cryptoStr + ' (~$' + usdVal + ' USD)',
+                tokensReceived: tokenVal,
+                txHash: 'NP-' + Math.random().toString(36).substring(2, 10).toUpperCase(),
+                time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+              });
+            }, 800);
+          }, 1200);
+        }, 1200);
+      }
+
+      // -------------------------------------------------------------------------
+      // Credit Card 3D Secure 2.0 Flow
+      // -------------------------------------------------------------------------
+      function processCardPayment() {
+        const amtInput = document.getElementById('buy-card-amt') || document.querySelector('.card-amt-input');
+        const usdVal = parseFloat(amtInput?.value || '100') || 100;
+        const tokenVal = Math.round(usdVal / 0.0006);
+        const cardNum = document.getElementById('card-number-input')?.value || '4532 •••• •••• 8821';
+        const cardLast4 = cardNum.replace(/s/g, '').slice(-4) || '8821';
+        const brand = document.getElementById('card-brand-detected')?.textContent || 'Visa';
+
+        let overlay = document.getElementById('card-3ds-overlay');
+        if (overlay) overlay.remove();
+
+        overlay = document.createElement('div');
+        overlay.id = 'card-3ds-overlay';
+        overlay.setAttribute('role', 'dialog');
+        overlay.setAttribute('aria-modal', 'true');
+        overlay.setAttribute('aria-label', '3D Secure Verification');
+        overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.85);backdrop-filter:blur(12px);z-index:999999;display:flex;align-items:center;justify-content:center;padding:16px;';
+
+        overlay.innerHTML = `
+          <div style="background:var(--s1);border:1px solid var(--line);border-radius:24px;padding:26px;max-width:400px;width:100%;color:var(--tx);font-family:Manrope,sans-serif;box-shadow:0 30px 90px rgba(0,0,0,0.9);">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--line);">
+              <div style="display:flex;align-items:center;gap:10px;">
+                <span style="font-weight:900;color:var(--ok);font-size:16px;">Verified by ${brand}</span>
+              </div>
+              <span style="font-size:11px;font-weight:700;color:var(--mut);">3D Secure 2.0</span>
+            </div>
+
+            <div style="font-size:14px;font-weight:800;margin-bottom:4px;">Bank Authorization Required</div>
+            <div style="font-size:12.5px;color:var(--mut);line-height:1.5;margin-bottom:16px;">
+              To protect your account, your issuing bank has sent a 6-digit confirmation code via SMS to <strong style="color:var(--tx);">(•••) •••-4921</strong>.
+            </div>
+
+            <div style="background:var(--s2);border:1px solid var(--line);border-radius:16px;padding:12px 16px;margin-bottom:16px;">
+              <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--mut);margin-bottom:4px;">
+                <span>Merchant</span>
+                <span style="font-weight:700;color:var(--tx);">OKN Token Presale</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--mut);">
+                <span>Total Amount</span>
+                <span style="font-weight:800;color:var(--tx);">$${usdVal.toFixed(2)} USD</span>
+              </div>
+            </div>
+
+            <div style="margin-bottom:16px;">
+              <label for="input-3ds-code" style="display:block;font-size:12px;font-weight:700;color:var(--mut);margin-bottom:6px;">Enter 6-digit SMS code</label>
+              <div style="display:flex;gap:8px;">
+                <input type="text" id="input-3ds-code" maxlength="6" value="742918" style="flex:1;height:44px;border-radius:12px;background:var(--s2);border:1px solid var(--line);color:var(--tx);font-size:18px;font-weight:800;text-align:center;letter-spacing:4px;outline:none;font-family:Sora,monospace;">
+                <button type="button" onclick="document.getElementById('input-3ds-code').value='892401';showToast('Auto-filled test passcode')" style="padding:0 12px;border-radius:12px;background:var(--s2);border:1px solid var(--line);color:var(--vio-l);font-weight:700;font-size:11px;cursor:pointer;">Auto-fill</button>
+              </div>
+            </div>
+
+            <div style="display:flex;flex-direction:column;gap:8px;">
+              <button type="button" id="btn-submit-3ds" onclick="authorize3DSecure(${usdVal}, ${tokenVal}, '${brand}', '${cardLast4}')" style="height:48px;border-radius:14px;background:var(--ok);color:#fff;font-weight:800;font-size:14px;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;">
+                <span>Authorize $${usdVal.toFixed(2)} Payment</span>
+              </button>
+              <button type="button" onclick="document.getElementById('card-3ds-overlay').remove()" style="height:36px;border-radius:12px;background:transparent;color:var(--mut);border:none;font-weight:700;font-size:13px;cursor:pointer;">
+                Cancel
+              </button>
+            </div>
+          </div>
+        `;
+        document.body.appendChild(overlay);
+      }
+
+      function authorize3DSecure(usdVal, tokenVal, brand, cardLast4) {
+        const btn = document.getElementById('btn-submit-3ds');
+        if (btn) {
+          btn.disabled = true;
+          btn.innerHTML = '<span>Processing with bank...</span>';
+        }
+        setTimeout(() => {
+          const overlay = document.getElementById('card-3ds-overlay');
+          if (overlay) overlay.remove();
+          completePurchase({
+            gateway: 'Credit Card',
+            method: brand + ' (•••• ' + cardLast4 + ')',
+            amountPaid: '$' + usdVal.toFixed(2) + ' USD',
+            tokensReceived: tokenVal,
+            txHash: 'CC-' + Math.random().toString(36).substring(2, 10).toUpperCase(),
+            time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+          });
+        }, 1200);
+      }
+
+      // -------------------------------------------------------------------------
+      // Express Pay Handlers (Apple Pay, Google Pay)
+      // -------------------------------------------------------------------------
+      function triggerApplePay() {
+        const amtInput = document.getElementById('buy-card-amt') || document.querySelector('.card-amt-input');
+        const usdVal = parseFloat(amtInput?.value || '100') || 100;
+        const tokenVal = Math.round(usdVal / 0.0006);
+
+        let overlay = document.createElement('div');
+        overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.85);backdrop-filter:blur(8px);z-index:999999;display:flex;align-items:flex-end;justify-content:center;';
+        overlay.innerHTML = `
+          <div style="background:#111;border-top:1px solid rgba(255,255,255,0.15);border-radius:24px 24px 0 0;padding:24px;max-width:440px;width:100%;color:#fff;font-family:-apple-system,BlinkMacSystemFont,sans-serif;">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+              <span style="font-size:18px;font-weight:700;"> Pay</span>
+              <button onclick="this.closest('div').parentElement.remove()" style="background:rgba(255,255,255,0.1);border:none;border-radius:50%;width:28px;height:28px;color:#fff;cursor:pointer;">✕</button>
+            </div>
+            <div style="border-bottom:1px solid rgba(255,255,255,0.1);padding-bottom:12px;margin-bottom:12px;display:flex;justify-content:space-between;">
+              <span style="color:#888;font-size:13px;">OKN Presale Allocation</span>
+              <span style="font-weight:700;font-size:15px;">$${usdVal.toFixed(2)}</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:12px;margin-bottom:20px;">
+              <div style="width:36px;height:24px;border-radius:4px;background:#222;border:1px solid #444;display:flex;align-items:center;justify-content:center;font-size:10px;">VISA</div>
+              <div style="font-size:13px;">Apple Card (•••• 1042)</div>
+            </div>
+            <button onclick="this.closest('div').parentElement.remove(); completePurchase({ gateway: 'Apple Pay', method: 'Apple Card (•••• 1042)', amountPaid: '$${usdVal.toFixed(2)} USD', tokensReceived: ${tokenVal}, txHash: 'AP-' + Math.random().toString(36).substring(2, 9).toUpperCase(), time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) })" style="width:100%;height:50px;border-radius:14px;background:#fff;color:#000;font-weight:700;font-size:16px;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;">
+              <span>Double Click Side Button or Confirm</span>
+            </button>
+          </div>
+        `;
+        document.body.appendChild(overlay);
+      }
+
+      function triggerGooglePay() {
+        const amtInput = document.getElementById('buy-card-amt') || document.querySelector('.card-amt-input');
+        const usdVal = parseFloat(amtInput?.value || '100') || 100;
+        const tokenVal = Math.round(usdVal / 0.0006);
+
+        let overlay = document.createElement('div');
+        overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.85);backdrop-filter:blur(8px);z-index:999999;display:flex;align-items:center;justify-content:center;padding:16px;';
+        overlay.innerHTML = `
+          <div style="background:var(--s1);border:1px solid var(--line);border-radius:24px;padding:24px;max-width:380px;width:100%;color:var(--tx);font-family:Manrope,sans-serif;">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+              <span style="font-size:16px;font-weight:800;display:flex;align-items:center;gap:6px;">Google Pay</span>
+              <button onclick="this.closest('div').parentElement.remove()" style="background:var(--s2);border:none;border-radius:50%;width:28px;height:28px;color:var(--mut);cursor:pointer;">✕</button>
+            </div>
+            <div style="font-size:13px;color:var(--mut);margin-bottom:12px;">Select card on Google Wallet:</div>
+            <div style="background:var(--s2);border:1px solid var(--line);border-radius:14px;padding:12px;margin-bottom:18px;display:flex;align-items:center;justify-content:space-between;">
+              <span style="font-weight:700;font-size:13px;">Chase Visa •••• 9814</span>
+              <span class="num" style="font-weight:800;font-size:14px;">$${usdVal.toFixed(2)}</span>
+            </div>
+            <button onclick="this.closest('div').parentElement.remove(); completePurchase({ gateway: 'Google Pay', method: 'Chase Visa •••• 9814', amountPaid: '$${usdVal.toFixed(2)} USD', tokensReceived: ${tokenVal}, txHash: 'GP-' + Math.random().toString(36).substring(2, 9).toUpperCase(), time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) })" style="width:100%;height:46px;border-radius:12px;background:#4285F4;color:#fff;font-weight:800;font-size:14px;border:none;cursor:pointer;">
+              Continue with Google Pay
+            </button>
+          </div>
+        `;
+        document.body.appendChild(overlay);
+      }
+
+      // -------------------------------------------------------------------------
+      // Web3 BNB Swap Action
+      // -------------------------------------------------------------------------
+      function executeWeb3Buy() {
+        if (!window.__userWalletConnected) {
+          openWalletModal();
+          return;
+        }
+        const bnbInput = document.getElementById('buy-bnb-amt') || document.getElementById('amt');
+        const bnbVal = parseFloat(bnbInput?.value || '0.1') || 0.1;
+        const tokens = Math.round(bnbVal * 1000000);
+
+        showToast('Initiating BSC on-chain transaction for ' + bnbVal + ' BNB...');
+        setTimeout(() => {
+          completePurchase({
+            gateway: 'Web3 Wallet',
+            method: 'BNB Smart Chain (Testnet)',
+            amountPaid: bnbVal + ' BNB',
+            tokensReceived: tokens,
+            txHash: '0x' + Math.random().toString(16).substring(2, 42),
+            time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+          });
+        }, 1200);
+      }
+
+      // -------------------------------------------------------------------------
+      // Common Purchase Completion & Receipt Engine
+      // -------------------------------------------------------------------------
+      function completePurchase(data) {
+        // Persist tokens
+        const currentTokens = parseInt(localStorage.getItem('okn_user_tokens') || '0', 10);
+        const newTotal = currentTokens + data.tokensReceived;
+        localStorage.setItem('okn_user_tokens', newTotal);
+
+        // Persist transaction record
+        let history = [];
+        try {
+          history = JSON.parse(localStorage.getItem('okn_tx_history') || '[]');
+        } catch (e) { history = []; }
+        history.unshift(data);
+        localStorage.setItem('okn_tx_history', JSON.stringify(history));
+
+        // Update UI counters across page
+        updateDynamicBalances();
+
+        // Celebration Toast
+        showToast('Payment successful! +' + data.tokensReceived.toLocaleString('en-US') + ' $OKN added.');
+
+        // Show Receipt Modal
+        showPaymentReceiptModal(data);
+      }
+
+      function showPaymentReceiptModal(data) {
+        let overlay = document.getElementById('payment-receipt-overlay');
+        if (overlay) overlay.remove();
+
+        overlay = document.createElement('div');
+        overlay.id = 'payment-receipt-overlay';
+        overlay.setAttribute('role', 'dialog');
+        overlay.setAttribute('aria-modal', 'true');
+        overlay.setAttribute('aria-label', 'Payment Receipt');
+        overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.85);backdrop-filter:blur(12px);z-index:999999;display:flex;align-items:center;justify-content:center;padding:16px;';
+
+        overlay.innerHTML = `
+          <div style="background:var(--s1);border:1px solid var(--line);border-radius:26px;padding:28px;max-width:420px;width:100%;color:var(--tx);font-family:Manrope,sans-serif;box-shadow:0 30px 90px rgba(0,0,0,0.9);text-align:center;">
+            
+            <div style="width:56px;height:56px;border-radius:50%;background:rgba(47,189,142,0.16);color:var(--ok);display:inline-flex;align-items:center;justify-content:center;margin-bottom:14px;box-shadow:0 0 20px rgba(47,189,142,0.35);">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            </div>
+
+            <h3 style="font-size:20px;font-weight:800;margin:0 0 6px;">Payment Confirmed!</h3>
+            <p style="font-size:13px;color:var(--mut);margin:0 0 20px;">Your $OKN tokens have been successfully purchased and credited.</p>
+
+            <div style="background:var(--s2);border:1px solid var(--line);border-radius:18px;padding:16px;text-align:left;margin-bottom:20px;">
+              <div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--line);font-size:12.5px;">
+                <span style="color:var(--mut);">Gateway</span>
+                <span style="font-weight:700;color:var(--tx);">${data.gateway}</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--line);font-size:12.5px;">
+                <span style="color:var(--mut);">Method</span>
+                <span style="font-weight:700;color:var(--tx);">${data.method}</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--line);font-size:12.5px;">
+                <span style="color:var(--mut);">Total Paid</span>
+                <span class="num" style="font-weight:800;color:var(--tx);">${data.amountPaid}</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--line);font-size:12.5px;">
+                <span style="color:var(--mut);">Tokens Credited</span>
+                <span class="num" style="font-weight:800;color:var(--ok);">+${data.tokensReceived.toLocaleString('en-US')} $OKN</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;padding:6px 0;font-size:11.5px;">
+                <span style="color:var(--mut);">Reference ID</span>
+                <span style="font-family:Sora,monospace;color:var(--vio-l);">${data.txHash}</span>
+              </div>
+            </div>
+
+            <div style="display:flex;gap:10px;">
+              <a href="wallet.html" style="flex:1;height:44px;border-radius:12px;background:var(--vio);color:#fff;font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center;text-decoration:none;">
+                View in Wallet
+              </a>
+              <button onclick="document.getElementById('payment-receipt-overlay').remove()" style="flex:1;height:44px;border-radius:12px;background:var(--s2);border:1px solid var(--line);color:var(--tx);font-weight:700;font-size:13px;cursor:pointer;">
+                Done
+              </button>
+            </div>
+          </div>
+        `;
+        document.body.appendChild(overlay);
+      }
+
+      function updateDynamicBalances() {
+        const currentTokens = parseInt(localStorage.getItem('okn_user_tokens') || '0', 10);
+        if (currentTokens > 0) {
+          const str = currentTokens.toLocaleString('en-US') + ' $OKN';
+          document.querySelectorAll('.user-okn-tokens, .okn-token-balance').forEach(el => {
+            el.textContent = str;
+          });
+        }
+      }
+
+      function copyInlineText(text, btn) {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text);
+        }
+        const orig = btn.innerText;
+        btn.innerText = 'Copied!';
+        setTimeout(() => { btn.innerText = orig; }, 2000);
+      }
+
+      // Initialize on DOM load
+      document.addEventListener('DOMContentLoaded', updateDynamicBalances);
     </script>
   
 </body>
